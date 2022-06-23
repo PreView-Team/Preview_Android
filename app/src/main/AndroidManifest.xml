@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name=".activity.sample.SampleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.error.ErrorActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
