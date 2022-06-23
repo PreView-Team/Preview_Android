@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.main.MainActivity">
-
+        tools:context=".activity.sample.SampleActivity">
         <Button
             android:id="@+id/error_btn"
             android:layout_width="match_parent"
