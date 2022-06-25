@@ -1,6 +1,7 @@
 package preview.android.activity.error
 
-import jkey20.errs.base.BaseViewModel
+import preview.android.BaseViewModel
+
 
 class ErrorViewModel  : BaseViewModel(){
 }
