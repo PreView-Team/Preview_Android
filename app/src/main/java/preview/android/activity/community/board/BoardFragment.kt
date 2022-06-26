@@ -33,7 +33,6 @@ class BoardFragment : BaseFragment<FragmentBoardBinding, CommunityHomeViewModel>
         binding.rvPost.run{
             setHasFixedSize(true)
             setItemViewCacheSize(10)
-
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             adapter = PostAdapter(
 
