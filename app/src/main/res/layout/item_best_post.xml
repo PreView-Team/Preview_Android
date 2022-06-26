@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginLeft="40dp"
-        android:background="@drawable/best_post_background"
+        android:background="@drawable/curved_navy_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
