@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/best_post_background.xml" value="0.259" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/circle_image_background.xml" value="0.259" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_community.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_home.xml" value="0.2485" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_mentor.xml" value="0.2485" />
@@ -12,11 +14,12 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_error.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_sample.xml" value="0.2390625" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_board.xml" value="0.6" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_community_home.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_find_team_member.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_interview_data.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_best_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25364583333333335" />
       </map>
     </option>

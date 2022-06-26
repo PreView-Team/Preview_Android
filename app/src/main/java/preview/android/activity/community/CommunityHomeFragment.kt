@@ -1,16 +1,16 @@
 package preview.android.activity.community
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayout
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.activity.community.board.BoardFragment
+import preview.android.activity.community.findteammember.FindTeamMemberFragment
+import preview.android.activity.community.interviewdata.InterviewDataFragment
+import preview.android.activity.community.interviewreview.InterviewReviewFragment
 import preview.android.databinding.FragmentCommunityHomeBinding
 
 class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding, CommunityHomeViewModel>(

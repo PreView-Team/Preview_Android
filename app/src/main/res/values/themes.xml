@@ -13,4 +13,37 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="text_headline_black">
+        <item name="android:textStyle">bold</item>
+        <item name="fontWeight">800</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="text_headline_bold">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="text_headline_medium">
+        <item name="fontWeight">500</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="text_middle_black">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20dp</item>
+
+    </style>
+
+
+    <style name="imageview_circle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

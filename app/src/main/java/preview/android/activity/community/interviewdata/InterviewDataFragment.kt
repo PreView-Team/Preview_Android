@@ -1,18 +1,16 @@
-package preview.android.activity.community
+package preview.android.activity.community.interviewdata
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.databinding.FragmentBoardBinding
+import preview.android.activity.community.CommunityHomeViewModel
+import preview.android.databinding.FragmentInterviewDataBinding
 
 
-class BoardFragment : BaseFragment<FragmentBoardBinding, CommunityHomeViewModel>(
-    R.layout.fragment_board
+class InterviewDataFragment : BaseFragment<FragmentInterviewDataBinding, CommunityHomeViewModel>(
+    R.layout.fragment_interview_data
 ) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

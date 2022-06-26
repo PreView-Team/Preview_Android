@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.community.FindTeamMemberFragment">
+        tools:context=".activity.community.findteammember.FindTeamMemberFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
