@@ -18,6 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     override val vm: MainViewModel by viewModels()
 
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController =
