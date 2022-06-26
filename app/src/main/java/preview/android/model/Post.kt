@@ -4,5 +4,8 @@ data class Post(
     val title : String = "",
     val content : String = "",
     val writer : String = "",
-    val like : Int = 0
+    val createDate : String = "",
+    val bookmarks : Int = 0,
+    val comments : Int = 0,
+    val likes : Int = 0
 )

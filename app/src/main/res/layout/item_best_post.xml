@@ -76,7 +76,7 @@
         <TextView
             android:textColor="@color/white"
             android:textSize="13dp"
-            android:text="@{Integer.toString(post.like)}"
+            android:text="@{Integer.toString(post.likes)}"
             android:id="@+id/tv_like_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
