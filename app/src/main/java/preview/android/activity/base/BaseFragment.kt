@@ -1,4 +1,4 @@
-package jkey20.errs.base
+package preview.android
 
 import android.os.Bundle
 import android.view.LayoutInflater

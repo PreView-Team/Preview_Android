@@ -1,16 +1,14 @@
 package preview.android.activity.main
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import jkey20.errs.base.BaseActivity
+import preview.android.BaseActivity
 import preview.android.R
 import preview.android.databinding.ActivityMainBinding
-import java.lang.RuntimeException
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
@@ -19,11 +17,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
     override val vm: MainViewModel by viewModels()
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.errorBtn.setOnClickListener {
-            throw RuntimeException("Error test")
-        }
+        navController =
+            (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
+        binding.bnvMain.setupWithNavController(navController)
     }
 
 

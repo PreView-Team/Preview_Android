@@ -1,4 +1,4 @@
-package jkey20.errs.base
+package preview.android
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
