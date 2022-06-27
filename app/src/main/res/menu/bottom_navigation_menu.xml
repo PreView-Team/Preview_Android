@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_baseline_mentor"
         android:title="멘토링" />
     <item
-        android:id="@+id/page_setting"
+        android:id="@+id/settingFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_setting"
         android:title="설정" />
