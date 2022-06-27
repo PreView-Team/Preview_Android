@@ -7,9 +7,10 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import preview.android.R
+import preview.android.activity.main.MainActivity
 import preview.android.databinding.ActivityErrorBinding
 
-class ErrorActivity : AppCompatActivity(){
+class ErrorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityErrorBinding
 
@@ -18,10 +19,17 @@ class ErrorActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_error)
         Log.e("onCreate", "!!")
+
         binding.tvErrorLog.text = errorText
 
+        binding.btnRefresh.setOnClickListener {
+            val intent = Intent()
+            intent.setComponent(lastActivityIntent!!.component)
+            startActivity(intent)
+        }
     }
 
     companion object {

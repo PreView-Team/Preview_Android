@@ -59,18 +59,19 @@ class PreviewExceptionHandler(
         lastActivity?.run {
             val stringWriter = StringWriter()
             throwable.printStackTrace(PrintWriter(stringWriter))
-
-            startErrorActivity(this, stringWriter.toString(), thread, throwable)
+            Log.e("stringwrite", stringWriter.toString())
+            startErrorActivity(this, stringWriter.toString())
         }
 
         Process.killProcess(Process.myPid())
         System.exit(-1)
     }
 
-    private fun startErrorActivity(activity: Activity, errorText: String, thread : Thread, throwable: Throwable) = activity.run {
+    private fun startErrorActivity(activity: Activity, errorText: String) = activity.run{
 
-        val errorActivityIntent = Intent(applicationContext, ErrorActivity::class.java)
+        val errorActivityIntent = Intent(this, ErrorActivity::class.java)
             .apply {
+                Log.e("startErrorActivity", "!!" + intent.toString())
                 putExtra(ErrorActivity.EXTRA_INTENT, intent)
                 putExtra(ErrorActivity.EXTRA_ERROR_TEXT, errorText)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
