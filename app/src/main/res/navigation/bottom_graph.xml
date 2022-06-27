@@ -16,4 +16,8 @@
         android:id="@+id/mentoringFragment"
         android:name="preview.android.activity.mentoring.MentoringFragment"
         android:label="MentoringFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="preview.android.activity.setting.SettingFragment"
+        android:label="SettingFragment" />
 </navigation>
