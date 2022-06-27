@@ -16,6 +16,7 @@ import preview.android.activity.community.board.BestPostAdapter
 import preview.android.activity.util.createBestPostList
 import preview.android.activity.util.createMentorList
 import preview.android.databinding.FragmentMentoringBinding
+import java.lang.RuntimeException
 
 class MentoringFragment : BaseFragment<FragmentMentoringBinding, MentoringViewModel>(
     R.layout.fragment_mentoring
@@ -24,6 +25,9 @@ class MentoringFragment : BaseFragment<FragmentMentoringBinding, MentoringViewMo
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvDescription.text = setSpecificTextColor()
+        binding.tvDescription.setOnClickListener {
+            throw RuntimeException("EXCEPTION")
+        }
 
         binding.rvNewMentor.run{
             setHasFixedSize(true)

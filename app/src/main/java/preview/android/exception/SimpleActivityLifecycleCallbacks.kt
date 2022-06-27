@@ -9,30 +9,31 @@ import android.util.Log
 abstract class SimpleActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityPaused(activity: Activity) {
-        // no-op
+
+        Log.e("onActivityPaused", "!!")
     }
 
     override fun onActivityResumed(activity: Activity) {
-        // no-op
+        Log.e("onActivityResumed", "!!")
     }
 
     override fun onActivityStarted(activity: Activity) {
-        // no-op
+        Log.e("onActivityStarted", "!!")
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        // no-op
+        Log.e("onActivityDestroyed", "!!")
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-        // no-op
+        Log.e("onActivitySaveI", "!!")
     }
 
     override fun onActivityStopped(activity: Activity) {
-        // no-op
+        Log.e("onActivityStopped", "!!")
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        // no-op
+        Log.e("onActivityCreated", "!!")
     }
 }
