@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="54dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="13sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원가입 "
+                    android:textColor="@color/blue"
+                    android:textSize="30sp"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="97dp" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="완료!"
+                    android:textSize="30sp"
+                    tools:layout_editor_absoluteX="155dp"
+                    tools:layout_editor_absoluteY="97dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="프리뷰12"
+                    android:textColor="@color/blue"
+                    android:textSize="21sp"
+                    tools:layout_editor_absoluteX="37dp"
+                    tools:layout_editor_absoluteY="147dp" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="님,"
+                    android:textSize="21sp"
+                    tools:layout_editor_absoluteX="155dp"
+                    tools:layout_editor_absoluteY="146dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView22"
+                style="@style/text_headline_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입을 축하합니다!"
+                android:textSize="21sp"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="196dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="30dp"
+            android:text="시작하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
