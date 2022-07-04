@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="preview.android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".PreviewApplication"
         android:allowBackup="true"
@@ -11,10 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth"
+                    android:scheme="kakao5c9d3c8e293983327d4d012fb7ba4ab2" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activity.error.ErrorActivity"
             android:exported="false" />
         <activity
             android:name=".activity.main.MainActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".activity.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
