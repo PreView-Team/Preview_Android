@@ -15,5 +15,9 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //닉네임 체크 GET
+
+        //POST 하고 -> 가입 성공이면 fragment 전환
+
     }
 }
