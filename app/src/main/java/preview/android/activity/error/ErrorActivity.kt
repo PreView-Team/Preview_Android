@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import preview.android.R
 import preview.android.activity.main.MainActivity
 import preview.android.databinding.ActivityErrorBinding
@@ -14,11 +16,13 @@ class ErrorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityErrorBinding
 
-    private val lastActivityIntent by lazy { intent.getParcelableExtra<Intent>(EXTRA_INTENT) }
-    private val errorText by lazy { intent.getStringExtra(EXTRA_ERROR_TEXT) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val lastActivityIntent = intent.getParcelableExtra<Intent>(EXTRA_INTENT)
+        val errorText = intent.getStringExtra(EXTRA_ERROR_TEXT)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_error)
         Log.e("onCreate", "!!")

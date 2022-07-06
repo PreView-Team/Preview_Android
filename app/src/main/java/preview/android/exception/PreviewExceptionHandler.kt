@@ -2,11 +2,16 @@ package preview.android.exception
 
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.app.Application
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Process
 import android.util.Log
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import preview.android.activity.error.ErrorActivity
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -57,17 +62,21 @@ class PreviewExceptionHandler(
 
     override fun uncaughtException(thread: Thread, throwable: Throwable) {
         lastActivity?.run {
+
+            Firebase.crashlytics.run {
+                setUserId("user0358")
+                log("LOG")
+                recordException(throwable)
+            }
             val stringWriter = StringWriter()
             throwable.printStackTrace(PrintWriter(stringWriter))
-            Log.e("stringwrite", stringWriter.toString())
             startErrorActivity(this, stringWriter.toString())
         }
-
         Process.killProcess(Process.myPid())
         System.exit(-1)
     }
 
-    private fun startErrorActivity(activity: Activity, errorText: String) = activity.run{
+    private fun startErrorActivity(activity: Activity, errorText: String) = activity.run {
 
         val errorActivityIntent = Intent(this, ErrorActivity::class.java)
             .apply {
@@ -79,7 +88,8 @@ class PreviewExceptionHandler(
 
         startActivity(errorActivityIntent)
         finish()
-
+//        Process.killProcess(Process.myPid())
+//        System.exit(-1)
     }
 
 }
