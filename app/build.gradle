@@ -9,6 +9,8 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'dagger.hilt.android.plugin'
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 32
@@ -25,6 +27,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "KAKAO_API_KEY", properties["KAKAO_API_KEY"]
     }
 
     buildTypes {
