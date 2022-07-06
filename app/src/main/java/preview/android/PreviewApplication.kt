@@ -12,7 +12,7 @@ class PreviewApplication : MultiDexApplication(){
 
     override fun onCreate() {
         super.onCreate()
-        KakaoSdk.init(this, "5c9d3c8e293983327d4d012fb7ba4ab2")
+        KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
         setCrashHandler()
     }
 
