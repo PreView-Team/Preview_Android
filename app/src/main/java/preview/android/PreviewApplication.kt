@@ -18,7 +18,6 @@ class PreviewApplication : MultiDexApplication(){
 
     private fun setCrashHandler(){
 
-        val crashlyticsExceptionHandler = Thread.getDefaultUncaughtExceptionHandler() ?: return
         Thread.setDefaultUncaughtExceptionHandler(
             PreviewExceptionHandler(this)
         )
