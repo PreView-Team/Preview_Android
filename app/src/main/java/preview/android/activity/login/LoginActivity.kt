@@ -32,6 +32,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         }
 
         vm.account.observe(this) { account ->
+            Log.e("ACCOUNT", account.toString())
             vm.loginToServer(account)
             //vm.signUp(account)
         }

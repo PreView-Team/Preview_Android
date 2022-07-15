@@ -64,14 +64,14 @@ class LoginViewModel @Inject constructor(
     fun signUp(account: Account) = viewModelScope.launch {
 
         loginRepository.signUp(account).collect { value ->
-            Log.e("RESULT", value)
+            Log.e("RESULT", value.toString())
         }
     }
 
     fun loginToServer(account: Account) = viewModelScope.launch {
 
         loginRepository.loginToServer(account).collect { value ->
-            Log.e("LOGINTOSERVER", value)
+            Log.e("LOGINTOSERVER", value.toString())
         }
 
     }
