@@ -1,6 +1,7 @@
 package preview.android.repository
 
 import android.content.Context
+import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.User
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import preview.android.activity.api.AuthService
+import preview.android.activity.api.dto.LoginData
 import preview.android.model.Account
 import kotlin.coroutines.resume
 
@@ -17,14 +19,14 @@ class LoginRepository(private val api: AuthService) {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
             loginWithKakoTalk(context).let { oAuthToken ->
                 account = account.copy(
-                    accessToken = oAuthToken.accessToken,
+                    token = oAuthToken.accessToken,
                     refreshToken = oAuthToken.refreshToken
                 )
             }
         } else {
             loginWithWebView(context).let { oAuthToken ->
                 account = account.copy(
-                    accessToken = oAuthToken.accessToken,
+                    token = oAuthToken.accessToken,
                     refreshToken = oAuthToken.refreshToken
                 )
             }
@@ -80,18 +82,21 @@ class LoginRepository(private val api: AuthService) {
 
         val request = api.signUp(account)
         if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!.result)
+
+            Log.i("SIGN UP:", request.body()!!.result)
+            trySend(request.body()!!)
         } else {
             trySend(request.errorBody()!!.string())
+            Log.i("errorBody:", request.errorBody()!!.string())
         }
 
         close()
     }
 
     suspend fun loginToServer(account: Account) = callbackFlow {
-        val request = api.login(account.refreshToken)
+        val request = api.login(LoginData(account.token))
         if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!.token)
+            trySend(request.body()!!)
         } else {
             trySend(request.errorBody()!!.string())
         }
