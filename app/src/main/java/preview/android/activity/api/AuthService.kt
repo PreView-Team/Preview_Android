@@ -14,5 +14,5 @@ interface AuthService {
     suspend fun signUp(@Body account: Account): Response<SignUpResponse>
 
     @POST("/api/login")
-    suspend fun login(@Body token: String): Response<LoginResponse>
+    suspend fun login(@Body token: LoginData): Response<LoginResponse>
 }
