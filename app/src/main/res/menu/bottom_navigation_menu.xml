@@ -7,15 +7,10 @@
         android:title="홈" />
 
     <item
-        android:id="@+id/communityHomeFragment"
+        android:id="@+id/newMentorFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_community"
-        android:title="커뮤니티" />
-    <item
-        android:id="@+id/mentoringFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_mentor"
-        android:title="멘토링" />
+        android:title="신규멘토" />
     <item
         android:id="@+id/settingFragment"
         android:enabled="true"

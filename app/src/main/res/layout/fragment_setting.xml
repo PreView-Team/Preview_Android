@@ -13,72 +13,76 @@
 
         <TextView
             android:id="@+id/textView9"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:text="내 프로필"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
             android:background="@drawable/ic_navy_next"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         <TextView
-            android:layout_marginTop="18dp"
             android:id="@+id/textView10"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="18dp"
             android:text="공지사항"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <ImageButton
-            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
             android:background="@drawable/ic_navy_next"
             app:layout_constraintBottom_toBottomOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView10" />
 
         <TextView
-            android:layout_marginTop="18dp"
             android:id="@+id/textView11"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="18dp"
             android:text="문의하기"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <ImageButton
-            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
             android:background="@drawable/ic_navy_next"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView11" />
 
         <TextView
-            android:layout_marginTop="18dp"
             android:id="@+id/textView12"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="18dp"
             android:text="알림 설정"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -99,32 +103,33 @@
             android:layout_height="3dp"
             android:layout_marginTop="28dp"
             android:background="@color/grey_200"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/imageButton"
             app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            android:orientation="horizontal" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
         <TextView
-            android:textColor="@color/red"
-            android:layout_marginTop="24dp"
             android:id="@+id/textView13"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="24dp"
             android:text="로그아웃"
+            android:textColor="@color/red"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_divider" />
 
         <TextView
-            android:layout_marginTop="24dp"
             android:id="@+id/textView14"
-            style="@style/text_middle_black"
+            style="@style/text_main_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="24dp"
             android:text="회원탈퇴"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
     </androidx.constraintlayout.widget.ConstraintLayout>

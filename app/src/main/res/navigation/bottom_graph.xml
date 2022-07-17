@@ -5,19 +5,15 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/communityHomeFragment"
-        android:name="preview.android.activity.community.CommunityHomeFragment"
-        android:label="CommunityHomeFragment" />
-    <fragment
         android:id="@+id/homeFragment"
         android:name="preview.android.activity.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/mentoringFragment"
-        android:name="preview.android.activity.mentoring.MentoringFragment"
-        android:label="MentoringFragment" />
-    <fragment
         android:id="@+id/settingFragment"
         android:name="preview.android.activity.setting.SettingFragment"
         android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/newMentorFragment"
+        android:name="preview.android.activity.newmentor.NewMentorFragment"
+        android:label="NewMentorFragment" />
 </navigation>
