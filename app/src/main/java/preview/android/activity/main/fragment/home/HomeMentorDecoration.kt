@@ -1,4 +1,4 @@
-package preview.android.activity.home
+package preview.android.activity.main.fragment.home
 
 import android.content.Context
 import android.graphics.Rect
@@ -6,9 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class HomeMentorDecoration(context : Context) : RecyclerView.ItemDecoration() {
-
-    private val context = context
+class HomeMentorDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -27,7 +25,6 @@ class HomeMentorDecoration(context : Context) : RecyclerView.ItemDecoration() {
             outRect.right = dpToPx(context, 20)
             outRect.left = dpToPx(context, 0)
         }
-
     }
 
     private fun dpToPx(context: Context, dp : Int) : Int{

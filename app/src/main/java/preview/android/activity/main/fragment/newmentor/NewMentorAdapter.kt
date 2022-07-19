@@ -1,4 +1,4 @@
-package preview.android.activity.home
+package preview.android.activity.main.fragment.newmentor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,15 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorBinding
-import preview.android.databinding.ItemMentorThumbnailBinding
 import preview.android.model.Mentor
 
-class HomeMentorAdapter : ListAdapter<Mentor, HomeMentorAdapter.ViewHolder>(diffUtil) {
+class NewMentorAdapter(
+    private val onApplyButtonClicked : (Mentor) -> Unit
+) : ListAdapter<Mentor, NewMentorAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemMentorThumbnailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+            ItemMentorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, onApplyButtonClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -23,14 +24,18 @@ class HomeMentorAdapter : ListAdapter<Mentor, HomeMentorAdapter.ViewHolder>(diff
 
 
     class ViewHolder(
-        private val binding: ItemMentorThumbnailBinding
+        private val binding: ItemMentorBinding,
+        private val onApplyButtonClicked: (Mentor) -> Unit
 
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mentor: Mentor) {
-            binding.mentor = mentor
+            // binding.mentor = mentor
+            binding.btnApply.setOnClickListener {
+                onApplyButtonClicked(mentor)
+            }
+
         }
     }
-
     private companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Mentor>() {
             override fun areContentsTheSame(oldItem: Mentor, newItem: Mentor) =

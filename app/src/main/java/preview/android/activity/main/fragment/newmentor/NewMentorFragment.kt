@@ -1,17 +1,13 @@
-package preview.android.activity.newmentor
+package preview.android.activity.main.fragment.newmentor
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.home.HomeMentorAdapter
-import preview.android.activity.home.HomeViewModel
+import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.activity.util.createMentorList
 import preview.android.databinding.FragmentNewMentorBinding
@@ -56,8 +52,8 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, HomeViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
-                    // 멘토 소개 페이지 이동하면서 멘토정보 넘겨줌
                     val intent = Intent(context, MentorInfoActivity::class.java)
+                    intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
                 }
             ).apply {
