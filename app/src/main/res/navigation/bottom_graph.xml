@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="preview.android.activity.home.HomeFragment"
+        android:name="preview.android.activity.main.fragment.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="preview.android.activity.setting.SettingFragment"
+        android:name="preview.android.activity.main.fragment.setting.SettingFragment"
         android:label="SettingFragment" />
     <fragment
         android:id="@+id/newMentorFragment"
-        android:name="preview.android.activity.newmentor.NewMentorFragment"
+        android:name="preview.android.activity.main.fragment.newmentor.NewMentorFragment"
         android:label="NewMentorFragment" />
 </navigation>

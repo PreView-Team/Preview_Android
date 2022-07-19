@@ -34,6 +34,15 @@
         <item name="background">@drawable/round_button</item>
     </style>
 
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorOnSurface">@color/grey_200</item>
+        <item name="colorSecondary">@color/primary</item>
+    </style>
+
     <style name="text_headline_extrabold">
         <item name="fontFamily">@font/ptd_extrabold</item>
         <item name="android:textSize">30dp</item>

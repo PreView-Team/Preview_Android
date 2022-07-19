@@ -24,6 +24,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
         binding.bnvMain.setupWithNavController(navController)
+
+        binding.tbMain.setNavigationOnClickListener { view ->
+
+        }
     }
 
 

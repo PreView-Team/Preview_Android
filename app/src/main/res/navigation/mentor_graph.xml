@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mentor_graph"
+    app:startDestination="@id/mentorInfoFragment">
+
+    <fragment
+        android:id="@+id/mentorInfoFragment"
+        android:name="preview.android.activity.mentorinfo.metorinfo.MentorInfoFragment"
+        android:label="MentorInfoFragment" >
+        <action
+            android:id="@+id/action_mentorInfoFragment_to_writeFormFragment"
+            app:destination="@id/writeFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeSubmitFragment"
+        android:name="preview.android.activity.mentorinfo.completesubmit.CompleteSubmitFragment"
+        android:label="CompleteSubmitFragment" />
+    <fragment
+        android:id="@+id/writeFormFragment"
+        android:name="preview.android.activity.mentorinfo.writeform.WriteFormFragment"
+        android:label="WriteFormFragment" >
+        <action
+            android:id="@+id/action_writeFormFragment_to_completeSubmitFragment"
+            app:destination="@id/completeSubmitFragment" />
+    </fragment>
+</navigation>

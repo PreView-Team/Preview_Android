@@ -1,10 +1,19 @@
 package preview.android.activity.util
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import preview.android.R
 import preview.android.model.Mentor
 import preview.android.model.Post
 
@@ -117,4 +126,46 @@ fun getToken() : String{
         Log.e("token: ", deviceToken.toString())
     }
     return deviceToken
+}
+
+fun changeWordPointColor(view : TextView, word : String): SpannableString {
+    val description = view.text
+    val spannableString = SpannableString(description)
+    val start = description.indexOf(word)
+    val end = start + word.length
+
+    spannableString.setSpan(
+        ForegroundColorSpan(Color.parseColor("#FDB022")),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    return spannableString
+}
+
+fun changeWordSkyBlueColor(view : TextView, word : String): SpannableString {
+    val description = view.text
+    val spannableString = SpannableString(description)
+    val start = description.indexOf(word)
+    val end = start + word.length
+
+    spannableString.setSpan(
+        ForegroundColorSpan(Color.parseColor("#2E90FA")),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    return spannableString
+}
+
+fun progressOn(progressDialog : AppCompatDialog){
+    progressDialog.setCancelable(false)
+    progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    progressDialog.setContentView(R.layout.loading_dialog_custom)
+    progressDialog.show()
+}
+fun progressOff(progressDialog : AppCompatDialog){
+    if(progressDialog != null && progressDialog.isShowing()){
+        progressDialog.dismiss()
+    }
 }

@@ -8,6 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import preview.android.activity.api.AuthService
+import preview.android.activity.api.MentorService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -40,5 +41,8 @@ object ApiModule {
     @ViewModelScoped
     fun provideAuthService(): AuthService = buildRetrofit(baseUrl, AuthService::class)
 
+    @Provides
+    @ViewModelScoped
+    fun provideMentorService(): MentorService = buildRetrofit(baseUrl, MentorService::class)
 
 }
