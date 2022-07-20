@@ -14,11 +14,9 @@ class HomeViewModel @Inject constructor(private val mentorRepository: MentorRepo
 
 
     fun getNewMentorList() = viewModelScope.launch {
-
         mentorRepository.getNewMentorList().collect { list ->
             MentorStore.updateNewMentorList(list)
         }
-
     }
 
     fun getRecommendMentorList() = viewModelScope.launch {

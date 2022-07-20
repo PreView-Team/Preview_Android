@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorThumbnailBinding
-import preview.android.model.Mentor
+import preview.android.model.MentorPost
 
-class HomeMentorAdapter : ListAdapter<Mentor, HomeMentorAdapter.ViewHolder>(diffUtil) {
+class HomeMentorAdapter : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -25,17 +25,17 @@ class HomeMentorAdapter : ListAdapter<Mentor, HomeMentorAdapter.ViewHolder>(diff
         private val binding: ItemMentorThumbnailBinding
 
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(mentor: Mentor) {
-            binding.mentor = mentor
+        fun bind(mentorPost: MentorPost) {
+            binding.mentor = mentorPost
         }
     }
 
     private companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Mentor>() {
-            override fun areContentsTheSame(oldItem: Mentor, newItem: Mentor) =
+        val diffUtil = object : DiffUtil.ItemCallback<MentorPost>() {
+            override fun areContentsTheSame(oldItem: MentorPost, newItem: MentorPost) =
                 oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: Mentor, newItem: Mentor) =
+            override fun areItemsTheSame(oldItem: MentorPost, newItem: MentorPost) =
                 oldItem == newItem
         }
     }

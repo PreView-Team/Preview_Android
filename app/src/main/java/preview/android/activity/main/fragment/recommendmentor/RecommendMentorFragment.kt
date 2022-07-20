@@ -2,17 +2,12 @@ package preview.android.activity.main.fragment.recommendmentor
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.main.MainViewModel
 import preview.android.activity.main.fragment.home.HomeViewModel
-import preview.android.activity.main.fragment.newmentor.NewMentorAdapter
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.data.MentorStore
 import preview.android.databinding.FragmentRecommendMentorBinding
@@ -60,7 +55,7 @@ class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, Hom
                     startActivity(intent)
                 }
             ).apply {
-                submitList(MentorStore.recommendMentorList.value)
+                submitList(MentorStore.recommendMentorPostList.value)
             }
         }
     }

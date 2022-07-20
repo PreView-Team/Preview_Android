@@ -2,22 +2,22 @@ package preview.android.data
 
 import androidx.lifecycle.LiveData
 import preview.android.activity.util.MutableListLiveData
-import preview.android.model.Mentor
+import preview.android.model.MentorPost
 
 object MentorStore {
 
-    private val _newMentorList = MutableListLiveData<Mentor>()
-    val newMentorList : LiveData<List<Mentor>> get() = _newMentorList
+    private val _newMentorList = MutableListLiveData<MentorPost>()
+    val newMentorPostList : LiveData<List<MentorPost>> get() = _newMentorList
 
-    private val _recommendMentorList = MutableListLiveData<Mentor>()
-    val recommendMentorList : LiveData<List<Mentor>> get() = _recommendMentorList
+    private val _recommendMentorList = MutableListLiveData<MentorPost>()
+    val recommendMentorPostList : LiveData<List<MentorPost>> get() = _recommendMentorList
 
 
-    fun updateNewMentorList(list : List<Mentor>){
+    fun updateNewMentorList(list : List<MentorPost>){
         _newMentorList.addAll(list)
     }
 
-    fun updateRecommendMentorList(list : List<Mentor>){
+    fun updateRecommendMentorList(list : List<MentorPost>){
         _recommendMentorList.addAll(list)
     }
 

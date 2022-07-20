@@ -1,13 +1,8 @@
 package preview.android.activity.main.fragment.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDeepLinkBuilder
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
@@ -36,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter().apply {
-                submitList(MentorStore.newMentorList.value)
+                submitList(MentorStore.newMentorPostList.value)
             }
         }
 
@@ -45,7 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter().apply {
-                submitList(MentorStore.recommendMentorList.value)
+                submitList(MentorStore.recommendMentorPostList.value)
             }
         }
 
@@ -58,11 +53,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             findNavController().navigate(R.id.action_homeFragment_to_recommendMentorFragment)
         }
 
-        MentorStore.newMentorList.observe(viewLifecycleOwner) { list ->
+        MentorStore.newMentorPostList.observe(viewLifecycleOwner) { list ->
             (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)
         }
 
-        MentorStore.recommendMentorList.observe(viewLifecycleOwner) { list ->
+        MentorStore.recommendMentorPostList.observe(viewLifecycleOwner) { list ->
             (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list)
         }
 

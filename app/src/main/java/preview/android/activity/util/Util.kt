@@ -1,20 +1,17 @@
 package preview.android.activity.util
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.provider.Settings
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import preview.android.R
-import preview.android.model.Mentor
+import preview.android.model.MentorPost
 import preview.android.model.Post
 
 
@@ -62,10 +59,10 @@ fun createBestPostList(): List<Post> {
     return list
 }
 
-fun createMentorList(): List<Mentor> {
-    val list = arrayListOf<Mentor>()
+fun createMentorList(): List<MentorPost> {
+    val list = arrayListOf<MentorPost>()
     list.add(
-        Mentor(
+        MentorPost(
             nickname = "프리뷰1",
             tag = "#대기업",
             title = "first",
@@ -75,7 +72,7 @@ fun createMentorList(): List<Mentor> {
         )
     )
     list.add(
-        Mentor(
+        MentorPost(
             nickname = "프리뷰2",
             tag = "#대기업",
             title = "second",
@@ -85,7 +82,7 @@ fun createMentorList(): List<Mentor> {
         )
     )
     list.add(
-        Mentor(
+        MentorPost(
             nickname = "프리뷰3",
             tag = "#대기업",
             title = "third",
@@ -95,7 +92,7 @@ fun createMentorList(): List<Mentor> {
         )
     )
     list.add(
-        Mentor(
+        MentorPost(
             nickname = "프리뷰4",
             tag = "#대기업",
             title = "fourth",

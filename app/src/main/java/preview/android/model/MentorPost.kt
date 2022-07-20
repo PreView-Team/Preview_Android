@@ -2,7 +2,7 @@ package preview.android.model
 
 import java.io.Serializable
 
-data class Mentor(
+data class MentorPost(
     val title : String ="",
     val subTitle : String = "",
     val contents : String = "",

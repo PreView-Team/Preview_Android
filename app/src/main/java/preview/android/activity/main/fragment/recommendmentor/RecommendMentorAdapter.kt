@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorBinding
-import preview.android.model.Mentor
+import preview.android.model.MentorPost
 
 class RecommendMentorAdapter(
-    private val onApplyButtonClicked : (Mentor) -> Unit
-) : ListAdapter<Mentor, RecommendMentorAdapter.ViewHolder>(diffUtil) {
+    private val onApplyButtonClicked : (MentorPost) -> Unit
+) : ListAdapter<MentorPost, RecommendMentorAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -25,23 +25,23 @@ class RecommendMentorAdapter(
 
     class ViewHolder(
         private val binding: ItemMentorBinding,
-        private val onApplyButtonClicked: (Mentor) -> Unit
+        private val onApplyButtonClicked: (MentorPost) -> Unit
 
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(mentor: Mentor) {
-            binding.mentor = mentor
+        fun bind(mentorPost: MentorPost) {
+            binding.mentor = mentorPost
             binding.btnApply.setOnClickListener {
-                onApplyButtonClicked(mentor)
+                onApplyButtonClicked(mentorPost)
             }
 
         }
     }
     private companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Mentor>() {
-            override fun areContentsTheSame(oldItem: Mentor, newItem: Mentor) =
+        val diffUtil = object : DiffUtil.ItemCallback<MentorPost>() {
+            override fun areContentsTheSame(oldItem: MentorPost, newItem: MentorPost) =
                 oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: Mentor, newItem: Mentor) =
+            override fun areItemsTheSame(oldItem: MentorPost, newItem: MentorPost) =
                 oldItem == newItem
         }
     }

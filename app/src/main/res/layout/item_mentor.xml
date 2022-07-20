@@ -6,7 +6,7 @@
 
         <variable
             name="mentor"
-            type="preview.android.model.Mentor" />
+            type="preview.android.model.MentorPost" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
