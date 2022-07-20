@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="mentor"
             type="preview.android.model.Mentor" />
@@ -14,14 +15,14 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,16 +101,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_content"
                     style="@style/text_caption_regular"
-                    android:textColor="@color/black"
-                    android:maxLines="3"
-                    android:ellipsize="end"
-                    android:id="@+id/textView29"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
-                    android:text="123\n123123\n123123\n123123"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="@{mentor.content}"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/btn_apply"
                     app:layout_constraintEnd_toEndOf="@+id/ib_favorite"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
@@ -118,9 +119,9 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_apply"
                     style="@style/text_main_medium"
-                    android:layout_marginRight="16dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="20dp"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
@@ -132,7 +133,7 @@
                     app:cornerRadius="22dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView29" />
+                    app:layout_constraintStart_toStartOf="@+id/tv_content" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
