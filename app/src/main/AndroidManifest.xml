@@ -16,12 +16,6 @@
             android:name=".activity.mentorinfo.MentorInfoActivity"
             android:exported="false" />
         <activity
-            android:name="preview.android.activity.mentorinfo.completesubmit.CompleteSubmitActivity"
-            android:exported="false" />
-        <activity
-            android:name="preview.android.activity.mentorinfo.writeform.WriteFormActivity"
-            android:exported="false" />
-        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_writeFragment"
+            app:destination="@id/writeFragment" />
 
     </fragment>
     <fragment
@@ -40,4 +43,8 @@
         android:id="@+id/recommendMentorFragment"
         android:name="preview.android.activity.main.fragment.recommendmentor.RecommendMentorFragment"
         android:label="RecommendMentorFragment" />
+    <fragment
+        android:id="@+id/writeFragment"
+        android:name="preview.android.activity.writementorpost.fragment.writementorpost.WriteMentorPostFragment"
+        android:label="WriteFragment" />
 </navigation>
