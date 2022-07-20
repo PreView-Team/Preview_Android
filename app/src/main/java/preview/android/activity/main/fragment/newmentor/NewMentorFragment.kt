@@ -10,6 +10,7 @@ import preview.android.R
 import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.activity.util.createMentorList
+import preview.android.data.MentorStore
 import preview.android.databinding.FragmentNewMentorBinding
 
 
@@ -57,7 +58,7 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, HomeViewModel>(
                     startActivity(intent)
                 }
             ).apply {
-                submitList(createMentorList())
+                submitList(MentorStore.newMentorList.value)
             }
         }
     }

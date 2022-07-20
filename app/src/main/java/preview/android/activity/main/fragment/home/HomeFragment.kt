@@ -1,8 +1,14 @@
 package preview.android.activity.main.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
@@ -21,6 +27,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvDescription.text = changeWordSkyBlueColor(binding.tvDescription, "매칭활동")
+
+        vm.getNewMentorList()
+        vm.getRecommendMentorList()
 
         binding.rvNewMentor.run {
             setHasFixedSize(true)
@@ -41,7 +50,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         }
 
 
-       // TODO: 신규멘토 전체보기, 추천멘토 전체보기 이벤트 리스너 추가해야함
+        binding.btnNewmentorAll.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_newMentorFragment)
+        }
+
+        binding.btnRecommendmentorAll.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_recommendMentorFragment)
+        }
 
         MentorStore.newMentorList.observe(viewLifecycleOwner) { list ->
             (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)

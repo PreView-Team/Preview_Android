@@ -7,13 +7,37 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="preview.android.activity.main.fragment.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_newMentorFragment"
+            app:destination="@id/newMentorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recommendMentorFragment"
+            app:destination="@id/recommendMentorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="preview.android.activity.main.fragment.setting.SettingFragment"
-        android:label="SettingFragment" />
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
+
         android:id="@+id/newMentorFragment"
         android:name="preview.android.activity.main.fragment.newmentor.NewMentorFragment"
-        android:label="NewMentorFragment" />
+        android:label="NewMentorFragment" >
+        <action
+            android:id="@+id/action_newMentorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendMentorFragment"
+        android:name="preview.android.activity.main.fragment.recommendmentor.RecommendMentorFragment"
+        android:label="RecommendMentorFragment" />
 </navigation>

@@ -29,7 +29,7 @@ class NewMentorAdapter(
 
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mentor: Mentor) {
-            // binding.mentor = mentor
+            binding.mentor = mentor
             binding.btnApply.setOnClickListener {
                 onApplyButtonClicked(mentor)
             }
