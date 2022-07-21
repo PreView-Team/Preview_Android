@@ -1,6 +1,8 @@
 package preview.android.activity.util
 
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Spannable
@@ -9,6 +11,7 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -155,8 +158,9 @@ fun changeFabOpen(view: FloatingActionButton, dialog: ConstraintLayout) {
     view.setImageResource(R.drawable.ic_baseline_close)
     view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.navy)
 }
-fun showDialogFragment(newFragment : DialogFragment) {
-    val fragmentManager = newFragment.requireActivity().supportFragmentManager
+fun showDialogFragment(activity : AppCompatActivity, newFragment : DialogFragment) {
+    
+    val fragmentManager = activity.supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
     transaction

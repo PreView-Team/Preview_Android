@@ -2,21 +2,23 @@ package preview.android.activity.main.fragment.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.activity.main.MainViewModel
 import preview.android.activity.util.changeWordSkyBlueColor
 import preview.android.data.MentorStore
 import preview.android.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
+class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
     R.layout.fragment_home
 ) {
 
-    override val vm: HomeViewModel by viewModels()
+    override val vm: MainViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:background="@color/navy"
+            android:background="@color/primary"
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,8 +22,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb_close"
-
+                app:title="글쓰기"
+                app:titleTextColor="@color/white"
+                app:titleCentered="true"
+                android:id="@+id/tb_write"
+                app:menu="@menu/write_dialog_app_bar_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_baseline_close">
@@ -40,5 +43,6 @@
             android:text="123123"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
