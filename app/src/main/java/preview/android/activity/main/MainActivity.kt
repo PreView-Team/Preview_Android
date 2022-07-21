@@ -60,7 +60,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
             Log.e("check", "!!")
         }
+
+        vm.writeMentorPost.observe(this){ mentorPost ->
+            if(isVerifyMentor()){
+                vm.sendWriteMentorPost(mentorPost)
+            }
+            else{
+                // 멘토 인증 화면으로 연결
+            }
+        }
     }
 
-
+    private fun isVerifyMentor() : Boolean{
+        // 인증여부 확인
+        return true
+    }
 }

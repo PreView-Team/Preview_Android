@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import preview.android.R
+import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.databinding.WriteDialogBinding
+import preview.android.model.MentorPost
 
 class WriteDialogFragment : DialogFragment() {
     lateinit var binding: WriteDialogBinding
+    val vm : MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,6 +28,10 @@ class WriteDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.tbWrite.setNavigationOnClickListener {
             dismiss()
+        }
+        binding.tbWrite.setOnMenuItemClickListener { menuItem ->
+            vm.setWriteMentorPost(MentorPost(title = "test0722"))
+            true
         }
     }
 
