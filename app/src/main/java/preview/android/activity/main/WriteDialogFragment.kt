@@ -22,25 +22,14 @@ class WriteDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tbClose.setNavigationOnClickListener {
+        binding.tbWrite.setNavigationOnClickListener {
             dismiss()
         }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        if (id == R.id.tb_close) {
-            dismiss()
-        }
-        return super.onOptionsItemSelected(item)
-
     }
 }
