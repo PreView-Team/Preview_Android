@@ -7,15 +7,16 @@
         android:title="홈" />
 
     <item
-        android:id="@+id/communityHomeFragment"
+        android:id="@+id/newMentorFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_community"
-        android:title="커뮤니티" />
+        android:icon="@drawable/ic_baseline_newmentor"
+        android:title="신규멘토" />
     <item
-        android:id="@+id/mentoringFragment"
+        android:id="@+id/recommendMentorFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_mentor"
-        android:title="멘토링" />
+        android:icon="@drawable/ic_baseline_recommendmentor"
+        android:title="추천멘토" />
+
     <item
         android:id="@+id/settingFragment"
         android:enabled="true"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:shape="rectangle">
+            <solid android:color="@color/primary"></solid>
+        </shape>
+    </item>
+    <item
+        android:gravity="center"
+        android:width="17dp"
+        android:height="22dp"
+        android:drawable="@drawable/ic_baseline_logo" >
+
+
+    </item>
+</layer-list>

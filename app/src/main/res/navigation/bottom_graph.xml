@@ -5,19 +5,46 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/communityHomeFragment"
-        android:name="preview.android.activity.community.CommunityHomeFragment"
-        android:label="CommunityHomeFragment" />
-    <fragment
         android:id="@+id/homeFragment"
-        android:name="preview.android.activity.home.HomeFragment"
-        android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/mentoringFragment"
-        android:name="preview.android.activity.mentoring.MentoringFragment"
-        android:label="MentoringFragment" />
+        android:name="preview.android.activity.main.fragment.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_newMentorFragment"
+            app:destination="@id/newMentorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recommendMentorFragment"
+            app:destination="@id/recommendMentorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_writeFragment"
+            app:destination="@id/writeFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="preview.android.activity.setting.SettingFragment"
-        android:label="SettingFragment" />
+        android:name="preview.android.activity.main.fragment.setting.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+
+        android:id="@+id/newMentorFragment"
+        android:name="preview.android.activity.main.fragment.newmentor.NewMentorFragment"
+        android:label="NewMentorFragment" >
+        <action
+            android:id="@+id/action_newMentorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendMentorFragment"
+        android:name="preview.android.activity.main.fragment.recommendmentor.RecommendMentorFragment"
+        android:label="RecommendMentorFragment" />
+    <fragment
+        android:id="@+id/writeFragment"
+        android:name="preview.android.activity.writementorpost.fragment.writementorpost.WriteMentorPostFragment"
+        android:label="WriteFragment" />
 </navigation>

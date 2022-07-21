@@ -14,33 +14,154 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
+    </style>
 
-    <style name="text_headline_black">
-        <item name="android:textStyle">bold</item>
-        <item name="fontWeight">800</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">24dp</item>
+    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">10dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+        <item name="cornerSizeBottomLeft">10dp</item>
+        <item name="elevation">10dp</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_button</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay_button" parent="">
+        <item name="background">@drawable/round_button</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorOnSurface">@color/grey_200</item>
+        <item name="colorSecondary">@color/primary</item>
+    </style>
+
+    <style name="text_headline_extrabold">
+        <item name="fontFamily">@font/ptd_extrabold</item>
+        <item name="android:textSize">30dp</item>
     </style>
 
     <style name="text_headline_bold">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/ptd_bold</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="text_headline_semibold">
+        <item name="fontFamily">@font/ptd_semibold</item>
+        <item name="android:textSize">30dp</item>
     </style>
 
     <style name="text_headline_medium">
-        <item name="fontWeight">500</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/ptd_medium</item>
+        <item name="android:textSize">30dp</item>
     </style>
 
-    <style name="text_middle_black">
-        <item name="android:textColor">@color/black</item>
+    <style name="text_headline_regular">
+        <item name="fontFamily">@font/ptd_regular</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="text_headline_light">
+        <item name="fontFamily">@font/ptd_light</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="text_middle_extrabold">
+        <item name="fontFamily">@font/ptd_extrabold</item>
         <item name="android:textSize">20dp</item>
-
     </style>
 
+    <style name="text_middle_bold">
+        <item name="fontFamily">@font/ptd_bold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_middle_semibold">
+        <item name="fontFamily">@font/ptd_semibold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_middle_medium">
+        <item name="fontFamily">@font/ptd_medium</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_middle_regular">
+        <item name="fontFamily">@font/ptd_regular</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_middle_light">
+        <item name="fontFamily">@font/ptd_light</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="text_main_extrabold">
+        <item name="fontFamily">@font/ptd_extrabold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_main_bold">
+        <item name="fontFamily">@font/ptd_bold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_main_semibold">
+        <item name="fontFamily">@font/ptd_semibold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_main_medium">
+        <item name="fontFamily">@font/ptd_medium</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_main_regular">
+        <item name="fontFamily">@font/ptd_regular</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_main_light">
+        <item name="fontFamily">@font/ptd_light</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="text_caption_extrabold">
+        <item name="fontFamily">@font/ptd_extrabold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="text_caption_bold">
+        <item name="fontFamily">@font/ptd_bold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="text_caption_semibold">
+        <item name="fontFamily">@font/ptd_semibold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="text_caption_medium">
+        <item name="fontFamily">@font/ptd_medium</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="text_caption_regular">
+        <item name="fontFamily">@font/ptd_regular</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="text_caption_light">
+        <item name="fontFamily">@font/ptd_light</item>
+        <item name="android:textSize">12dp</item>
+    </style>
 
     <style name="imageview_circle">
         <item name="cornerFamily">rounded</item>

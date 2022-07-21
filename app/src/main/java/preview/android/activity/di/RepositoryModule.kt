@@ -6,7 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import preview.android.activity.api.AuthService
+import preview.android.activity.api.MentorService
 import preview.android.repository.LoginRepository
+import preview.android.repository.MentorRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -14,4 +16,8 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideLoginRepository(api: AuthService): LoginRepository = LoginRepository(api)
+
+    @Provides
+    @ViewModelScoped
+    fun provideMentorRepository(api: MentorService) : MentorRepository = MentorRepository(api)
 }

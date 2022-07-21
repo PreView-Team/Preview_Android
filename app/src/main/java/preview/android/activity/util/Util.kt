@@ -1,11 +1,24 @@
 package preview.android.activity.util
 
-import android.content.Context
-import android.provider.Settings
+import android.animation.ObjectAnimator
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatDialog
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
-import preview.android.model.Mentor
+import preview.android.R
+import preview.android.model.MentorPost
 import preview.android.model.Post
 
 
@@ -53,54 +66,15 @@ fun createBestPostList(): List<Post> {
     return list
 }
 
-fun createMentorList(): List<Mentor> {
-    val list = arrayListOf<Mentor>()
-    list.add(
-        Mentor(
-            nickname = "프리뷰1",
-            tag = "#대기업",
-            title = "first",
-            content = "content1\ncontent1",
-            comments = 20,
-            likes = 20
-        )
-    )
-    list.add(
-        Mentor(
-            nickname = "프리뷰2",
-            tag = "#대기업",
-            title = "second",
-            content = "content2\ncontent2",
-            comments = 20,
-            likes = 20
-        )
-    )
-    list.add(
-        Mentor(
-            nickname = "프리뷰3",
-            tag = "#대기업",
-            title = "third",
-            content = "content3\ncontent2",
-            comments = 20,
-            likes = 20
-        )
-    )
-    list.add(
-        Mentor(
-            nickname = "프리뷰4",
-            tag = "#대기업",
-            title = "fourth",
-            content = "content4\ncontent2",
-            comments = 20,
-            likes = 20
-        )
-    )
+fun createMentorList(): List<MentorPost> {
+    val list = arrayListOf<MentorPost>()
+
 
     return list
 }
 
-fun getToken() : String{
-    if(deviceToken == "") {
+fun getToken(): String {
+    if (deviceToken == "") {
         var task =
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -117,4 +91,76 @@ fun getToken() : String{
         Log.e("token: ", deviceToken.toString())
     }
     return deviceToken
+}
+
+fun changeWordPointColor(view: TextView, word: String): SpannableString {
+    val description = view.text
+    val spannableString = SpannableString(description)
+    val start = description.indexOf(word)
+    val end = start + word.length
+
+    spannableString.setSpan(
+        ForegroundColorSpan(Color.parseColor("#FDB022")),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    return spannableString
+}
+
+fun changeWordSkyBlueColor(view: TextView, word: String): SpannableString {
+    val description = view.text
+    val spannableString = SpannableString(description)
+    val start = description.indexOf(word)
+    val end = start + word.length
+
+    spannableString.setSpan(
+        ForegroundColorSpan(Color.parseColor("#2E90FA")),
+        start,
+        end,
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    return spannableString
+}
+
+fun progressOn(progressDialog: AppCompatDialog) {
+    progressDialog.setCancelable(false)
+    progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    progressDialog.setContentView(R.layout.loading_dialog_custom)
+    progressDialog.show()
+}
+
+fun progressOff(progressDialog: AppCompatDialog) {
+    if (progressDialog != null && progressDialog.isShowing()) {
+        progressDialog.dismiss()
+    }
+}
+
+fun isFabOpened(view: FloatingActionButton): Boolean {
+    return view.backgroundTintList!!.equals(
+        AppCompatResources.getColorStateList(view.context, R.color.navy)
+    )
+}
+
+fun changeFabClose(view: FloatingActionButton, dialog: ConstraintLayout) {
+    ObjectAnimator.ofFloat(dialog, "translationY", 0f).apply { start() }
+    view.setImageResource(R.drawable.ic_baseline_add)
+    view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.orange)
+    dialog.visibility = View.INVISIBLE
+}
+
+fun changeFabOpen(view: FloatingActionButton, dialog: ConstraintLayout) {
+    dialog.visibility = View.VISIBLE
+    ObjectAnimator.ofFloat(dialog, "translationY", -20f).apply { start() }
+    view.setImageResource(R.drawable.ic_baseline_close)
+    view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.navy)
+}
+fun showDialogFragment(newFragment : DialogFragment) {
+    val fragmentManager = newFragment.requireActivity().supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+    transaction
+        .add(android.R.id.content, newFragment)
+        .addToBackStack(null)
+        .commit()
 }
