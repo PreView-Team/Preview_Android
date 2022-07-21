@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         binding.btnWrite.setOnClickListener {
             Log.e("write", "!!")
-            showDialogFragment(WriteDialogFragment())
+            showDialogFragment(this, WriteDialogFragment())
         }
         binding.btnCheckMentor.setOnClickListener {
 
