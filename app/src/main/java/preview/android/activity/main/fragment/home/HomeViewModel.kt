@@ -1,7 +1,9 @@
 package preview.android.activity.main.fragment.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.data.MentorStore
@@ -24,4 +26,11 @@ class HomeViewModel @Inject constructor(private val mentorRepository: MentorRepo
             MentorStore.updateRecommendMentorList(list)
         }
     }
+
+    fun getCategoryMentorPostList(categoryId : Int) = viewModelScope.launch {
+        mentorRepository.getCategoryMentorPostList(categoryId).collect{ response ->
+            Log.e("POST LIST", response.toString())
+        }
+    }
+
 }

@@ -17,8 +17,13 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun getFirstMentorPostList() = callbackFlow {
-        trySend(createMentorList())
+    suspend fun getCategoryMentorPostList(categoryId: Int) = callbackFlow {
+        val request = api.getCatergoryPostList(categoryId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            trySend(request.errorBody()!!.string())
+        }
         close()
     }
 

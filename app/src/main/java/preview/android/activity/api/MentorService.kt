@@ -17,5 +17,5 @@ interface MentorService {
     suspend fun createPost(@Body mentorPost : MentorPost) : Response<MentorPostResponse>
 
     @GET("/api/post/category/{categoryId}")
-    suspend fun getCatergoryPost(@Path("categoryId") categoryId : Int) : Response<JsonObject>
+    suspend fun getCatergoryPostList(@Path("categoryId") categoryId : Int) : Response<JsonObject>
 }
