@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
@@ -152,4 +154,13 @@ fun changeFabOpen(view: FloatingActionButton, dialog: ConstraintLayout) {
     ObjectAnimator.ofFloat(dialog, "translationY", -20f).apply { start() }
     view.setImageResource(R.drawable.ic_baseline_close)
     view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.navy)
+}
+fun showDialogFragment(newFragment : DialogFragment) {
+    val fragmentManager = newFragment.requireActivity().supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+    transaction
+        .add(android.R.id.content, newFragment)
+        .addToBackStack(null)
+        .commit()
 }

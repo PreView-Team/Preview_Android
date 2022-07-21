@@ -8,6 +8,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,6 +22,7 @@ import preview.android.R
 import preview.android.activity.util.changeFabClose
 import preview.android.activity.util.changeFabOpen
 import preview.android.activity.util.isFabOpened
+import preview.android.activity.util.showDialogFragment
 import preview.android.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
@@ -51,6 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         binding.btnWrite.setOnClickListener {
             Log.e("write", "!!")
+            showDialogFragment(WriteDialogFragment())
         }
         binding.btnCheckMentor.setOnClickListener {
 
