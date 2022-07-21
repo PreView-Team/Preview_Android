@@ -57,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
             showDialogFragment(this, WriteDialogFragment())
         }
         binding.btnCheckMentor.setOnClickListener {
-
+            showDialogFragment(this, CertifyMentorDialogFragment())
             Log.e("check", "!!")
         }
 

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_certify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_baseline_close">
+
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/textView29"
+            style="@style/text_middle_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="정확히 인증받고\n 활발한 프리뷰 활동을 즐겨요!"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <TextView
+            android:id="@+id/textView33"
+            style="@style/text_main_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:text="구글폼으로 질문에따라 인증절차를\n밟아주시면 저희가 확인해서 인증마크를 드려요."
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <TextView
+            android:id="@+id/textView34"
+            style="@style/text_main_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:text="아래 링크를 눌러주세요!"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:text="https://naver.com"
+            android:textColor="@color/black"
+            android:textColorLink="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
