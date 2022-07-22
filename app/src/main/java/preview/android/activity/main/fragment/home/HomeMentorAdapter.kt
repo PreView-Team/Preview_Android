@@ -26,7 +26,7 @@ class HomeMentorAdapter : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(
 
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mentorPost: MentorPost) {
-            binding.mentor = mentorPost
+            //binding.mentor = mentorPost
         }
     }
 

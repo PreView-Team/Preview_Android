@@ -2,6 +2,7 @@ package preview.android.activity.login
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
+import preview.android.activity.api.dto.LoginResponse
 import preview.android.model.Account
 import preview.android.repository.LoginRepository
 import javax.inject.Inject
@@ -20,11 +22,21 @@ class LoginViewModel @Inject constructor(
     private val _refreshToken = MutableLiveData<String>("")
     val refreshToken: LiveData<String> get() = _refreshToken
 
+    private val _kakaoAccessToken = MutableLiveData<String>("")
+    val kakaoAccessToken: LiveData<String> get() = _kakaoAccessToken
+
     private val _account = MutableLiveData<Account>()
     val account: LiveData<Account> get() = _account
 
     private val _responseResult = MutableLiveData<String>()
     val responseResult: LiveData<String> get() = _responseResult
+
+    private val _nickname = MutableLiveData<String>()
+    val nickname: LiveData<String> get() = _nickname
+
+    private val _nicknameResponseResult = MutableLiveData<String>()
+    val nicknameResponseResult: LiveData<String> get() = _nicknameResponseResult
+
 
     fun loadRefreshToken(): String {
         return _refreshToken.value!!
@@ -32,6 +44,14 @@ class LoginViewModel @Inject constructor(
 
     fun setRefreshToken(token: String) {
         _refreshToken.value = token
+    }
+
+    fun loadKakaoAccessToken(): String {
+        return _kakaoAccessToken.value!!
+    }
+
+    fun setKakaoAccessToken(token: String) {
+        _kakaoAccessToken.value = token
     }
 
     fun loadAccount(): Account {
@@ -50,12 +70,28 @@ class LoginViewModel @Inject constructor(
         _responseResult.value = result
     }
 
+    fun loadNickname(): String {
+        return _nickname.value!!
+    }
+
+    fun setNickname(nickname: String) {
+        _nickname.value = nickname
+    }
+
+    fun loadNicknameResponseResult(): String {
+        return _nicknameResponseResult.value!!
+    }
+
+    fun setNicknameResponseResult(result: String) {
+        _nicknameResponseResult.value = result
+    }
+
     fun loginKaKao(context: Context) = viewModelScope.launch {
         runCatching {
             loginRepository.login(context)
         }.onSuccess { value ->
             setAccount(value)
-            setRefreshToken(value.refreshToken)
+            setKakaoAccessToken(value.kakaoAccessToken)
         }.onFailure {
             throw Throwable(it)
         }
@@ -64,7 +100,7 @@ class LoginViewModel @Inject constructor(
     fun signUp(account: Account) = viewModelScope.launch {
 
         loginRepository.signUp(account).collect { value ->
-            Log.e("RESULT", value.toString())
+            Log.e("SIGNUP", value.toString())
         }
     }
 
@@ -72,7 +108,17 @@ class LoginViewModel @Inject constructor(
 
         loginRepository.loginToServer(account).collect { value ->
             Log.e("LOGINTOSERVER", value.toString())
+            setResponseResult(value)
         }
 
     }
+
+    fun checkNickname(nickname: String) = viewModelScope.launch {
+
+        loginRepository.checkNickname(nickname).collect { value ->
+            Log.e("NICKNAME CHECK", value.toString())
+            setNicknameResponseResult(value.toString())
+        }
+    }
+
 }

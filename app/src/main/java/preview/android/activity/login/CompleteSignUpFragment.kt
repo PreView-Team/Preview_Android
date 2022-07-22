@@ -1,19 +1,28 @@
 package preview.android.activity.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.activity.main.MainActivity
 import preview.android.databinding.FragmentCompleteSignUpBinding
 
+@AndroidEntryPoint
 class CompleteSignUpFragment : BaseFragment<FragmentCompleteSignUpBinding, LoginViewModel>(
     R.layout.fragment_complete_sign_up
 ) {
-    override val vm: LoginViewModel by viewModels()
+    override val vm: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnGoHome.setOnClickListener {
+            vm.loginToServer(vm.loadAccount())
+        }
 
     }
 }

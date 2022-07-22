@@ -19,15 +19,15 @@ class LoginRepository(private val api: AuthService) {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
             loginWithKakoTalk(context).let { oAuthToken ->
                 account = account.copy(
-                    token = oAuthToken.accessToken,
-                    refreshToken = oAuthToken.refreshToken
+                    kakaoAccessToken = oAuthToken.accessToken,
+//                    refreshToken = oAuthToken.refreshToken
                 )
             }
         } else {
             loginWithWebView(context).let { oAuthToken ->
                 account = account.copy(
-                    token = oAuthToken.accessToken,
-                    refreshToken = oAuthToken.refreshToken
+                    kakaoAccessToken = oAuthToken.accessToken,
+//                    refreshToken = oAuthToken.refreshToken
                 )
             }
         }
@@ -94,9 +94,20 @@ class LoginRepository(private val api: AuthService) {
     }
 
     suspend fun loginToServer(account: Account) = callbackFlow {
-        val request = api.login(LoginData(account.token))
+        val request = api.login(LoginData(account.kakaoAccessToken))
         if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!)
+            trySend(request.body()!!.token!!)
+        } else {
+            trySend(request.code().toString())
+        }
+        close()
+    }
+
+    suspend fun checkNickname(username: String) = callbackFlow {
+
+        val request = api.nickname(username)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!.isValidNickname.toString())
         } else {
             trySend(request.errorBody()!!.string())
         }

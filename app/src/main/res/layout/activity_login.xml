@@ -8,9 +8,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -31,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:text="프리뷰"
                     android:textColor="@color/blue"
-                    android:textSize="30dp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/textView16"
@@ -39,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="에"
-                    android:textSize="30dp" />
+                    android:textSize="30sp" />
             </LinearLayout>
 
             <TextView
@@ -48,9 +50,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="오신걸 환영합니다 :)"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/iv"
+            android:layout_width="280dp"
+            android:layout_height="195.38dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <TextView
             android:id="@+id/textView18"
@@ -58,21 +71,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginBottom="97dp"
+            android:layout_marginTop="142.62dp"
+            android:layout_marginEnd="221dp"
             android:text="SNS로 간편가입하기"
             android:textColor="#4B5565"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_kakao"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="39dp"
+            android:background="@drawable/curved_yellow_background"
+            android:drawableLeft="@drawable/btn_kakao_login"
+            android:paddingEnd="60dp"
+            android:stateListAnimator="@null"
             android:text="카카오로 등록"
+            android:textColor="#222222"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
