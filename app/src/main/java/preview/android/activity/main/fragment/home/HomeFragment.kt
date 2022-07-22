@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvDescription.text = changeWordSkyBlueColor(binding.tvDescription, "매칭활동")
-
+        vm.updateFragmentState(MainViewModel.FragmentState.home)
         vm.getNewMentorList()
         vm.getRecommendMentorList()
 

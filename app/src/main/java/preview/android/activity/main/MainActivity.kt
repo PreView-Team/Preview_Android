@@ -43,7 +43,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         binding.tbMain.setNavigationOnClickListener { view ->
 
         }
-
         binding.fab.setOnClickListener {
             if (isFabOpened(binding.fab)) {
                 changeFabClose(binding.fab, binding.layoutFabClick)
@@ -61,17 +60,40 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
             Log.e("check", "!!")
         }
 
-        vm.writeMentorPost.observe(this){ mentorPost ->
-            if(isVerifyMentor()){
-                vm.sendWriteMentorPost(mentorPost)
+        vm.fragmentState.observe(this) { state ->
+            Log.e("STATE", state.toString())
+            changeFabClose(binding.fab, binding.layoutFabClick)
+            when (state) {
+                MainViewModel.FragmentState.newMentor -> {
+                    binding.fab.visibility = View.INVISIBLE
+                }
+                MainViewModel.FragmentState.recommendMentor -> {
+                    binding.fab.visibility = View.INVISIBLE
+                }
+                MainViewModel.FragmentState.home -> {
+                    binding.fab.visibility = View.VISIBLE
+                }
+                MainViewModel.FragmentState.community -> {
+                    binding.fab.visibility = View.VISIBLE
+                    binding.fab.setImageResource(R.drawable.ic_baseline_write)
+                }
+                MainViewModel.FragmentState.setting -> {
+                    binding.fab.visibility = View.INVISIBLE
+                }
             }
-            else{
+
+        }
+
+        vm.writeMentorPost.observe(this) { mentorPost ->
+            if (isVerifyMentor()) {
+                vm.sendWriteMentorPost(mentorPost)
+            } else {
                 // 멘토 인증 화면으로 연결
             }
         }
     }
 
-    private fun isVerifyMentor() : Boolean{
+    private fun isVerifyMentor(): Boolean {
         // 인증여부 확인
         return true
     }

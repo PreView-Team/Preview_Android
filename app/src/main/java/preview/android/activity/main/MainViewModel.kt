@@ -17,11 +17,34 @@ class MainViewModel @Inject constructor(
     private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
 
+    companion object{
+        const val NEW_MENTOR = 1
+        const val RECOMMEND_MENTOR = 2
+        const val HOME = 3
+        const val COMMUNITY = 4
+        const val SETTING = 5
+    }
+
+    sealed class FragmentState {
+        object newMentor : FragmentState()
+        object recommendMentor : FragmentState()
+        object home : FragmentState()
+        object community : FragmentState()
+        object setting : FragmentState()
+    }
+
+    private var _fragmentState = MutableLiveData<FragmentState>()
+    val fragmentState: LiveData<FragmentState> get() = _fragmentState
+
     private var _writeMentorPost = MutableLiveData<MentorPost>()
     val writeMentorPost: LiveData<MentorPost> get() = _writeMentorPost
 
     private val _token = MutableLiveData<String>("")
     val token: LiveData<String> get() = _token
+
+    fun updateFragmentState(fragmentState: FragmentState){
+        _fragmentState.value = fragmentState
+    }
 
     fun loadToken(): String {
         return _token.value!!

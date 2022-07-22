@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
@@ -17,9 +18,6 @@
         <action
             android:id="@+id/action_homeFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_writeFragment"
-            app:destination="@id/writeFragment" />
 
     </fragment>
     <fragment
@@ -43,8 +41,10 @@
         android:id="@+id/recommendMentorFragment"
         android:name="preview.android.activity.main.fragment.recommendmentor.RecommendMentorFragment"
         android:label="RecommendMentorFragment" />
+
     <fragment
-        android:id="@+id/writeFragment"
-        android:name="preview.android.activity.writementorpost.fragment.writementorpost.WriteMentorPostFragment"
-        android:label="WriteFragment" />
+        android:id="@+id/communityFragment"
+        android:name="preview.android.activity.main.fragment.community.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
 </navigation>

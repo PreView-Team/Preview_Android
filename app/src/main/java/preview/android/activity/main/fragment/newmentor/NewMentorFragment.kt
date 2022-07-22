@@ -23,7 +23,7 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        vm.updateFragmentState(MainViewModel.FragmentState.newMentor)
         vm.getCategoryMentorPostList(1)
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
