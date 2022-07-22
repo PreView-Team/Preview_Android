@@ -14,65 +14,95 @@ import preview.android.model.Account
 import kotlin.coroutines.resume
 
 class LoginRepository(private val api: AuthService) {
-    suspend fun login(context: Context): Account {
+    suspend fun login(context: Context): Any {
         var account = Account()
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
-            loginWithKakoTalk(context).let { oAuthToken ->
-                account = account.copy(
-                    kakaoAccessToken = oAuthToken.accessToken,
+            loginWithKakoTalk(context).let { value ->
+                when (value) {
+                    is OAuthToken -> {
+                        account = account.copy(
+                            kakaoAccessToken = value.accessToken,
 //                    refreshToken = oAuthToken.refreshToken
-                )
+                        )
+                    }
+                    is Throwable -> {
+                        return value
+                    }
+                    else -> {
+                        return "로그인 인증 중 에러가 발생했습니다. 다시 시도해주세요."
+                    }
+                }
             }
         } else {
-            loginWithWebView(context).let { oAuthToken ->
-                account = account.copy(
-                    kakaoAccessToken = oAuthToken.accessToken,
+            loginWithWebView(context).let { value ->
+                when (value) {
+                    is OAuthToken -> {
+                        account = account.copy(
+                            kakaoAccessToken = value.accessToken,
 //                    refreshToken = oAuthToken.refreshToken
-                )
+                        )
+                    }
+                    is Throwable -> {
+                        return value
+                    }
+                    else -> {
+                        return "로그인 인증 중 에러가 발생했습니다. 다시 시도해주세요."
+                    }
+                }
             }
         }
-        getUser().let { user ->
-            account = account.copy(nickname = user.kakaoAccount?.profile?.nickname!!)
+        getUser().let { value ->
+            when(value){
+                is User ->{
+                    account = account.copy(nickname = value.kakaoAccount?.profile?.nickname!!)
+                }
+                is Throwable ->{
+                    return value
+                }
+                else ->{
+                    return "유저정보를 받아오는 도중 에러가 발생했습니다. 다시 시도해주세요."
+                }
+            }
         }
         return account
     }
 
 
-    suspend fun loginWithKakoTalk(context: Context): OAuthToken =
+    suspend fun loginWithKakoTalk(context: Context): Any =
         suspendCancellableCoroutine { continuation ->
             UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
                 continuation.resume(
                     when {
-                        error != null -> throw error
+                        error != null -> error
                         token != null -> token
-                        else -> throw Throwable("RESPONSE_NOTHING")
+                        else -> "else"
                     }
                 )
             }
         }
 
 
-    suspend fun loginWithWebView(context: Context): OAuthToken =
+    suspend fun loginWithWebView(context: Context): Any =
         suspendCancellableCoroutine { continuation ->
             UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->
                 continuation.resume(
                     when {
-                        error != null -> throw error
+                        error != null -> error
                         token != null -> token
-                        else -> throw Throwable("RESPONSE_NOTHING")
+                        else -> "else"
                     }
                 )
             }
         }
 
-    suspend fun getUser(): User =
+    suspend fun getUser(): Any =
         suspendCancellableCoroutine { continuation ->
             UserApiClient.instance.me { user, error ->
                 continuation.resume(
                     when {
-                        error != null -> throw error
+                        error != null -> error
                         user != null -> user
-                        else -> throw Throwable("RESPONSE_NOTHING")
+                        else -> "else"
                     }
                 )
             }

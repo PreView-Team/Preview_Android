@@ -90,8 +90,18 @@ class LoginViewModel @Inject constructor(
         runCatching {
             loginRepository.login(context)
         }.onSuccess { value ->
-            setAccount(value)
-            setKakaoAccessToken(value.kakaoAccessToken)
+            when (value) {
+                is Account -> {
+                    setAccount(value)
+                    setKakaoAccessToken(value.kakaoAccessToken)
+                }
+                is Throwable -> {
+                    // 에러 원인별로 토스트메시지 표시
+                }
+                else -> {
+
+                }
+            }
         }.onFailure {
             throw Throwable(it)
         }
