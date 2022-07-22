@@ -3,23 +3,25 @@ package preview.android.activity.main.fragment.recommendmentor
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.activity.main.MainViewModel
 import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.data.MentorStore
 import preview.android.databinding.FragmentRecommendMentorBinding
 
-class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, HomeViewModel>(
+class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, MainViewModel>(
     R.layout.fragment_recommend_mentor
 ) {
-    override val vm: HomeViewModel by viewModels()
+    override val vm: MainViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        vm.updateFragmentState(MainViewModel.FragmentState.recommendMentor)
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
