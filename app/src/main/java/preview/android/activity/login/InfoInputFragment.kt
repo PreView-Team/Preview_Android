@@ -17,7 +17,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNickname.setOnClickListener {
+        binding.textInputLayoutNickname.setEndIconOnClickListener {
             vm.checkNickname(binding.etNickname.text.toString())
             vm.nicknameResponseResult.observe(viewLifecycleOwner) { result ->
                 when (result) {
