@@ -21,11 +21,17 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
 import preview.android.R
+import preview.android.activity.login.CompleteSignUpFragment
+import preview.android.activity.login.InfoInputFragment
+import preview.android.activity.login.LoginActivity
 import preview.android.model.MentorPost
 import preview.android.model.Post
 
 
 var deviceToken = ""
+
+const val ERROR_CODE_400: String = "400"
+
 
 fun createBestPostList(): List<Post> {
     val list = arrayListOf<Post>()
@@ -158,8 +164,9 @@ fun changeFabOpen(view: FloatingActionButton, dialog: ConstraintLayout) {
     view.setImageResource(R.drawable.ic_baseline_close)
     view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.navy)
 }
-fun showDialogFragment(activity : AppCompatActivity, newFragment : DialogFragment) {
-    
+
+fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment) {
+
     val fragmentManager = activity.supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -168,3 +175,4 @@ fun showDialogFragment(activity : AppCompatActivity, newFragment : DialogFragmen
         .addToBackStack(null)
         .commit()
 }
+
