@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+        <variable
+            name="nickname"
+            type="String" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -61,7 +65,7 @@
                     style="@style/text_headline_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="프리뷰12"
+                    android:text="@{nickname}"
                     android:textColor="#2E90FA"
                     android:textSize="20sp"
                     tools:layout_editor_absoluteX="37dp"
