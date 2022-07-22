@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.data.AccountStore
 import preview.android.databinding.FragmentInfoInputBinding
 
 @AndroidEntryPoint
@@ -38,6 +39,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
                 jobNames = listOf("마케터", "프로그래머")
             )
             vm.signUp(account)
+            AccountStore.updateNickname(account.nickname)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
         }

@@ -7,10 +7,18 @@ import preview.android.model.MentorPost
 
 object AccountStore {
 
+    private val _nickname = MutableLiveData<String>()
+    val nickname: LiveData<String> get() = _nickname
+
+
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
     fun updateToken(token : String){
         _token.value = token
+    }
+
+    fun updateNickname(nickname : String){
+        _nickname.value = nickname
     }
 }
