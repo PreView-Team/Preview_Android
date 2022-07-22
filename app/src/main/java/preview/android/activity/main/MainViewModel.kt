@@ -19,6 +19,18 @@ class MainViewModel @Inject constructor(
 
     private var _writeMentorPost = MutableLiveData<MentorPost>()
     val writeMentorPost: LiveData<MentorPost> get() = _writeMentorPost
+
+    private val _token = MutableLiveData<String>("")
+    val token: LiveData<String> get() = _token
+
+    fun loadToken(): String {
+        return _token.value!!
+    }
+
+    fun setToken(token: String) {
+        _token.value = token
+    }
+
     fun getNewMentorList() = viewModelScope.launch {
         mentorRepository.getNewMentorList().collect { list ->
             MentorStore.updateNewMentorList(list)

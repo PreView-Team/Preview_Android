@@ -7,9 +7,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -22,16 +24,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="13sp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="17sp">
 
                 <TextView
                     android:id="@+id/textView23"
                     style="@style/text_headline_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:lineHeight="36.01dp"
                     android:text="회원가입 "
-                    android:textColor="@color/blue"
+                    android:textColor="#2E90FA"
                     android:textSize="30sp"
                     tools:layout_editor_absoluteX="37dp"
                     tools:layout_editor_absoluteY="97dp" />
@@ -50,8 +53,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10sp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="10sp">
 
                 <TextView
                     android:id="@+id/textView21"
@@ -59,8 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="프리뷰12"
-                    android:textColor="@color/blue"
-                    android:textSize="21sp"
+                    android:textColor="#2E90FA"
+                    android:textSize="20sp"
                     tools:layout_editor_absoluteX="37dp"
                     tools:layout_editor_absoluteY="147dp" />
 
@@ -70,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="님,"
-                    android:textSize="21sp"
+                    android:textSize="20sp"
                     tools:layout_editor_absoluteX="155dp"
                     tools:layout_editor_absoluteY="146dp" />
             </LinearLayout>
@@ -81,19 +84,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="회원가입을 축하합니다!"
-                android:textSize="21sp"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="37dp"
                 tools:layout_editor_absoluteY="196dp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button2"
+        <View
+            android:layout_width="260.13dp"
+            android:layout_height="230.37dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginEnd="57.87dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+        <android.widget.Button
+            android:id="@+id/btn_go_home"
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/curved_blue_background"
             android:text="시작하기"
+            android:textColor="@color/white"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -9,9 +9,8 @@ import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
-import preview.android.activity.api.dto.LoginResponse
-import preview.android.activity.api.dto.LoginData
 import preview.android.activity.main.MainActivity
+import preview.android.activity.main.MainViewModel
 import preview.android.databinding.ActivityLoginBinding
 
 @AndroidEntryPoint
@@ -19,7 +18,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
     R.layout.activity_login
 ) {
     override val vm: LoginViewModel by viewModels()
-    private lateinit var infoInputFragment: InfoInputFragment
+    val main_vm: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +33,38 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         vm.account.observe(this) { account ->
             Log.e("ACCOUNT", account.toString())
             vm.loginToServer(account)
+            vm.setKakaoAccessToken(account.kakaoAccessToken)
             //vm.signUp(account)
         }
 
         vm.responseResult.observe(this) { responseResult ->
 
-            when (responseResult) {
-                "Success" -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(binding.layoutLogin.id, infoInputFragment).commit()
-                }
-                "Fail" -> {
-                    Log.d("LOGIN/FAILURE", "로그인을 실패했습니다.")
-                }
+            if (vm.loadResponseResult() == "400") {
+                changeFragment(1)
+            } else {
+                main_vm.setToken(vm.loadResponseResult())
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+
+        }
+
+    }
+
+    fun changeFragment(index: Int) {
+        val infoInputFragment = InfoInputFragment()
+        val completeSignUpFragment = CompleteSignUpFragment()
+        when (index) {
+            1 -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.layout_login, infoInputFragment).commit()
+            }
+            2 -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.layout_login, completeSignUpFragment).commit()
             }
         }
     }
+
 }
