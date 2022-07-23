@@ -66,7 +66,7 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                     startActivity(intent)
                 }
             ).apply {
-                submitList(MentorStore.newMentorPostList.value)
+                submitList(MentorStore.newMentorList.value)
             }
         }
     }

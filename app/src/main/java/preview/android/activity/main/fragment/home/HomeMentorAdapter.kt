@@ -23,10 +23,9 @@ class HomeMentorAdapter : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(
 
     class ViewHolder(
         private val binding: ItemMentorThumbnailBinding
-
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mentorPost: MentorPost) {
-            //binding.mentor = mentorPost
+            binding.mentorpost = mentorPost
         }
     }
 

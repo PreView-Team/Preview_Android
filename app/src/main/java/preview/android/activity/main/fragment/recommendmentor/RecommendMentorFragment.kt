@@ -57,7 +57,7 @@ class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, Mai
                     startActivity(intent)
                 }
             ).apply {
-                submitList(MentorStore.recommendMentorPostList.value)
+                submitList(MentorStore.recommendMentorList.value)
             }
         }
     }

@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="정확히 인증받고\n 활발한 프리뷰 활동을 즐겨요!"
+            android:text="정확히 인증받고\n활발한 프리뷰 활동을 즐겨요!"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
