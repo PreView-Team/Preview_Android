@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter().apply {
-                submitList(MentorStore.newMentorPostList.value)
+                submitList(MentorStore.newMentorList.value)
             }
         }
 
@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter().apply {
-                submitList(MentorStore.recommendMentorPostList.value)
+                submitList(MentorStore.recommendMentorList.value)
             }
         }
 
@@ -55,11 +55,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             findNavController().navigate(R.id.action_homeFragment_to_recommendMentorFragment)
         }
 
-        MentorStore.newMentorPostList.observe(viewLifecycleOwner) { list ->
+        MentorStore.newMentorList.observe(viewLifecycleOwner) { list ->
             (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)
         }
 
-        MentorStore.recommendMentorPostList.observe(viewLifecycleOwner) { list ->
+        MentorStore.recommendMentorList.observe(viewLifecycleOwner) { list ->
             (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list)
         }
 
