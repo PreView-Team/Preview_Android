@@ -30,7 +30,7 @@ class WriteDialogFragment : DialogFragment() {
             dismiss()
         }
         binding.tbWrite.setOnMenuItemClickListener { menuItem ->
-            vm.setWriteMentorPost(MentorPost(title = "test0722"))
+            vm.setWriteMentorPost(MentorPost(title = "test0722", kakaoId = 2342966316))
             true
         }
     }

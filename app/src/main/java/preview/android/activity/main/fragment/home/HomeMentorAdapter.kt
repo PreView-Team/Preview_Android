@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorThumbnailBinding
 import preview.android.model.MentorPost
 
-class HomeMentorAdapter : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(diffUtil) {
+class HomeMentorAdapter(
+    private val onThumbnailClicked : (MentorPost) -> Unit
+) : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemMentorThumbnailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, onThumbnailClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -22,10 +24,14 @@ class HomeMentorAdapter : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(
 
 
     class ViewHolder(
-        private val binding: ItemMentorThumbnailBinding
+        private val binding: ItemMentorThumbnailBinding,
+        private val onThumbnailClicked : (MentorPost) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mentorPost: MentorPost) {
             binding.mentorpost = mentorPost
+            binding.cardview.setOnClickListener {
+                onThumbnailClicked(mentorPost)
+            }
         }
     }
 

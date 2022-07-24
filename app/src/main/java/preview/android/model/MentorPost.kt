@@ -11,5 +11,5 @@ data class MentorPost(
     val comment : String = "",
     val subTitle : String = "",
     val categortId : Int = 1,
-    val kakaoId : Int = 0,
+    val kakaoId : Long = 0,
 ) : Serializable

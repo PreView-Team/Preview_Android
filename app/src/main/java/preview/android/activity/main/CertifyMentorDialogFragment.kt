@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import preview.android.R
+import preview.android.data.AccountStore
 import preview.android.databinding.CertifyMentorDialogBinding
 
 class CertifyMentorDialogFragment : DialogFragment() {
@@ -31,6 +32,8 @@ class CertifyMentorDialogFragment : DialogFragment() {
         binding.tbCertify.setNavigationOnClickListener {
             dismiss()
         }
+
+        vm.registMentor(AccountStore.token.value!!, 2342966316)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

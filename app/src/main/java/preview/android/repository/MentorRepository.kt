@@ -1,5 +1,6 @@
 package preview.android.repository
 
+import android.util.Log
 import kotlinx.coroutines.flow.callbackFlow
 import preview.android.activity.api.MentorService
 import preview.android.activity.util.createMentorList
@@ -33,6 +34,17 @@ class MentorRepository(private val api: MentorService) {
             trySend(request.body()!!)
         } else {
             trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun registMentor(token : String, kakaoId : Long) = callbackFlow {
+        val request = api.registMentor("Bearer $token",kakaoId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("REGIST ERROR",request.code().toString())
+            trySend(request.errorBody()!!.string() + "??")
         }
         close()
     }
