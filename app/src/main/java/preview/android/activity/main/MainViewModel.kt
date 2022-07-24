@@ -17,7 +17,7 @@ class MainViewModel @Inject constructor(
     private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
 
-    companion object{
+    companion object {
         const val NEW_MENTOR = 1
         const val RECOMMEND_MENTOR = 2
         const val HOME = 3
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
     private val _token = MutableLiveData<String>("")
     val token: LiveData<String> get() = _token
 
-    fun updateFragmentState(fragmentState: FragmentState){
+    fun updateFragmentState(fragmentState: FragmentState) {
         _fragmentState.value = fragmentState
     }
 
@@ -82,6 +82,12 @@ class MainViewModel @Inject constructor(
     fun sendWriteMentorPost(mentorPost: MentorPost) = viewModelScope.launch {
         mentorRepository.sendMentorPost(mentorPost).collect { response ->
             Log.e("sendWriteMentorPost", response.toString())
+        }
+    }
+
+    fun registMentor(token: String, kakaoId: Long) = viewModelScope.launch {
+        mentorRepository.registMentor(token, kakaoId).collect { response ->
+            Log.e("registMentor", response.toString())
         }
     }
 }
