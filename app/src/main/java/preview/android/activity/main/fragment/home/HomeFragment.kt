@@ -1,5 +1,6 @@
 package preview.android.activity.main.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -9,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
+import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.activity.util.changeWordSkyBlueColor
 import preview.android.data.MentorStore
 import preview.android.databinding.FragmentHomeBinding
@@ -32,7 +34,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             setHasFixedSize(true)
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
-            adapter = HomeMentorAdapter().apply {
+            adapter = HomeMentorAdapter(
+                onThumbnailClicked = { mentorPost ->
+                    val intent = Intent(context, MentorInfoActivity::class.java)
+                    intent.putExtra("mentorInfo", mentorPost)
+                    startActivity(intent)
+                }
+            ).apply {
                 submitList(MentorStore.newMentorList.value)
             }
         }
@@ -41,7 +49,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             setHasFixedSize(true)
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
-            adapter = HomeMentorAdapter().apply {
+            adapter = HomeMentorAdapter(
+                onThumbnailClicked = { mentorPost ->
+                    val intent = Intent(context, MentorInfoActivity::class.java)
+                    intent.putExtra("mentorInfo", mentorPost)
+                    startActivity(intent)
+                }
+            ).apply {
                 submitList(MentorStore.recommendMentorList.value)
             }
         }
