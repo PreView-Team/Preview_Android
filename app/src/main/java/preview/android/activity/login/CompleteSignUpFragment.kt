@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainActivity
+import preview.android.data.AccountStore
 import preview.android.databinding.FragmentCompleteSignUpBinding
 
 @AndroidEntryPoint
@@ -20,6 +21,7 @@ class CompleteSignUpFragment : BaseFragment<FragmentCompleteSignUpBinding, Login
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.nickname = AccountStore.nickname.value
         binding.btnGoHome.setOnClickListener {
             vm.loginToServer(vm.loadAccount())
         }
