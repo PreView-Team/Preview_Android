@@ -59,11 +59,11 @@
             app:menu="@menu/bottom_navigation_menu" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="invisible"
             android:id="@+id/layout_fab_click"
             android:layout_width="170dp"
             android:layout_height="90dp"
-            android:background="@drawable/curved_navy_background_10"
+            android:background="@drawable/curved_primary_background_10"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/fab"
             app:layout_constraintEnd_toEndOf="@+id/fab">
 
@@ -76,10 +76,10 @@
                 android:layout_marginTop="8dp"
                 android:gravity="start"
                 android:minHeight="0dp"
-                android:outlineSpotShadowColor="@color/navy"
+                android:outlineSpotShadowColor="@color/primary"
                 android:paddingHorizontal="10dp"
                 android:text="글쓰기"
-                app:backgroundTint="@color/navy"
+                app:backgroundTint="@color/primary"
                 app:icon="@drawable/ic_baseline_write"
                 app:iconGravity="textStart"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,18 +87,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:layout_marginHorizontal="10dp"
-                android:paddingHorizontal="10dp"
-                android:layout_marginBottom="8dp"
                 android:id="@+id/btn_check_mentor"
                 style="@style/text_main_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="start"
-                android:outlineSpotShadowColor="@color/navy"
-                android:text="멘토 인증하기"
                 android:minHeight="0dp"
-                app:backgroundTint="@color/navy"
+                android:outlineSpotShadowColor="@color/primary"
+                android:paddingHorizontal="10dp"
+                android:text="멘토 인증하기"
+                app:backgroundTint="@color/primary"
                 app:icon="@drawable/ic_baseline_user_check"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
