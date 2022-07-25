@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.JsonArray
 import preview.android.R
 import preview.android.model.MentorPost
 import preview.android.model.Post
@@ -75,32 +76,25 @@ fun createMentorList(): List<MentorPost> {
 
     list.add(
         MentorPost(
-            nickname = "프리뷰1",
-            tag = "태그1",
             title = "제목1",
             contents = "내용1"
         )
     )
     list.add(
         MentorPost(
-            nickname = "프리뷰2",
-            tag = "태그2",
             title = "제목2",
             contents = "내용2"
         )
     )
     list.add(
         MentorPost(
-            nickname = "프리뷰3",
-            tag = "태그3",
+
             title = "제목3",
             contents = "내용3"
         )
     )
     list.add(
         MentorPost(
-            nickname = "프리뷰4",
-            tag = "태그4",
             title = "제목4",
             contents = "내용4"
         )
@@ -202,3 +196,6 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
+fun filtPostArray(postArray : String){
+
+}

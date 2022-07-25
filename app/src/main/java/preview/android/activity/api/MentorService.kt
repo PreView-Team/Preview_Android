@@ -1,5 +1,6 @@
 package preview.android.activity.api
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -12,10 +13,14 @@ import retrofit2.http.*
 interface MentorService {
 
     @POST("/api/post")
-    suspend fun createPost(@Body mentorPost: MentorPost): Response<MentorPostResponse>
+    suspend fun createPost(
+        @Header("Authorization") token: String,
+        @Body mentorPost: MentorPost): Response<MentorPostResponse>
 
     @GET("/api/post/category/{categoryId}")
-    suspend fun getCatergoryPostList(@Path("categoryId") categoryId: Int): Response<JsonObject>
+    suspend fun getCatergoryPostList(
+        @Header("Authorization") token: String,
+        @Path("categoryId") categoryId: Int): Response<JsonArray>
 
     @POST("/api/authority/{kakaoId}")
     suspend fun registMentor(

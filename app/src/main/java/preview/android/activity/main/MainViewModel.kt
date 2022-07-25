@@ -66,11 +66,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getCategoryMentorPostList(categoryId: Int) = viewModelScope.launch {
-        mentorRepository.getCategoryMentorPostList(categoryId).collect { response ->
+    fun getCategoryMentorPostList(token: String, categoryId: Int) = viewModelScope.launch {
+        mentorRepository.getCategoryMentorPostList(token, categoryId).collect { response ->
             Log.e("POST LIST", response.toString())
-
-
         }
     }
 
@@ -79,8 +77,8 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun sendWriteMentorPost(mentorPost: MentorPost) = viewModelScope.launch {
-        mentorRepository.sendMentorPost(mentorPost).collect { response ->
+    fun sendWriteMentorPost(token: String, mentorPost: MentorPost) = viewModelScope.launch {
+        mentorRepository.sendMentorPost(token, mentorPost).collect { response ->
             Log.e("sendWriteMentorPost", response.toString())
         }
     }

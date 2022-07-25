@@ -67,15 +67,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
-                        android:id="@+id/ib_check_verify"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:background="@drawable/ic_baseline_check_verify"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_enterprise"
-                        app:layout_constraintStart_toEndOf="@+id/tv_enterprise"
-                        app:layout_constraintTop_toTopOf="@+id/tv_enterprise" />
 
                     <TextView
                         android:id="@+id/tv_job"

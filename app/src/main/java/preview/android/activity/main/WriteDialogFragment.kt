@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import preview.android.R
-import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.databinding.WriteDialogBinding
 import preview.android.model.MentorPost
 
@@ -30,7 +29,7 @@ class WriteDialogFragment : DialogFragment() {
             dismiss()
         }
         binding.tbWrite.setOnMenuItemClickListener { menuItem ->
-            vm.setWriteMentorPost(MentorPost(title = "test0722", kakaoId = 2342966316))
+            vm.setWriteMentorPost(MentorPost(title = "test0722", contents = "contents", subTitle = "123123", categoryId = 1))
             true
         }
     }

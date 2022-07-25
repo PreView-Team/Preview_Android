@@ -26,6 +26,7 @@ import preview.android.activity.util.changeFabClose
 import preview.android.activity.util.changeFabOpen
 import preview.android.activity.util.isFabOpened
 import preview.android.activity.util.showDialogFragment
+import preview.android.data.AccountStore
 import preview.android.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
@@ -89,7 +90,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         vm.writeMentorPost.observe(this) { mentorPost ->
             if (isVerifyMentor()) {
-                vm.sendWriteMentorPost(mentorPost)
+                vm.sendWriteMentorPost(AccountStore.token.value!!, mentorPost)
             } else {
                 // 멘토 인증 화면으로 연결
             }
