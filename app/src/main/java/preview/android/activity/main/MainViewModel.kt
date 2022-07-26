@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
 import preview.android.model.MentorPost
+import preview.android.model.Writing
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
@@ -36,8 +37,8 @@ class MainViewModel @Inject constructor(
     private var _fragmentState = MutableLiveData<FragmentState>()
     val fragmentState: LiveData<FragmentState> get() = _fragmentState
 
-    private var _writeMentorPost = MutableLiveData<MentorPost>()
-    val writeMentorPost: LiveData<MentorPost> get() = _writeMentorPost
+    private var _writing = MutableLiveData<Writing>()
+    val writing: LiveData<Writing> get() = _writing
 
     private val _token = MutableLiveData<String>("")
     val token: LiveData<String> get() = _token
@@ -107,13 +108,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setWriteMentorPost(mentorPost: MentorPost) {
-        _writeMentorPost.value = mentorPost
+    fun setWriting(writing: Writing) {
+        _writing.value = writing
     }
 
 
-    fun sendWriteMentorPost(token: String, mentorPost: MentorPost) = viewModelScope.launch {
-        mentorRepository.sendMentorPost(token, mentorPost).collect { response ->
+    fun sendWriting(token: String, writing: Writing) = viewModelScope.launch {
+        mentorRepository.sendWriting(token, writing).collect { response ->
             Log.e("sendWriteMentorPost", response.toString())
         }
     }

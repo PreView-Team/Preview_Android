@@ -1,13 +1,16 @@
 package preview.android.activity.api.dto
 
+import preview.android.model.Review
+
 data class PostDetailResponse(
-    val contents : String,
-    val id : Int,
-    val title :String,
-    val subtitle : String,
-    val nickname : String,
-        val categoryName : String,
-    val createDateTime : String,
-    val updateDateTime : String,
-    val checkedLike : Boolean
+    val postId: Int,
+    val title: String,
+    val contents: String,
+    val nickname: String,
+    val categoryName: String,
+    val createDateTime: String,
+    val updateDateTime: String,
+    val introduce: String,
+    val history: String,
+    val reviews: List<Review>,
 )

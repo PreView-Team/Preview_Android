@@ -78,7 +78,7 @@ fun createMentorList(): List<MentorPost> {
         MentorPost(
             postId = 1,
             nickname = "1번",
-            categoryId = 1,
+            categoryName =  "마케터",
             introduce = "소개 1번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,
@@ -91,7 +91,7 @@ fun createMentorList(): List<MentorPost> {
         MentorPost(
             postId = 2,
             nickname = "2번",
-            categoryId = 2,
+            categoryName =  "마케터",
             introduce = "소개 2번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,

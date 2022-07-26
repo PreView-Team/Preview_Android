@@ -6,6 +6,7 @@ import preview.android.activity.api.MentorService
 import preview.android.activity.util.createMentorList
 import preview.android.model.MentorPost
 import preview.android.model.PostId
+import preview.android.model.Writing
 
 class MentorRepository(private val api: MentorService) {
 
@@ -30,8 +31,8 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun sendMentorPost(token: String, mentorPost: MentorPost) = callbackFlow {
-        val request = api.createPost("Bearer $token", mentorPost)
+    suspend fun sendWriting(token: String, writing: Writing) = callbackFlow {
+        val request = api.createPost("Bearer $token", writing)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {

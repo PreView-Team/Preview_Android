@@ -5,7 +5,7 @@ import java.io.Serializable
 data class MentorPost(
     val postId: Int = 1,
     val nickname: String = "",
-    val categoryId: Int = 1,
+    val categoryName: String = "마케터",
     val introduce : String = "",
     val contents: String = "",
     val like : Boolean = false,

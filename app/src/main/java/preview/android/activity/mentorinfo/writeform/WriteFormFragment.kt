@@ -23,13 +23,16 @@ class WriteFormFragment : BaseFragment<FragmentWriteFormBinding, MentorInfoViewM
         super.onViewCreated(view, savedInstanceState)
         binding.btnApply.setOnClickListener {
             progressOn(progressDialog)
-            vm.sendForm(Form())
+            vm.sendForm(Form(
+
+            ))
         }
 
-        vm.response.observe(viewLifecycleOwner){
+        vm.response.observe(viewLifecycleOwner) {
             progressOff(progressDialog)
             // 다음 페이지로 이동
-            view.findNavController().navigate(R.id.action_writeFormFragment_to_completeSubmitFragment)
+            view.findNavController()
+                .navigate(R.id.action_writeFormFragment_to_completeSubmitFragment)
         }
     }
 

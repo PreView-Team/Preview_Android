@@ -1,6 +1,7 @@
 package preview.android.model
 
 data class Form(
-    val name : String = "",
-
+    val title : String = "",
+    val content : String = "",
+    val categoryName : String = "",
 )

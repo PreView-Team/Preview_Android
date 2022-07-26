@@ -10,6 +10,7 @@ import preview.android.activity.api.dto.MentorRegistResponse
 import preview.android.activity.api.dto.PostDetailResponse
 import preview.android.model.MentorPost
 import preview.android.model.PostId
+import preview.android.model.Writing
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -18,7 +19,7 @@ interface MentorService {
     @POST("/api/post")
     suspend fun createPost(
         @Header("Authorization") token: String,
-        @Body mentorPost: MentorPost
+        @Body writing: Writing
     ): Response<MentorPostResponse>
 
     @GET("/api/post/category/{categoryId}")

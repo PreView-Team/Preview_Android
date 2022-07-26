@@ -88,9 +88,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         }
 
-        vm.writeMentorPost.observe(this) { mentorPost ->
+        vm.writing.observe(this) { writing ->
             if (isVerifyMentor()) {
-                vm.sendWriteMentorPost(AccountStore.token.value!!, mentorPost)
+                vm.sendWriting(AccountStore.token.value!!, writing)
             } else {
                 // 멘토 인증 화면으로 연결
             }

@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:singleLine="true"
-                        android:text="@{Integer.toString(mentorpost.categoryId)}"
+                        android:text="@{mentorpost.categoryName}"
                         android:textColor="@color/white"
                         android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"

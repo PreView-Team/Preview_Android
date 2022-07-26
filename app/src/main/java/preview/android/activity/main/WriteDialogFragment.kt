@@ -10,10 +10,11 @@ import androidx.fragment.app.activityViewModels
 import preview.android.R
 import preview.android.databinding.WriteDialogBinding
 import preview.android.model.MentorPost
+import preview.android.model.Writing
 
 class WriteDialogFragment : DialogFragment() {
     lateinit var binding: WriteDialogBinding
-    val vm : MainViewModel by activityViewModels()
+    val vm: MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +38,13 @@ class WriteDialogFragment : DialogFragment() {
             dismiss()
         }
         binding.tbWrite.setOnMenuItemClickListener { menuItem ->
-            // vm.setWriteMentorPost(MentorPost(title = "test0722", contents = "contents", subTitle = "123123", categoryId = 1))
+            vm.setWriting(
+                Writing(
+                    title = binding.etTitle.text.toString(),
+                    contents = binding.etContents.text.toString()
+                    // TODO : 직군 설정
+                )
+            )
             true
         }
     }
