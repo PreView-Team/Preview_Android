@@ -3,6 +3,7 @@ package preview.android.activity.main
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -25,6 +26,13 @@ class WriteDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ibClose.setOnClickListener {
+            binding.layoutWritePolicy.isGone = true
+        }
+
+        binding.tvWritePolicy.setOnClickListener {
+            // link 연결
+        }
         binding.tbWrite.setNavigationOnClickListener {
             dismiss()
         }
