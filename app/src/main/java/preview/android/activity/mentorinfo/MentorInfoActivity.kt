@@ -6,10 +6,12 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.databinding.ActivityMentorInfoBinding
 
+@AndroidEntryPoint
 class MentorInfoActivity : BaseActivity<ActivityMentorInfoBinding, MentorInfoViewModel>(
     R.layout.activity_mentor_info
 ) {

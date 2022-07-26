@@ -60,16 +60,16 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
-                    val intent = Intent(context, MentorInfoActivity::class.java)
+                    val intent = Intent(activity, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
                 },
                 onFavoriteButtonChecked = { isChecked, postId ->
-                    if(isChecked){
+                    if (isChecked) {
                         vm.likePost(AccountStore.token.value!!, postId)
                         Log.e("CHECKED", "!!")
-                    }
-                    else{
+                    } else {
+                        vm.unLikePost(AccountStore.token.value!!, postId)
                         Log.e("NOT CHECKED", "!!")
                     }
 
@@ -77,6 +77,11 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             ).apply {
                 submitList(vm.newMentorPostList.value)
             }
+        }
+
+        vm.newMentorPostList.observe(viewLifecycleOwner) { list ->
+            Log.e("newMentorPostList", list.toString())
+            (binding.rvNewMentor.adapter as NewMentorAdapter).submitList(list.toMutableList())
         }
     }
 

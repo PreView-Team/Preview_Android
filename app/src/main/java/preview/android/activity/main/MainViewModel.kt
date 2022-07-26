@@ -65,6 +65,16 @@ class MainViewModel @Inject constructor(
         _recommendMentorThumbnailList.addAll(list)
     }
 
+    fun updateNewMentorPostList(list: List<MentorPost>) {
+        _newMentorPostList.clear()
+        _newMentorPostList.addAll(list)
+    }
+
+    fun updateRecommendMentorPostList(list: List<MentorPost>) {
+        _recommendMentorPostList.clear()
+        _recommendMentorPostList.addAll(list)
+    }
+
     fun updateFragmentState(fragmentState: FragmentState) {
         _fragmentState.value = fragmentState
     }
@@ -93,6 +103,7 @@ class MainViewModel @Inject constructor(
         mentorRepository.getCategoryMentorPostList(token, categoryId).collect { response ->
             Log.e("POST LIST", response.toString())
             // 분류해서 리스트에 넣어야함
+            updateNewMentorPostList(response as List<MentorPost>)
         }
     }
 
@@ -113,9 +124,16 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun likePost(token: String, postId : Int) = viewModelScope.launch {
+    fun likePost(token: String, postId: Int) = viewModelScope.launch {
         mentorRepository.likePost(token, postId).collect { response ->
             Log.e("likePost", response.toString())
         }
     }
+
+    fun unLikePost(token: String, postId: Int) = viewModelScope.launch {
+        mentorRepository.unLikePost(token, postId).collect { response ->
+            Log.e("unLikePost", response.toString())
+        }
+    }
+
 }
