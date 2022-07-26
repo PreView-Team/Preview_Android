@@ -8,12 +8,12 @@ import preview.android.model.MentorPost
 
 class MentorRepository(private val api: MentorService) {
 
-    suspend fun getNewMentorList() = callbackFlow {
+    suspend fun getNewMentorThumbnailList() = callbackFlow {
         trySend(createMentorList())
         close()
     }
 
-    suspend fun getRecommendMentorList() = callbackFlow {
+    suspend fun getRecommendMentorThumbnailList() = callbackFlow {
         trySend(createMentorList())
         close()
     }
@@ -44,6 +44,17 @@ class MentorRepository(private val api: MentorService) {
             trySend(request.body()!!)
         } else {
             Log.e("REGIST ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string() + "??")
+        }
+        close()
+    }
+
+    suspend fun likePost(token: String, postId: Int) = callbackFlow {
+        val request = api.like("Bearer $token", postId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("likePost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string() + "??")
         }
         close()

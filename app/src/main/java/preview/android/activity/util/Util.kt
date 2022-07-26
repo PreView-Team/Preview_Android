@@ -76,27 +76,28 @@ fun createMentorList(): List<MentorPost> {
 
     list.add(
         MentorPost(
-            title = "제목1",
-            contents = "내용1"
+            postId = 1,
+            nickname = "1번",
+            categoryId = 1,
+            introduce = "소개 1번",
+            contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
+            like = true,
+            likeCount = 123,
+            review = false,
+            reviewCount = 0
         )
     )
     list.add(
         MentorPost(
-            title = "제목2",
-            contents = "내용2"
-        )
-    )
-    list.add(
-        MentorPost(
-
-            title = "제목3",
-            contents = "내용3"
-        )
-    )
-    list.add(
-        MentorPost(
-            title = "제목4",
-            contents = "내용4"
+            postId = 2,
+            nickname = "2번",
+            categoryId = 2,
+            introduce = "소개 2번",
+            contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
+            like = true,
+            likeCount = 456,
+            review = false,
+            reviewCount = 0
         )
     )
     return list
@@ -196,6 +197,6 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
-fun filtPostArray(postArray : String){
+fun filtPostArray(postArray: String) {
 
 }

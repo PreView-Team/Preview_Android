@@ -2,6 +2,7 @@ package preview.android.activity.main.fragment.recommendmentor
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
@@ -9,7 +10,6 @@ import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
-import preview.android.data.MentorStore
 import preview.android.databinding.FragmentRecommendMentorBinding
 
 class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, MainViewModel>(
@@ -54,9 +54,16 @@ class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, Mai
                     val intent = Intent(context, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
+                }, onFavoriteButtonChecked = { isChecked, postId ->
+                    if (isChecked) {
+                        Log.e("CHECKED", "!!")
+                    } else {
+                        Log.e("NOT CHECKED", "!!")
+                    }
+
                 }
             ).apply {
-                submitList(MentorStore.recommendMentorList.value)
+                submitList(vm.recommendMentorPostList.value)
             }
         }
     }

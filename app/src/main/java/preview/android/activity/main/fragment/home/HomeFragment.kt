@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
@@ -12,7 +11,6 @@ import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.activity.util.changeWordSkyBlueColor
-import preview.android.data.MentorStore
 import preview.android.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
@@ -26,9 +24,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvDescription.text = changeWordSkyBlueColor(binding.tvDescription, "매칭활동")
+
         vm.updateFragmentState(MainViewModel.FragmentState.home)
-        vm.getNewMentorList()
-        vm.getRecommendMentorList()
+        vm.getNewMentorThumbnailList()
+        vm.getRecommendMentorThumbnailList()
 
         binding.rvNewMentor.run {
             setHasFixedSize(true)
@@ -41,7 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
                     startActivity(intent)
                 }
             ).apply {
-                submitList(MentorStore.newMentorList.value)
+                submitList(vm.newMentorThumbnailList.value)
             }
         }
 
@@ -56,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
                     startActivity(intent)
                 }
             ).apply {
-                submitList(MentorStore.recommendMentorList.value)
+                submitList(vm.recommendMentorThumbnailList.value)
             }
         }
 
@@ -69,12 +68,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             findNavController().navigate(R.id.action_homeFragment_to_recommendMentorFragment)
         }
 
-        MentorStore.newMentorList.observe(viewLifecycleOwner) { list ->
-            (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)
-        }
 
-        MentorStore.recommendMentorList.observe(viewLifecycleOwner) { list ->
+        vm.newMentorThumbnailList.observe(viewLifecycleOwner) { list ->
+            (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)
+
+        }
+        vm.recommendMentorThumbnailList.observe(viewLifecycleOwner) { list ->
             (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list)
+
         }
 
     }

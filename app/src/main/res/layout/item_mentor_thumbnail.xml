@@ -51,7 +51,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="nickname"
+                        android:text="@{mentorpost.nickname}"
                         android:textColor="@color/white"
                         android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:singleLine="true"
-                        android:text="1231231"
+                        android:text="@{Integer.toString(mentorpost.categoryId)}"
                         android:textColor="@color/white"
                         android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -81,26 +81,12 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:singleLine="true"
-                    android:text="@{mentorpost.title}"
+                    android:text="@{mentorpost.introduce}"
                     android:textColor="@color/white"
                     android:textSize="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="2dp"
-                    android:singleLine="true"
-                    android:text="@{mentorpost.contents}"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +97,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
+                    app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                     <ImageView
 
@@ -131,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
 
-                        android:text="123"
+                        android:text="@{Integer.toString(mentorpost.likeCount)}"
                         android:textColor="@color/white"
                         android:textSize="13dp"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -153,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
-                        android:text="123"
+                        android:text="@{Integer.toString(mentorpost.reviewCount)}"
                         android:textColor="@color/white"
                         android:textSize="13dp"
                         app:layout_constraintStart_toEndOf="@+id/imageView4"

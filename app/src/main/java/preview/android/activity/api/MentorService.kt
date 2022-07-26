@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import org.json.JSONObject
+import preview.android.activity.api.dto.LikeResponse
 import preview.android.activity.api.dto.MentorPostResponse
 import preview.android.activity.api.dto.MentorRegistResponse
 import preview.android.model.MentorPost
@@ -27,4 +28,9 @@ interface MentorService {
         @Header("Authorization") token: String,
         @Path("kakaoId") kakoId: Long
     ): Response<MentorRegistResponse>
+
+    @POST("/api/post/like")
+    suspend fun like(
+        @Header("Authorization") token : String,
+        @Body postId : Int) : Response<LikeResponse>
 }

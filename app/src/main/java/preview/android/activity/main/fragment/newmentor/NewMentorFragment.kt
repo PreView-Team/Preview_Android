@@ -2,6 +2,7 @@ package preview.android.activity.main.fragment.newmentor
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
@@ -10,7 +11,6 @@ import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.data.AccountStore
-import preview.android.data.MentorStore
 import preview.android.databinding.FragmentNewMentorBinding
 
 
@@ -63,9 +63,19 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                     val intent = Intent(context, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
+                },
+                onFavoriteButtonChecked = { isChecked, postId ->
+                    if(isChecked){
+                        vm.likePost(AccountStore.token.value!!, postId)
+                        Log.e("CHECKED", "!!")
+                    }
+                    else{
+                        Log.e("NOT CHECKED", "!!")
+                    }
+
                 }
             ).apply {
-                submitList(MentorStore.newMentorList.value)
+                submitList(vm.newMentorPostList.value)
             }
         }
     }
