@@ -78,6 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="phone"
                 android:id="@+id/et_contact"
                 style="@style/text_caption_light"
                 android:layout_width="0dp"

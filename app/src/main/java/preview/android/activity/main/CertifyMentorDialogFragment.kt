@@ -33,7 +33,7 @@ class CertifyMentorDialogFragment : DialogFragment() {
             dismiss()
         }
 
-        vm.registMentor(AccountStore.token.value!!, 2342966316)
+        vm.registMentor(AccountStore.token.value!!, AccountStore.kakaoId)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

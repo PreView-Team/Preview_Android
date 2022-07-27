@@ -2,16 +2,15 @@ package preview.android.activity.main.fragment.newmentor
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
-import preview.android.activity.main.fragment.home.HomeViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
-import preview.android.data.MentorStore
+import preview.android.data.AccountStore
 import preview.android.databinding.FragmentNewMentorBinding
 
 
@@ -24,26 +23,26 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.updateFragmentState(MainViewModel.FragmentState.newMentor)
-        vm.getCategoryMentorPostList(1)
+        vm.getCategoryMentorPostList(AccountStore.token.value!!, 1)
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     // 
                     0 -> {
-                        vm.getCategoryMentorPostList(1)
+                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 1)
                     }
 
                     1 -> {
-                        vm.getCategoryMentorPostList(2)
+                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 2)
                     }
 
                     2 -> {
-                        vm.getCategoryMentorPostList(3)
+                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 3)
                     }
 
                     3 -> {
-                        vm.getCategoryMentorPostList(4)
+                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 4)
                     }
                 }
             }
@@ -61,13 +60,28 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
-                    val intent = Intent(context, MentorInfoActivity::class.java)
+                    val intent = Intent(activity, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
+                },
+                onFavoriteButtonChecked = { isChecked, postId ->
+                    if (isChecked) {
+                        vm.likePost(AccountStore.token.value!!, postId)
+                        Log.e("CHECKED", "!!")
+                    } else {
+                        vm.unLikePost(AccountStore.token.value!!, postId)
+                        Log.e("NOT CHECKED", "!!")
+                    }
+
                 }
             ).apply {
-                submitList(MentorStore.newMentorList.value)
+                submitList(vm.newMentorPostList.value)
             }
+        }
+
+        vm.newMentorPostList.observe(viewLifecycleOwner) { list ->
+            Log.e("newMentorPostList", list.toString())
+            (binding.rvNewMentor.adapter as NewMentorAdapter).submitList(list.toMutableList())
         }
     }
 

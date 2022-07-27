@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_weight="8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:context=".activity.mentorinfo.writeform.WriteFormActivity">
+
+            <TextView
+                android:id="@+id/textView27"
+                style="@style/text_middle_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:lineSpacingExtra="8dp"
+                android:text="멘토분에게 어떤 부분을\n상담받고 싶으셨나요?"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/text_main_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="고민하고 있던 내용들과 질문들을 구체적으로\n적어주시면 더 원활한 멘토 상담을 진행할 수 있어요."
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView27"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+            <TextView
+                android:id="@+id/textView30"
+
+                style="@style/text_main_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="상담받고 싶으신 내용 및 질문"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView28"
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+            <TextView
+                android:id="@+id/textView40"
+                style="@style/text_main_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="(필수)"
+                android:textColor="@color/grey_300"
+                app:layout_constraintBottom_toBottomOf="@+id/textView30"
+                app:layout_constraintStart_toEndOf="@+id/textView30"
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/curved_light_blue_background_10"
+                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                tools:layout_editor_absoluteX="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_contents"
+                    style="@style/text_caption_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:hint="이름 입력"
+                    android:maxLength="500"
+                    android:padding="8dp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_char_number"
+                android:layout_marginTop="6dp"
+                style="@style/text_main_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/500자 (공백포함 최소 50자)"
+                android:textColor="@color/grey_300"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <com.google.android.material.button.MaterialButton
+                android:layout_weight="1"
+                android:id="@+id/btn_back"
+                style="@style/text_main_semibold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="처음으로 돌아가기"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/grey_200"
+                app:cornerRadius="26.5dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="14dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_apply"
+                style="@style/text_main_semibold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="신청서 제출하기"
+
+                android:textColor="@color/white"
+                app:backgroundTint="@color/primary"
+                app:cornerRadius="26.5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

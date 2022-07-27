@@ -7,6 +7,8 @@ import preview.android.model.MentorPost
 
 object AccountStore {
 
+    val kakaoId = 2327958242
+
     private val _nickname = MutableLiveData<String>()
     val nickname: LiveData<String> get() = _nickname
 

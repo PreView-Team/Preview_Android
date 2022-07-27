@@ -20,16 +20,6 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
 
         binding.textInputLayoutNickname.setEndIconOnClickListener {
             vm.checkNickname(binding.etNickname.text.toString())
-            vm.nicknameResponseResult.observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    "true" -> {
-                        Toast.makeText(activity, "사용 불가능한 닉네임입니다.", Toast.LENGTH_SHORT).show()
-                    }
-                    "false" -> {
-                        Toast.makeText(activity, "사용 가능한 닉네입입니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
         }
 
         binding.btnNext.setOnClickListener {
@@ -42,6 +32,17 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
             AccountStore.updateNickname(account.nickname)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
+        }
+
+        vm.nicknameResponseResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                "true" -> {
+                    Toast.makeText(activity, "사용 불가능한 닉네임입니다.", Toast.LENGTH_SHORT).show()
+                }
+                "false" -> {
+                    Toast.makeText(activity, "사용 가능한 닉네입입니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
