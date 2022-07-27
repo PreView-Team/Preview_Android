@@ -9,19 +9,27 @@
         android:name="preview.android.activity.mentorinfo.metorinfo.MentorInfoFragment"
         android:label="MentorInfoFragment" >
         <action
-            android:id="@+id/action_mentorInfoFragment_to_writeFormFragment"
-            app:destination="@id/writeFormFragment" />
+            android:id="@+id/action_mentorInfoFragment_to_writeForm1stFragment"
+            app:destination="@id/writeForm1stFragment" />
     </fragment>
     <fragment
         android:id="@+id/completeSubmitFragment"
         android:name="preview.android.activity.mentorinfo.completesubmit.CompleteSubmitFragment"
         android:label="CompleteSubmitFragment" />
     <fragment
-        android:id="@+id/writeFormFragment"
-        android:name="preview.android.activity.mentorinfo.writeform.WriteFormFragment"
-        android:label="WriteFormFragment" >
+        android:id="@+id/writeForm1stFragment"
+        android:name="preview.android.activity.mentorinfo.writeform.WriteForm1stFragment"
+        android:label="WriteForm1stFragment" >
         <action
-            android:id="@+id/action_writeFormFragment_to_completeSubmitFragment"
+            android:id="@+id/action_writeForm1stFragment_to_writeForm2ndFragment"
+            app:destination="@id/writeForm2ndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeForm2ndFragment"
+        android:name="preview.android.activity.mentorinfo.writeform.WriteForm2ndFragment"
+        android:label="WriteForm2ndFragment" >
+        <action
+            android:id="@+id/action_writeForm2ndFragment_to_completeSubmitFragment"
             app:destination="@id/completeSubmitFragment" />
     </fragment>
 </navigation>
