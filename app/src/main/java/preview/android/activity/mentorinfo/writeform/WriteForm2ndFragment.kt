@@ -15,6 +15,7 @@ import preview.android.R
 import preview.android.activity.mentorinfo.MentorInfoViewModel
 import preview.android.activity.util.progressOff
 import preview.android.activity.util.progressOn
+import preview.android.data.AccountStore
 import preview.android.data.MentorInfoStore
 import preview.android.databinding.FragmentWriteForm1stBinding
 import preview.android.databinding.FragmentWriteForm2ndBinding
@@ -57,7 +58,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
                         contents = binding.etContents.text.toString()
                     )
                 )
-                vm.sendForm(MentorInfoStore.form.value!!)
+                vm.sendForm(AccountStore.token.value!!, MentorInfoStore.form.value!!)
             }
         }
 

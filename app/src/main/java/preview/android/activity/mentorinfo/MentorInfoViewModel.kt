@@ -18,8 +18,11 @@ class MentorInfoViewModel @Inject constructor(
     private val _response = MutableLiveData<String>()
     val response: LiveData<String> get() = _response
 
-    fun sendForm(form: Form) {
-        _response.value = "test"
+    fun sendForm(token: String, form: Form) = viewModelScope.launch {
+        mentorRepository.sendForm(token, form).collect{ response ->
+            Log.e("sendForm", response.toString())
+            _response.value = response.toString()
+        }
     }
 
     fun getPostDetail(token: String, postId: Int) = viewModelScope.launch {
