@@ -4,6 +4,7 @@ import android.util.Log
 import kotlinx.coroutines.flow.callbackFlow
 import preview.android.activity.api.MentorService
 import preview.android.activity.util.createMentorList
+import preview.android.model.Form
 import preview.android.model.MentorPost
 import preview.android.model.PostId
 import preview.android.model.Writing
@@ -47,7 +48,7 @@ class MentorRepository(private val api: MentorService) {
             trySend(request.body()!!)
         } else {
             Log.e("REGIST ERROR", request.code().toString())
-            trySend(request.errorBody()!!.string() + "??")
+            trySend(request.errorBody()!!.string())
         }
         close()
     }
@@ -58,18 +59,18 @@ class MentorRepository(private val api: MentorService) {
             trySend(request.body()!!)
         } else {
             Log.e("likePost ERROR", request.code().toString())
-            trySend(request.errorBody()!!.string() + "??")
+            trySend(request.errorBody()!!.string())
         }
         close()
     }
 
-    suspend fun unLikePost(token : String, postId: Int) = callbackFlow {
+    suspend fun unLikePost(token: String, postId: Int) = callbackFlow {
         val request = api.unlike("Bearer $token", PostId(postId = postId))
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("likePost ERROR", request.code().toString())
-            trySend(request.errorBody()!!.string() + "??")
+            Log.e("unLikePost ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
         }
         close()
     }
@@ -79,8 +80,19 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("likePost ERROR", request.code().toString())
-            trySend(request.errorBody()!!.string() + "??")
+            Log.e("getPostDetail ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun sendForm(token: String, form: Form) = callbackFlow {
+        val request = api.createFrom("Bearer $token", form)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("sendForm ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
         }
         close()
     }

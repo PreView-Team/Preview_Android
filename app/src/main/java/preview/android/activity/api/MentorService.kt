@@ -4,10 +4,8 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import org.json.JSONObject
-import preview.android.activity.api.dto.LikeResponse
-import preview.android.activity.api.dto.MentorPostResponse
-import preview.android.activity.api.dto.MentorRegistResponse
-import preview.android.activity.api.dto.PostDetailResponse
+import preview.android.activity.api.dto.*
+import preview.android.model.Form
 import preview.android.model.MentorPost
 import preview.android.model.PostId
 import preview.android.model.Writing
@@ -51,5 +49,11 @@ interface MentorService {
         @Header("Authorization") token: String,
         @Path("postId") postId: Int
     ): Response<PostDetailResponse>
+
+    @POST("/api/form")
+    suspend fun createFrom(
+        @Header("Authorization") token: String,
+        @Body fom : Form
+    ) : Response<FormResponse>
 
 }
