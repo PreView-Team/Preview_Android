@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable-v24/curved_blue_border.xml" value="0.203" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_kakao_login.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/curved_light_blue_background_10.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/curved_navy_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/curved_yellow_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_bookmark.xml" value="0.1" />
@@ -37,11 +38,18 @@
         <entry key="app/src/main/res/drawable/ic_baseline_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_mentor.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_setting.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_black_favorite.xml" value="0.119" />
+        <entry key="app/src/main/res/drawable/ic_black_next.xml" value="0.119" />
+        <entry key="app/src/main/res/drawable/ic_image_login.xml" value="0.119" />
+        <entry key="app/src/main/res/drawable/ic_image_signup.xml" value="0.119" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_comment.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_favorite.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_next.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/round_button.xml" value="0.119" />
+        <entry key="app/src/main/res/drawable/selection_favorite.xml" value="0.119" />
+        <entry key="app/src/main/res/drawable/tab_indicator.xml" value="0.119" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2169984679291214" />
         <entry key="app/src/main/res/layout/activity_mentor_info.xml" value="0.19324497648567765" />
         <entry key="app/src/main/res/layout/activity_sample.xml" value="0.2545289855072464" />
@@ -49,7 +57,7 @@
         <entry key="app/src/main/res/layout/fragment_board.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_community.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_community_home.xml" value="0.2545289855072464" />
-        <entry key="app/src/main/res/layout/fragment_complete_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_complete_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_complete_submit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_find_team_member.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2545289855072464" />
