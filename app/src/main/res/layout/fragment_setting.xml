@@ -76,7 +76,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/layout_send_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -108,15 +108,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
+            android:id="@+id/layout_receive_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+            app:layout_constraintEnd_toEndOf="@+id/layout_send_form"
+            app:layout_constraintStart_toStartOf="@+id/layout_send_form"
+            app:layout_constraintTop_toBottomOf="@+id/layout_send_form">
 
             <TextView
                 android:id="@+id/textView12"
@@ -146,9 +146,9 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+            app:layout_constraintEnd_toEndOf="@+id/layout_receive_form"
+            app:layout_constraintStart_toStartOf="@+id/layout_receive_form"
+            app:layout_constraintTop_toBottomOf="@+id/layout_receive_form">
 
             <TextView
                 android:id="@+id/textView13"

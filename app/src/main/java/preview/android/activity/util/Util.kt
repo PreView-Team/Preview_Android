@@ -1,5 +1,6 @@
 package preview.android.activity.util
 
+import android.R.array
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -18,7 +19,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import preview.android.R
 import preview.android.model.MentorPost
 import preview.android.model.Post
@@ -78,26 +82,22 @@ fun createMentorList(): List<MentorPost> {
         MentorPost(
             postId = 1,
             nickname = "1번",
-            categoryName =  "마케터",
+            category = "마케터",
             introduce = "소개 1번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,
             likeCount = 123,
-            review = false,
-            reviewCount = 0
         )
     )
     list.add(
         MentorPost(
             postId = 2,
             nickname = "2번",
-            categoryName =  "마케터",
+            category = "마케터",
             introduce = "소개 2번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,
             likeCount = 456,
-            review = false,
-            reviewCount = 0
         )
     )
     return list
@@ -197,6 +197,9 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
-fun filtPostArray(postArray: String) {
+fun filtPostArray(list: JsonArray): List<MentorPost> {
+    val type = object : TypeToken<List<MentorPost>>() {}.type
+
+    return Gson().fromJson(list, type)
 
 }

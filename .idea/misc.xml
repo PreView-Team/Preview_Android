@@ -58,6 +58,7 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_mentor_info.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_mentor_profile.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_receive_form.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_sample.xml" value="0.2390625" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_write_form.xml" value="0.22453703703703703" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_write_mentor_post.xml" value="0.2" />
@@ -83,7 +84,7 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_best_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.5035211267605634" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/loading_dialog_custom.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/write_dialog.xml" value="0.2" />

@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
+import preview.android.activity.util.filtPostArray
 import preview.android.model.MentorPost
 import preview.android.model.Writing
 import preview.android.repository.MentorRepository
@@ -100,14 +102,20 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getCategoryMentorPostList(token: String, categoryId: Int) = viewModelScope.launch {
-        mentorRepository.getCategoryMentorPostList(token, categoryId).collect { response ->
-            Log.e("POST LIST", response.toString())
-            // 분류해서 리스트에 넣어야함
-            updateNewMentorPostList(response as List<MentorPost>)
+    fun getCategoryNewMentorPostList(token: String, categoryName: String) =
+        viewModelScope.launch {
+            mentorRepository.getCategoryNewMentorPostList(token, categoryName).collect { response ->
+                Log.e("new LIST", response.toString())
+                updateNewMentorPostList(filtPostArray(response as JsonArray))
+            }
         }
-    }
-
+    fun getCategoryRecommendMentorPostList(token: String, categoryName: String) =
+        viewModelScope.launch {
+            mentorRepository.getCategoryRecommendMentorPostList(token, categoryName).collect { response ->
+                Log.e("recommend LIST", response.toString())
+                updateRecommendMentorPostList(filtPostArray(response as JsonArray))
+            }
+        }
     fun setWriting(writing: Writing) {
         _writing.value = writing
     }
