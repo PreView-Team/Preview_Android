@@ -1,12 +1,14 @@
-package preview.android.activity.mentorprofile
+package preview.android.activity.management.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import preview.android.R
 
-class MentorProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mentor_profile)
+        setContentView(R.layout.activity_profile)
     }
 }
+// 닉네임 설정 -> 중복확인
+// 직군설정

@@ -12,7 +12,6 @@ import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentNewMentorBinding
-import preview.android.model.CategoryName
 
 
 class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(

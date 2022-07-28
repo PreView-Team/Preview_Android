@@ -117,7 +117,7 @@ class LoginViewModel @Inject constructor(
     fun loginToServer(account: Account) = viewModelScope.launch {
 
         loginRepository.loginToServer(account).collect { value ->
-            Log.e("LOGINTOSERVER", value.toString())
+            Log.e("LOGINTOSERVER response", value.toString())
             setResponseResult(value)
         }
 

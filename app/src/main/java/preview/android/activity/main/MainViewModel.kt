@@ -5,15 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonArray
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtPostArray
-import preview.android.model.CategoryName
 import preview.android.model.MentorPost
 import preview.android.model.Writing
 import preview.android.repository.MentorRepository

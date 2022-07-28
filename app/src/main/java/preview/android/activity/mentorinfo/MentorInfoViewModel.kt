@@ -15,6 +15,7 @@ import javax.inject.Inject
 class MentorInfoViewModel @Inject constructor(
     private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
+
     private val _response = MutableLiveData<String>()
     val response: LiveData<String> get() = _response
 
@@ -28,6 +29,7 @@ class MentorInfoViewModel @Inject constructor(
     fun getPostDetail(token: String, postId: Int) = viewModelScope.launch {
         mentorRepository.getPostDetail(token, postId).collect { response ->
             Log.e("getPostDetail", response.toString())
+
         }
     }
 }
