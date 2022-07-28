@@ -31,6 +31,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         var keyHash = Utility.getKeyHash(this)
         Log.e(TAG, "해시 키 값 : ${keyHash}")
 
+        // 로그인 여부 체크는 splash에서 진행
         val pref = getSharedPreferences("loginAccount", MODE_PRIVATE)
 
         val savedKakaoAccessToken = pref.getString("kakaoAccessToken", "").toString()
@@ -52,10 +53,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             AccountStore.updateNickname(savedNickname)
 
             vm.setAccount(Account(savedKakaoAccessToken, savedNickname, savedJobs))
-            vm.loginToServer(vm.loadAccount())
-
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
 
         binding.btnKakao.setOnClickListener {
@@ -79,7 +76,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         }
 
         vm.responseResult.observe(this) { responseResult ->
-
+            Log.e("RESPONSE RESULT ", "!!" + responseResult)
             if (responseResult == ERROR_CODE_400) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
