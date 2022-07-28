@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name=".activity.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.mentorprofile.MentorProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.mentorinfo.MentorInfoActivity"
             android:exported="false" />
         <activity
@@ -24,7 +30,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakao${kakao_key}" />
             </intent-filter>
         </activity>
@@ -33,11 +40,10 @@
             android:exported="false" />
         <activity
             android:name=".activity.main.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.login.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
