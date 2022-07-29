@@ -11,6 +11,7 @@ import preview.android.R
 import preview.android.activity.management.sendform.SendFormViewModel
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentSendFormDetailBinding
+import preview.android.model.EditForm
 
 
 class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendFormViewModel>(
@@ -26,5 +27,21 @@ class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendF
             AccountStore.token.value!!,
             bundle!!.getInt("formId")
         )
+
+        binding.btnDelete.setOnClickListener {
+            vm.deleteForm(AccountStore.token.value!!, bundle!!.getInt("formId"))
+        }
+
+        binding.btnEdit.setOnClickListener {
+            vm.editForm(AccountStore.token.value!!, bundle!!.getInt("formId"), EditForm().copy(
+                name = "주이식",
+                phoneNumber = "010-9557-1081",
+                contents = "작성내용"
+            ))
+        }
+
+        vm.formDetail.observe(viewLifecycleOwner) { formDetailResponse ->
+            binding.formdetailresponse = formDetailResponse
+        }
     }
 }

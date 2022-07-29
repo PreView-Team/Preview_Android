@@ -75,4 +75,18 @@ interface MentorService {
         @Header("Authorization") token: String,
         @Path("formId") formId: Int
     ): Response<ReceiveFormDetailResponse>
+
+    @DELETE("/api/form/{formId}")
+    suspend fun deleteForm(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int
+    ): Response<FormResponse>
+
+    @PUT("/api/form/{formId}")
+    suspend fun editForm(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int,
+        @Body editForm: EditForm
+    ): Response<FormResponse>
+
 }

@@ -151,4 +151,28 @@ class MentorRepository(private val api: MentorService) {
         }
         close()
     }
+
+    suspend fun deleteForm(token: String, formId: Int) = callbackFlow {
+        val request = api.deleteForm("Bearer $token", formId)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("deleteForm ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun editForm(token: String, formId : Int,editForm : EditForm) = callbackFlow {
+        val request = api.editForm("Bearer $token", formId, editForm)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("deleteForm ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
 }
