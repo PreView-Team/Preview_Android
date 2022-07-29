@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name=".activity.management.chat.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.management.receiveform.ReceiveFormActivity"
             android:exported="false" />
         <activity

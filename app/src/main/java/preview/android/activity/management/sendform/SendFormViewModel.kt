@@ -13,12 +13,13 @@ import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
 import preview.android.model.EditForm
 import preview.android.model.SendFormThumbnail
+import preview.android.repository.FormRepository
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SendFormViewModel @Inject constructor(
-    private val mentorRepository: MentorRepository
+    private val formRepository: FormRepository
 ) : BaseViewModel() {
 
     private val _formThumbnailList = MutableListLiveData<SendFormThumbnail>()
@@ -38,13 +39,13 @@ class SendFormViewModel @Inject constructor(
 
     fun getSendForms(token: String) = viewModelScope.launch {
         Log.e("getReceiveForms", "!!")
-        mentorRepository.getSendForms(token).collect { response ->
+        formRepository.getSendForms(token).collect { response ->
             updateFormThumbnailList(filtJsonArray(response as JsonArray))
         }
     }
 
     fun getFormDetail(token: String, formId: Int) = viewModelScope.launch {
-        mentorRepository.getFormDetail(token, formId).collect { response ->
+        formRepository.getFormDetail(token, formId).collect { response ->
             Log.e("getFormDetail", "!!")
             Log.e("response", response.toString())
             // response 처리
@@ -53,13 +54,13 @@ class SendFormViewModel @Inject constructor(
     }
 
     fun deleteForm(token: String, formId: Int) = viewModelScope.launch {
-        mentorRepository.deleteForm(token, formId).collect { response ->
+        formRepository.deleteForm(token, formId).collect { response ->
             Log.e("deleteForm response", response.toString())
         }
     }
 
     fun editForm(token: String, formId: Int, editForm: EditForm) = viewModelScope.launch {
-        mentorRepository.editForm(token, formId, editForm).collect{
+        formRepository.editForm(token, formId, editForm).collect{
                 response ->
             Log.e("editForm response", response.toString())
         }

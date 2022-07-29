@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
+import preview.android.activity.management.chat.ChatActivity
 import preview.android.activity.management.profile.ProfileActivity
 import preview.android.activity.management.receiveform.ReceiveFormActivity
 import preview.android.activity.management.sendform.SendFormActivity
@@ -35,6 +36,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
         }
         binding.layoutSendForm.setOnClickListener {
             val intent = Intent(context, SendFormActivity::class.java)
+            startActivity(intent)
+        }
+        binding.layoutChat.setOnClickListener {
+            val intent = Intent(context, ChatActivity::class.java)
             startActivity(intent)
         }
 

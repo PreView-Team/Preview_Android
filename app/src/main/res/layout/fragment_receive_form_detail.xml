@@ -3,20 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="receiveformdetail"
+            type="preview.android.activity.api.dto.ReceiveFormDetailResponse" />
     </data>
 
-    <FrameLayout
-        android:background="@color/white"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.management.receiveform.fragment.ReceiveFormDetailFragment">
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".activity.management.sendform.fragment.SendFormDetailFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
+            android:text="@{receiveformdetail.status}"
+            android:id="@+id/tv_status"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content" />
 
-    </FrameLayout>
+        <TextView
+            android:text="@{receiveformdetail.createTime}"
+
+            android:id="@+id/tv_createtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@{receiveformdetail.username}"
+
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@{receiveformdetail.contents}"
+
+            android:id="@+id/tv_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_refuse"
+            android:text="거절"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:text="수락"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </layout>
