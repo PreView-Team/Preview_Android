@@ -13,9 +13,10 @@ import preview.android.data.AccountStore
 import preview.android.databinding.FragmentReceiveFormDetailBinding
 
 
-class ReceiveFormDetailFragment : BaseFragment<FragmentReceiveFormDetailBinding, ReceiveFormViewModel>(
-    R.layout.fragment_receive_form_detail
-) {
+class ReceiveFormDetailFragment :
+    BaseFragment<FragmentReceiveFormDetailBinding, ReceiveFormViewModel>(
+        R.layout.fragment_receive_form_detail
+    ) {
     override val vm: ReceiveFormViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,5 +27,17 @@ class ReceiveFormDetailFragment : BaseFragment<FragmentReceiveFormDetailBinding,
             AccountStore.token.value!!,
             bundle!!.getInt("formId")
         )
+
+        binding.btnAccept.setOnClickListener {
+            //vm.
+        }
+
+        binding.btnRefuse.setOnClickListener {
+
+        }
+
+        vm.receiveFormDetail.observe(viewLifecycleOwner) { receiveFormDetailResponse ->
+            binding.receiveformdetail = receiveFormDetailResponse
+        }
     }
 }

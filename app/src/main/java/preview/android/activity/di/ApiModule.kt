@@ -8,6 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import preview.android.activity.api.AuthService
+import preview.android.activity.api.FormService
 import preview.android.activity.api.MentorService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,5 +45,9 @@ object ApiModule {
     @Provides
     @ViewModelScoped
     fun provideMentorService(): MentorService = buildRetrofit(baseUrl, MentorService::class)
+
+    @Provides
+    @ViewModelScoped
+    fun provideFormService(): FormService = buildRetrofit(baseUrl, FormService::class)
 
 }

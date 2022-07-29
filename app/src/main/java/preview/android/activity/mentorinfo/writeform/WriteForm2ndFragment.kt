@@ -52,7 +52,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
         })
 
         binding.btnApply.setOnClickListener {
-            if (binding.etContents.text!!.length < 50) {
+            if (binding.etContents.text!!.length == 50) {
                 // 50자 이상 입력하라고 안내
             } else {
                 progressOn(progressDialog)
@@ -61,6 +61,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
                         contents = binding.etContents.text.toString()
                     )
                 )
+                Log.e("MentorInfoStore", MentorInfoStore.form.value.toString())
                 vm.sendForm(AccountStore.token.value!!, MentorInfoStore.form.value!!)
             }
         }

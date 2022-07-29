@@ -20,13 +20,6 @@ class MainViewModel @Inject constructor(
     private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
 
-    companion object {
-        const val NEW_MENTOR = 1
-        const val RECOMMEND_MENTOR = 2
-        const val HOME = 3
-        const val COMMUNITY = 4
-        const val SETTING = 5
-    }
 
     sealed class FragmentState {
         object newMentor : FragmentState()
