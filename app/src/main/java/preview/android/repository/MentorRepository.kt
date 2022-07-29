@@ -103,4 +103,52 @@ class MentorRepository(private val api: MentorService) {
         }
         close()
     }
+
+    suspend fun getSendForms(token: String) = callbackFlow {
+        val request = api.getAllMyForm("Bearer $token")
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("getSendForms ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun getReceiveForms(token: String) = callbackFlow {
+        val request = api.getAllReceiveForm("Bearer $token")
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("getReceiveForms ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun getFormDetail(token: String, formId: Int) = callbackFlow {
+        val request = api.getFormDetail("Bearer $token", formId)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("getFormDetail ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun getReceiveFormDetail(token: String, formId: Int) = callbackFlow {
+        val request = api.getReceiveFormDetail("Bearer $token", formId)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("getFormDetail ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
 }

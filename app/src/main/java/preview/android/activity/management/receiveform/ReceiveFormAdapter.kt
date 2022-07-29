@@ -6,17 +6,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorBinding
+import preview.android.databinding.ItemReceiveFormThumbnailBinding
 import preview.android.model.MentorPost
+import preview.android.model.ReceiveFormThumbnail
 
 class ReceiveFormAdapter(
-    private val onApplyButtonClicked : (MentorPost) -> Unit,
-    private val onFavoriteButtonChecked : (Boolean, Int) -> Unit,
-) : ListAdapter<MentorPost, ReceiveFormAdapter.ViewHolder>(diffUtil) {
+    private val onClicked : (Int) -> Unit
+) : ListAdapter<ReceiveFormThumbnail, ReceiveFormAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemMentorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding, onApplyButtonClicked, onFavoriteButtonChecked)
+            ItemReceiveFormThumbnailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, onClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -25,27 +26,33 @@ class ReceiveFormAdapter(
 
 
     class ViewHolder(
-        private val binding: ItemMentorBinding,
-        private val onApplyButtonClicked: (MentorPost) -> Unit,
-        private val onFavoriteButtonChecked : (Boolean, Int) -> Unit,
-
+        private val binding: ItemReceiveFormThumbnailBinding,
+        private val onClicked : (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(mentorPost: MentorPost) {
-            binding.mentorpost = mentorPost
-            binding.btnApply.setOnClickListener {
-                onApplyButtonClicked(mentorPost)
+        fun bind(receiveFormThumbnail: ReceiveFormThumbnail) {
+            binding.receiveformthumbnail = receiveFormThumbnail
+
+            if (receiveFormThumbnail.status == "수락") {
+                binding.tvStatus.text = "수락"
             }
-            binding.ibFavorite.setOnCheckedChangeListener { button, isChecked ->
-                onFavoriteButtonChecked(isChecked, mentorPost.postId)
+            else if(receiveFormThumbnail.status == "대기"){
+                binding.tvStatus.text = "대기"
+            }
+            else{
+                binding.tvStatus.text = "거절"
+            }
+
+            binding.layoutReceiveformthumbnail.setOnClickListener {
+                onClicked(receiveFormThumbnail.formId)
             }
         }
     }
     private companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MentorPost>() {
-            override fun areContentsTheSame(oldItem: MentorPost, newItem: MentorPost) =
+        val diffUtil = object : DiffUtil.ItemCallback<ReceiveFormThumbnail>() {
+            override fun areContentsTheSame(oldItem: ReceiveFormThumbnail, newItem: ReceiveFormThumbnail) =
                 oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: MentorPost, newItem: MentorPost) =
+            override fun areItemsTheSame(oldItem: ReceiveFormThumbnail, newItem: ReceiveFormThumbnail) =
                 oldItem == newItem
         }
     }

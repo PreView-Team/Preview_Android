@@ -54,4 +54,25 @@ interface MentorService {
         @Body fom: Form
     ): Response<FormResponse>
 
+    @GET("/api/form")
+    suspend fun getAllMyForm(
+        @Header("Authorization") token: String
+    ): Response<JsonArray>
+
+    @GET("/api/mentor/form")
+    suspend fun getAllReceiveForm(
+        @Header("Authorization") token: String
+    ): Response<JsonArray>
+
+    @GET("/api/form/{formId}")
+    suspend fun getFormDetail(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int
+    ): Response<FormDetailResponse>
+
+    @GET("/api/mentor/form/{formId}")
+    suspend fun getReceiveFormDetail(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int
+    ): Response<ReceiveFormDetailResponse>
 }

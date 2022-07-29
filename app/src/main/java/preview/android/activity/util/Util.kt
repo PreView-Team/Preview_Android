@@ -1,6 +1,5 @@
 package preview.android.activity.util
 
-import android.R.array
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -21,11 +20,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import preview.android.R
+import preview.android.model.SendFormThumbnail
 import preview.android.model.MentorPost
 import preview.android.model.Post
+import preview.android.model.ReceiveFormThumbnail
 
 
 var deviceToken = ""
@@ -123,36 +123,34 @@ fun getToken(): String {
     return deviceToken
 }
 
-fun changeWordPointColor(view: TextView, word: String): SpannableString {
+fun changeWordColor(view : TextView, word: String, color : String) : SpannableString{
     val description = view.text
     val spannableString = SpannableString(description)
     val start = description.indexOf(word)
     val end = start + word.length
 
-    spannableString.setSpan(
-        ForegroundColorSpan(Color.parseColor("#FDB022")),
-        start,
-        end,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
+    when(color){
+        "point" ->{
+            spannableString.setSpan(
+                ForegroundColorSpan(Color.parseColor("#FDB022")),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        "skyblue" ->{
+            spannableString.setSpan(
+                ForegroundColorSpan(Color.parseColor("#2E90FA")),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+    }
+
     return spannableString
+
 }
-
-fun changeWordSkyBlueColor(view: TextView, word: String): SpannableString {
-    val description = view.text
-    val spannableString = SpannableString(description)
-    val start = description.indexOf(word)
-    val end = start + word.length
-
-    spannableString.setSpan(
-        ForegroundColorSpan(Color.parseColor("#2E90FA")),
-        start,
-        end,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
-    return spannableString
-}
-
 fun progressOn(progressDialog: AppCompatDialog) {
     progressDialog.setCancelable(false)
     progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -197,9 +195,7 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
-fun filtPostArray(list: JsonArray): List<MentorPost> {
-    val type = object : TypeToken<List<MentorPost>>() {}.type
-
+inline fun <reified T> filtJsonArray(list: JsonArray) : List<T>{
+    val type = object : TypeToken<List<T>>() {}.type
     return Gson().fromJson(list, type)
-
 }

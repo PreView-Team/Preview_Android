@@ -9,6 +9,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.main.fragment.newmentor.NewMentorAdapter
+import preview.android.activity.management.receiveform.fragment.ReceiveFormDetailFragment
+import preview.android.activity.management.sendform.SendFormAdapter
+import preview.android.activity.management.sendform.fragment.SendFormDetailFragment
 import preview.android.activity.mentorinfo.MentorInfoActivity
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityReceiveFormBinding
@@ -21,13 +24,31 @@ class ReceiveFormActivity : BaseActivity<ActivityReceiveFormBinding, ReceiveForm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding.rvReceiveForm.run {
-//            setHasFixedSize(true)
-//            setItemViewCacheSize(10)
-//            adapter = ReceiveFormAdapter(
-//            ).apply {
-//                submitList()
-//            }
-//        }
+
+        vm.getReceiveForms(AccountStore.token.value!!)
+
+        binding.rvReceiveForm.run {
+            setHasFixedSize(true)
+            setItemViewCacheSize(10)
+            adapter = ReceiveFormAdapter(
+                onClicked = { formId ->
+                    val bundle = Bundle()
+                    bundle.putInt("formId", formId)
+                    val fragment = ReceiveFormDetailFragment()
+                    fragment.arguments = bundle
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.layout_receive_form, fragment)
+                        .commit()
+                }
+            ).apply {
+                submitList(vm.receiveFormThumbnailList.value)
+            }
+        }
+        vm.receiveFormThumbnailList.observe(this) { list ->
+            Log.e("receivelList", list.toString())
+            (binding.rvReceiveForm.adapter as ReceiveFormAdapter).submitList(list.toMutableList())
+        }
+
     }
 }

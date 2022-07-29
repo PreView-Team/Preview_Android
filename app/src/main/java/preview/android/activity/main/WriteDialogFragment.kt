@@ -40,6 +40,7 @@ class WriteDialogFragment : DialogFragment() {
         binding.tbWrite.setOnMenuItemClickListener { menuItem ->
             vm.setWriting(
                 Writing(
+                    categoryName  = "디자인",
                     title = binding.etTitle.text.toString(),
                     contents = binding.etContents.text.toString()
                     // TODO : 직군 설정

@@ -26,7 +26,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
             // TODO: jobNames 변경필요
             val account = vm.loadAccount().copy(
                 nickname = binding.etNickname.text.toString(),
-                jobNames = listOf("마케터", "프로그래머")
+                jobNames = listOf("디자인")
             )
             vm.signUp(account)
             AccountStore.updateNickname(account.nickname)
