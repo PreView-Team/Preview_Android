@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
-import preview.android.activity.util.filtPostArray
+import preview.android.activity.util.filtJsonArray
 import preview.android.model.MentorPost
 import preview.android.model.Writing
 import preview.android.repository.MentorRepository
@@ -106,14 +106,14 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             mentorRepository.getCategoryNewMentorPostList(token, categoryName).collect { response ->
                 Log.e("new LIST", response.toString())
-                updateNewMentorPostList(filtPostArray(response as JsonArray))
+                updateNewMentorPostList(filtJsonArray(response as JsonArray))
             }
         }
     fun getCategoryRecommendMentorPostList(token: String, categoryName: String) =
         viewModelScope.launch {
             mentorRepository.getCategoryRecommendMentorPostList(token, categoryName).collect { response ->
                 Log.e("recommend LIST", response.toString())
-                updateRecommendMentorPostList(filtPostArray(response as JsonArray))
+                updateRecommendMentorPostList(filtJsonArray(response as JsonArray))
             }
         }
     fun setWriting(writing: Writing) {

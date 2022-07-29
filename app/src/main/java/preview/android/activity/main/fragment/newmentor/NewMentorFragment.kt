@@ -30,11 +30,11 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                 when (tab?.position) {
                     // 
                     0 -> {
-                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "프로그래밍")
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "디자인")
                     }
 
                     1 -> {
-                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "PM")
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "프로그래밍")
                     }
 
                     2 -> {

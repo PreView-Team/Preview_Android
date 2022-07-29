@@ -59,8 +59,10 @@ class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, Mai
                     startActivity(intent)
                 }, onFavoriteButtonChecked = { isChecked, postId ->
                     if (isChecked) {
+                        vm.likePost(AccountStore.token.value!!, postId)
                         Log.e("CHECKED", "!!")
                     } else {
+                        vm.unLikePost(AccountStore.token.value!!, postId)
                         Log.e("NOT CHECKED", "!!")
                     }
 
