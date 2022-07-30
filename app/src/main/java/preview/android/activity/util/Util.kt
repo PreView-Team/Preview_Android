@@ -31,7 +31,7 @@ import preview.android.model.ReceiveFormThumbnail
 var deviceToken = ""
 
 const val ERROR_CODE_400: String = "400"
-
+const val ERROR_UNAUTHORIZED: String = "401"
 
 fun createBestPostList(): List<Post> {
     val list = arrayListOf<Post>()
