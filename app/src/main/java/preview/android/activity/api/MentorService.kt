@@ -48,5 +48,16 @@ interface MentorService {
         @Path("postId") postId: Int
     ): Response<PostDetailResponse>
 
+    @PUT("/api/post")
+    suspend fun editPost(
+        @Header("Authorization") token: String,
+        @Body editPost: EditPost
+    ) : Response<MentorPostResponse>
+
+    @DELETE("/api/post")
+    suspend fun deletePost(
+        @Header("Authorization") token: String,
+        @Body postId: Int
+    ) : Response<MentorPostResponse>
 
 }

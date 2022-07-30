@@ -90,4 +90,28 @@ class FormRepository(private val api : FormService) {
         }
         close()
     }
+
+    suspend fun acceptForm(token: String, formId: Int) = callbackFlow {
+        val request = api.acceptForm("Bearer $token", formId)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("acceptForm ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+    suspend fun refuseForm(token: String, formId: Int) = callbackFlow {
+        val request = api.refuseForm("Bearer $token", formId)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            Log.e("acceptForm ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
 }

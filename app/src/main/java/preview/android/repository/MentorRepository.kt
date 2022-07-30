@@ -93,5 +93,26 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
+    suspend fun editPost(token: String, postId: Int, writing: Writing) = callbackFlow {
+        val request = api.editPost("Bearer $token", EditPost(postId, "test", "testcontents"))
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("editPost ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun deletePost(token:String, postId : Int) = callbackFlow {
+        val request = api.deletePost("Bearer $token", postId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("deletePost ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
 
 }

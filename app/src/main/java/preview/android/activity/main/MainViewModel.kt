@@ -138,4 +138,16 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun editPost(token: String, postId: Int, writing: Writing) = viewModelScope.launch {
+        mentorRepository.editPost(token, postId, writing).collect { response ->
+            Log.e("editPost", response.toString())
+
+        }
+    }
+    fun deletePost(token: String, postId: Int) = viewModelScope.launch {
+        mentorRepository.deletePost(token, postId).collect { response ->
+            Log.e("deletePost", response.toString())
+
+        }
+    }
 }

@@ -29,11 +29,11 @@ class ReceiveFormDetailFragment :
         )
 
         binding.btnAccept.setOnClickListener {
-            //vm.
+            vm.aceeptForm(AccountStore.token.value!!, bundle.getInt("formId"))
         }
 
         binding.btnRefuse.setOnClickListener {
-
+            vm.refuseForm(AccountStore.token.value!!, bundle.getInt("formId"))
         }
 
         vm.receiveFormDetail.observe(viewLifecycleOwner) { receiveFormDetailResponse ->
