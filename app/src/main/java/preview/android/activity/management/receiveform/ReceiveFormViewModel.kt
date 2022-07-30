@@ -35,7 +35,7 @@ class ReceiveFormViewModel @Inject constructor(
         _receiveFormThumbnailList.addAll(list)
     }
 
-    fun setReceiveFormDetail(receiveFormDetailResponse : ReceiveFormDetailResponse){
+    fun setReceiveFormDetail(receiveFormDetailResponse: ReceiveFormDetailResponse) {
         _receiveFormDetail.value = receiveFormDetailResponse
     }
 
@@ -47,19 +47,23 @@ class ReceiveFormViewModel @Inject constructor(
         }
     }
 
-    fun getReceiveFormDetail(token: String, formId : Int)= viewModelScope.launch {
+    fun getReceiveFormDetail(token: String, formId: Int) = viewModelScope.launch {
         formRepository.getReceiveFormDetail(token, formId).collect { response ->
             Log.e("getReceiveFormDetail", response.toString())
             setReceiveFormDetail(response as ReceiveFormDetailResponse)
         }
     }
 
-    fun aceeptForm(token: String, formId: Int) = viewModelScope.launch{
-        //formRepository.
+    fun aceeptForm(token: String, formId: Int) = viewModelScope.launch {
+        formRepository.acceptForm(token, formId).collect { response ->
+            Log.e("acceptForm", response.toString())
+        }
     }
 
-    fun refuseForm(){
-
+    fun refuseForm(token: String, formId: Int) = viewModelScope.launch {
+        formRepository.refuseForm(token, formId).collect { response ->
+            Log.e("acceptForm", response.toString())
+        }
     }
 
 }

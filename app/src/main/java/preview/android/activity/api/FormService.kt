@@ -52,5 +52,16 @@ interface FormService {
         @Body editForm: EditForm
     ): Response<FormResponse>
 
+    @POST("/api/mentor/form/{formId}")
+    suspend fun acceptForm(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int,
+    ) : Response<FormResponse>
+
+    @DELETE("/api/mentor/form/{formId}")
+    suspend fun refuseForm(
+        @Header("Authorization") token: String,
+        @Path("formId") formId: Int,
+    ) : Response<FormResponse>
 
 }
