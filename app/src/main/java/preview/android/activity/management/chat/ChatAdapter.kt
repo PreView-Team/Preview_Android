@@ -1,5 +1,6 @@
 package preview.android.activity.management.chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -16,7 +17,7 @@ import preview.android.model.Message
 class ChatAdapter(
 ) : ListAdapter<Message, RecyclerView.ViewHolder>(diffUtil) {
     override fun getItemViewType(position: Int): Int {
-        if(currentList[position].nickname == AccountStore.nickname.value){
+        if(currentList[position].nickname == AccountStore.nickname.value){ // TODO: mentornickname과 같을때 mychat 처리
             return MY_CHAT
         }
         else{
@@ -62,11 +63,13 @@ class ChatAdapter(
     }
     private companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Message>() {
-            override fun areContentsTheSame(oldItem: Message, newItem: Message) =
-                oldItem == newItem
+            override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
+                return oldItem == newItem
+            }
 
-            override fun areItemsTheSame(oldItem: Message, newItem: Message) =
-                oldItem == newItem
+            override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
+                return oldItem == newItem
+            }
         }
 
         private const val MY_CHAT = 1

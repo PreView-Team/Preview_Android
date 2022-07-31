@@ -89,8 +89,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         }
 
-        vm.editPost(AccountStore.token.value!!, 2, writing = Writing())
-       // vm.deletePost(AccountStore.token.value!!, 4)
 
         vm.writing.observe(this) { writing ->
             if (isVerifyMentor()) {

@@ -39,22 +39,23 @@ class ChatActivity : BaseActivity<ActivityChatBinding, ChatViewModel>(
 //        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다"))
 //        myRef.child(nickname).setValue(createList)
 
-        val chatRoomList = arrayListOf<String>()
+
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    val chatRoomList = arrayListOf<String>()
                     dataSnapshot.children.forEach { children ->
                         // key값 -> 닉네임
-                        Log.e("KEY", "!!" + children.key)
                         if (children.key != null) {
                             chatRoomList.add(children.key!!)
                         }
                     }
+                    vm.updateChatRoomList(chatRoomList)
                 }
 
                 //vm.updateMessageList(hashMap.values.toList())
-                vm.updateChatRoomList(chatRoomList)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -74,7 +75,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding, ChatViewModel>(
                     fragment.arguments = bundle
 
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.layout_chat, fragment)
+                        .add(R.id.layout_chat, fragment)
                         .commit()
                 }
             ).apply {
@@ -88,7 +89,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding, ChatViewModel>(
         }
 
         binding.btnCreate.setOnClickListener {
-            val message = Message(nickname = "0729", message = "")
+            val message = Message(nickname = "0729", message = "", count = 0)
             myRef.child("07292" + "/" + count).setValue(message)
         }
     }
