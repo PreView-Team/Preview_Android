@@ -32,11 +32,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = this.arguments
+        val nickname = requireArguments().getString("nickname")!!
 
         val database = Firebase.database
         val myRef = database.getReference("mentorNickName")
-        val nickname = bundle!!.getString("nickname")!!
+     //   val nickname = bundle!!.getString("nickname")!!
 //        val token = AccountStore.token.value.toString()
 //        val createList = arrayListOf<Message>()
 //        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다"))
