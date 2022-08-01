@@ -24,7 +24,7 @@ interface MentorService {
         @Query("name") categoryName: String
     ): Response<JsonArray>
 
-    @POST("/api/authority/{kakaoId}")
+    @POST("/api/mentor/{kakaoId}")
     suspend fun registMentor(
         @Header("Authorization") token: String,
         @Path("kakaoId") kakoId: Long

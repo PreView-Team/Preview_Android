@@ -83,6 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_check_form"
                 android:layout_weight="1"
                 android:text="제출한 신청서 확인하기"
                 style="@style/text_main_semibold"
