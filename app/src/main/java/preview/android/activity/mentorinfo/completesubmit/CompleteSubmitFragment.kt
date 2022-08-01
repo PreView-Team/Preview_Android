@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainActivity
+import preview.android.activity.management.sendform.SendFormActivity
 import preview.android.activity.mentorinfo.MentorInfoViewModel
 import preview.android.activity.util.changeWordColor
 import preview.android.databinding.FragmentCompleteSubmitBinding
@@ -24,6 +25,11 @@ class CompleteSubmitFragment : BaseFragment<FragmentCompleteSubmitBinding, Mento
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvDescription.text = changeWordColor(binding.tvDescription, "완료", "point")
+
+        binding.btnCheckForm.setOnClickListener {
+            val intent = Intent(context, SendFormActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnHome.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)

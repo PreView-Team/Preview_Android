@@ -19,17 +19,29 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/et_message"
             app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/et_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="내용"
-            app:layout_constraintBottom_toTopOf="@+id/btn_send" />
+            app:layout_constraintBottom_toTopOf="@+id/btn_send_other" />
+
+        <Button
+            android:id="@+id/btn_send_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전송1"
+            app:layout_constraintBottom_toTopOf="@+id/btn_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
         <Button
             android:id="@+id/btn_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="전송"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:text="전송2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
