@@ -30,6 +30,7 @@ class ReceiveFormDetailFragment :
 
         binding.btnAccept.setOnClickListener {
             vm.aceeptForm(AccountStore.token.value!!, bundle.getInt("formId"))
+            vm.createRoom(vm.receiveFormDetail.value!!.username)
         }
 
         binding.btnRefuse.setOnClickListener {

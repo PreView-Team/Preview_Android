@@ -8,6 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import preview.android.activity.api.AuthService
 import preview.android.activity.api.FormService
 import preview.android.activity.api.MentorService
+import preview.android.repository.ChatRepository
 import preview.android.repository.FormRepository
 import preview.android.repository.LoginRepository
 import preview.android.repository.MentorRepository
@@ -26,4 +27,8 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideFormRepository(api: FormService) : FormRepository = FormRepository(api)
+
+    @Provides
+    @ViewModelScoped
+    fun provideChatRepository() : ChatRepository = ChatRepository()
 }

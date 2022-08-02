@@ -34,41 +34,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
 
         val nickname = requireArguments().getString("nickname")!!
 
-        val database = Firebase.database
-        val myRef = database.getReference("mentorNickName")
-     //   val nickname = bundle!!.getString("nickname")!!
-//        val token = AccountStore.token.value.toString()
-//        val createList = arrayListOf<Message>()
-//        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다"))
-//        myRef.child(nickname).setValue(createList)
-
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    val list = arrayListOf<Message>()
-                    dataSnapshot.child(nickname).children.forEach { dataSnapshot ->
-                        val map = dataSnapshot.value as HashMap<String, String>
-                        list.add(
-                            Message(
-                                nickname = map.get("nickname")!!,
-                                message = map.get("message")!!,
-                                count = list.size
-                            )
-                        )
-
-                    }
-                    Log.e("list value1", list.size.toString())
-                    Log.e("list foreach", list.toString())
-                    vm.updateMessageList(list)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
-            }
-        })
+        vm.readChatList(nickname)
 
         binding.rvChat.run {
             setHasFixedSize(true)
@@ -81,12 +47,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
 
         binding.btnSendOther.setOnClickListener {
             val message = Message(nickname = "other", message = binding.etMessage.text.toString(), vm.messageList.value!!.size)
-            myRef.child(nickname + "/" + vm.messageList.value!!.size).setValue(message)
+            vm.sendChat(nickname, message,  vm.messageList.value!!.size)
         }
 
         binding.btnSend.setOnClickListener {
             val message = Message(nickname = AccountStore.nickname.value!!, message = binding.etMessage.text.toString(), vm.messageList.value!!.size)
-            myRef.child(nickname + "/" + vm.messageList.value!!.size).setValue(message)
+            vm.sendChat(nickname, message,  vm.messageList.value!!.size)
         }
         lifecycleScope.launch {
             vm.messageList.collect { list ->

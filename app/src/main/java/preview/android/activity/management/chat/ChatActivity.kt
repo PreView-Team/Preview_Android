@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.databinding.ActivityChatBinding
 
+@AndroidEntryPoint
 class ChatActivity : BaseActivity<ActivityChatBinding, ChatViewModel>(
     R.layout.activity_chat
 ) {

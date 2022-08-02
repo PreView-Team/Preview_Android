@@ -32,40 +32,7 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val database = Firebase.database
-        val myRef = database.getReference("mentorNickName")
-        val nickname = AccountStore.nickname.value.toString()
-        var count = 0
-//        val token = AccountStore.token.value.toString()
-//        val createList = arrayListOf<Message>()
-//        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다"))
-//        myRef.child(nickname).setValue(createList)
-
-
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    val chatRoomList = arrayListOf<String>()
-                    dataSnapshot.children.forEach { children ->
-                        // key값 -> 닉네임
-                        if (children.key != null) {
-                            chatRoomList.add(children.key!!)
-                        }
-                    }
-                    vm.updateChatRoomList(chatRoomList)
-                }
-
-                //vm.updateMessageList(hashMap.values.toList())
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
-            }
-        })
-
+        vm.readChatRoomList()
         binding.rvChatRoom.run {
 //            setHasFixedSize(true)
 //            setItemViewCacheSize(10)
@@ -83,11 +50,6 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         vm.chatRoomList.observe(viewLifecycleOwner) { list ->
             Log.e("list", list.toString())
             (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(list.toMutableList())
-        }
-
-        binding.btnCreate.setOnClickListener {
-            val message = Message(nickname = "0729", message = "", count = 0)
-            myRef.child("07292" + "/" + count).setValue(message)
         }
 
     }
