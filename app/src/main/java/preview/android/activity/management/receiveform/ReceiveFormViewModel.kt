@@ -13,15 +13,18 @@ import preview.android.activity.api.dto.FormDetailResponse
 import preview.android.activity.api.dto.ReceiveFormDetailResponse
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
+import preview.android.model.Message
 import preview.android.model.ReceiveFormThumbnail
 import preview.android.model.SendFormThumbnail
+import preview.android.repository.ChatRepository
 import preview.android.repository.FormRepository
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class ReceiveFormViewModel @Inject constructor(
-    private val formRepository: FormRepository
+    private val formRepository: FormRepository,
+    private val chatRepository: ChatRepository
 ) : BaseViewModel() {
 
     private val _receiveFormThumbnailList = MutableListLiveData<ReceiveFormThumbnail>()
@@ -66,4 +69,10 @@ class ReceiveFormViewModel @Inject constructor(
         }
     }
 
+    fun createRoom(nickname : String) = viewModelScope.launch{
+        chatRepository.createChatRoom(nickname).collect {
+            Log.e("createRoom reponse", it)
+        }
+
+    }
 }
