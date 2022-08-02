@@ -1,6 +1,7 @@
 package preview.android.activity.util
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Spannable
@@ -22,10 +23,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
 import preview.android.R
-import preview.android.model.SendFormThumbnail
 import preview.android.model.MentorPost
 import preview.android.model.Post
-import preview.android.model.ReceiveFormThumbnail
+import java.io.File
+import java.io.FileInputStream
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.*
 
 
 var deviceToken = ""
@@ -103,7 +107,7 @@ fun createMentorList(): List<MentorPost> {
     return list
 }
 
-fun getToken(): String {
+fun getFCMToken(): String {
     if (deviceToken == "") {
         var task =
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -123,14 +127,14 @@ fun getToken(): String {
     return deviceToken
 }
 
-fun changeWordColor(view : TextView, word: String, color : String) : SpannableString{
+fun changeWordColor(view: TextView, word: String, color: String): SpannableString {
     val description = view.text
     val spannableString = SpannableString(description)
     val start = description.indexOf(word)
     val end = start + word.length
 
-    when(color){
-        "point" ->{
+    when (color) {
+        "point" -> {
             spannableString.setSpan(
                 ForegroundColorSpan(Color.parseColor("#FDB022")),
                 start,
@@ -138,7 +142,7 @@ fun changeWordColor(view : TextView, word: String, color : String) : SpannableSt
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        "skyblue" ->{
+        "skyblue" -> {
             spannableString.setSpan(
                 ForegroundColorSpan(Color.parseColor("#2E90FA")),
                 start,
@@ -151,6 +155,7 @@ fun changeWordColor(view : TextView, word: String, color : String) : SpannableSt
     return spannableString
 
 }
+
 fun progressOn(progressDialog: AppCompatDialog) {
     progressDialog.setCancelable(false)
     progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -195,7 +200,7 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
-inline fun <reified T> filtJsonArray(list: JsonArray) : List<T>{
+inline fun <reified T> filtJsonArray(list: JsonArray): List<T> {
     val type = object : TypeToken<List<T>>() {}.type
     return Gson().fromJson(list, type)
 }

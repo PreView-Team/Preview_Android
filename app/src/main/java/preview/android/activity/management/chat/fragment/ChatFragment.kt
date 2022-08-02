@@ -19,6 +19,7 @@ import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.management.chat.ChatAdapter
 import preview.android.activity.management.chat.ChatViewModel
+import preview.android.activity.util.getFCMToken
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentChatBinding
 import preview.android.model.Message
@@ -53,6 +54,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
         binding.btnSend.setOnClickListener {
             val message = Message(nickname = AccountStore.nickname.value!!, message = binding.etMessage.text.toString(), vm.messageList.value!!.size)
             vm.sendChat(nickname, message,  vm.messageList.value!!.size)
+            vm.sendNotice(getFCMToken(), nickname)
         }
         lifecycleScope.launch {
             vm.messageList.collect { list ->

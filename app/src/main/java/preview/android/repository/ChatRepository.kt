@@ -11,6 +11,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
+import preview.android.activity.util.getFCMToken
+import preview.android.data.AccountStore
 import kotlin.coroutines.resume
 import preview.android.model.Message
 import java.util.HashMap
@@ -22,7 +24,7 @@ class ChatRepository {
 
     fun createChatRoom(nickname: String) = callbackFlow {
         val createList = arrayListOf<Message>()
-        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다", count = 0))
+        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다", count = 0, mentorToken = AccountStore.myFCMToken)) // menteeToken = 멘티 fcmToken
         myRef.child(nickname).setValue(createList).addOnSuccessListener {
             trySend("success")
         }.addOnFailureListener {

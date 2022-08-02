@@ -29,6 +29,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KAKAO_API_KEY", properties["KAKAO_API_KEY"]
+        buildConfigField "String", "FCM_KEY", properties['FCM_KEY']
         manifestPlaceholders = [kakao_key: kakao_key]
     }
 
