@@ -1,6 +1,7 @@
 package preview.android.activity.main
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -22,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
+import preview.android.activity.alarm.AlarmActivity
 import preview.android.activity.util.changeFabClose
 import preview.android.activity.util.changeFabOpen
 import preview.android.activity.util.isFabOpened
@@ -41,12 +43,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
         binding.bnvMain.setupWithNavController(navController)
 
         binding.tbMain.setNavigationOnClickListener { view ->
-
+            val intent = Intent(this, AlarmActivity::class.java)
+            startActivity(intent)
         }
         binding.fab.setOnClickListener {
             if (isFabOpened(binding.fab)) {

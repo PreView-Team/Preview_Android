@@ -28,4 +28,14 @@ class MutableListLiveData<T>  : MutableLiveData<List<T>>(){
         tempList.clear()
         value = tempList
     }
+
+    fun backgroundAddAll(items: List<T>){
+        tempList.addAll(items)
+        postValue(tempList)
+    }
+
+    fun backgroundClear() {
+        tempList.clear()
+        postValue(tempList)
+    }
 }
