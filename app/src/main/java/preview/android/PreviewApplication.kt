@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.multidex.MultiDexApplication
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
-import preview.android.activity.util.getToken
+import preview.android.activity.util.getFCMToken
+import preview.android.data.AccountStore
 import preview.android.exception.PreviewExceptionHandler
 
 
@@ -15,7 +16,7 @@ class PreviewApplication : MultiDexApplication(){
         super.onCreate()
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
         setCrashHandler()
-        getToken()
+        AccountStore.myFCMToken = getFCMToken()
     }
 
     private fun setCrashHandler(){

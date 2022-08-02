@@ -131,10 +131,15 @@ class LoginViewModel @Inject constructor(
     }
 
     fun loginToServer(account: Account) = viewModelScope.launch {
-
         loginRepository.loginToServer(account).collect { value ->
-            Log.e("LOGINTOSERVER", value.toString())
-            setResponseResult(value)
+            if(value is LoginResponse) {
+                Log.e("LOGINTOSERVER response", value.toString())
+                setResponseResult(value.token!!)
+            }
+            else{
+                Log.e("else response", value.toString())
+                setResponseResult(value.toString())
+            }
         }
 
     }

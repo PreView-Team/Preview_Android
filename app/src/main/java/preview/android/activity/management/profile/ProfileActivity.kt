@@ -1,4 +1,4 @@
-package preview.android.activity.profile
+package preview.android.activity.management.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

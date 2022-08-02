@@ -5,10 +5,7 @@ import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import preview.android.activity.api.dto.*
-import preview.android.model.Form
-import preview.android.model.MentorPost
-import preview.android.model.PostId
-import preview.android.model.Writing
+import preview.android.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,13 +17,14 @@ interface MentorService {
         @Body writing: Writing
     ): Response<MentorPostResponse>
 
-    @GET("/api/post/category/{categoryId}")
+    @GET("/api/post/category/")
     suspend fun getCatergoryPostList(
         @Header("Authorization") token: String,
-        @Path("categoryId") categoryId: Int
+        @Query("status") status: String,
+        @Query("name") categoryName: String
     ): Response<JsonArray>
 
-    @POST("/api/authority/{kakaoId}")
+    @POST("/api/mentor/{kakaoId}")
     suspend fun registMentor(
         @Header("Authorization") token: String,
         @Path("kakaoId") kakoId: Long
@@ -50,10 +48,16 @@ interface MentorService {
         @Path("postId") postId: Int
     ): Response<PostDetailResponse>
 
-    @POST("/api/form")
-    suspend fun createFrom(
+    @PUT("/api/post")
+    suspend fun editPost(
         @Header("Authorization") token: String,
-        @Body fom : Form
-    ) : Response<FormResponse>
+        @Body editPost: EditPost
+    ) : Response<MentorPostResponse>
+
+    @DELETE("/api/post")
+    suspend fun deletePost(
+        @Header("Authorization") token: String,
+        @Body postId: Int
+    ) : Response<MentorPostResponse>
 
 }

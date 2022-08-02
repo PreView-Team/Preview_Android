@@ -1,6 +1,7 @@
 package preview.android.activity.util
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Spannable
@@ -18,16 +19,23 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import com.google.gson.JsonArray
+import com.google.gson.reflect.TypeToken
 import preview.android.R
 import preview.android.model.MentorPost
 import preview.android.model.Post
+import java.io.File
+import java.io.FileInputStream
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.*
 
 
 var deviceToken = ""
 
 const val ERROR_CODE_400: String = "400"
-
+const val ERROR_UNAUTHORIZED: String = "401"
 
 fun createBestPostList(): List<Post> {
     val list = arrayListOf<Post>()
@@ -78,32 +86,28 @@ fun createMentorList(): List<MentorPost> {
         MentorPost(
             postId = 1,
             nickname = "1번",
-            categoryName =  "마케터",
+            category = "마케터",
             introduce = "소개 1번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,
             likeCount = 123,
-            review = false,
-            reviewCount = 0
         )
     )
     list.add(
         MentorPost(
             postId = 2,
             nickname = "2번",
-            categoryName =  "마케터",
+            category = "마케터",
             introduce = "소개 2번",
             contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
             like = true,
             likeCount = 456,
-            review = false,
-            reviewCount = 0
         )
     )
     return list
 }
 
-fun getToken(): String {
+fun getFCMToken(): String {
     if (deviceToken == "") {
         var task =
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -123,34 +127,33 @@ fun getToken(): String {
     return deviceToken
 }
 
-fun changeWordPointColor(view: TextView, word: String): SpannableString {
+fun changeWordColor(view: TextView, word: String, color: String): SpannableString {
     val description = view.text
     val spannableString = SpannableString(description)
     val start = description.indexOf(word)
     val end = start + word.length
 
-    spannableString.setSpan(
-        ForegroundColorSpan(Color.parseColor("#FDB022")),
-        start,
-        end,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
-    return spannableString
-}
+    when (color) {
+        "point" -> {
+            spannableString.setSpan(
+                ForegroundColorSpan(Color.parseColor("#FDB022")),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        "skyblue" -> {
+            spannableString.setSpan(
+                ForegroundColorSpan(Color.parseColor("#2E90FA")),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+    }
 
-fun changeWordSkyBlueColor(view: TextView, word: String): SpannableString {
-    val description = view.text
-    val spannableString = SpannableString(description)
-    val start = description.indexOf(word)
-    val end = start + word.length
-
-    spannableString.setSpan(
-        ForegroundColorSpan(Color.parseColor("#2E90FA")),
-        start,
-        end,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
     return spannableString
+
 }
 
 fun progressOn(progressDialog: AppCompatDialog) {
@@ -197,6 +200,7 @@ fun showDialogFragment(activity: AppCompatActivity, newFragment: DialogFragment)
         .commit()
 }
 
-fun filtPostArray(postArray: String) {
-
+inline fun <reified T> filtJsonArray(list: JsonArray): List<T> {
+    val type = object : TypeToken<List<T>>() {}.type
+    return Gson().fromJson(list, type)
 }

@@ -1,4 +1,4 @@
-package preview.android.activity.mentorprofile
+package preview.android.activity.management.mentorprofile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

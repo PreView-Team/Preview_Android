@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.mentorinfo.MentorInfoViewModel
-import preview.android.activity.util.changeWordPointColor
+import preview.android.activity.util.changeWordColor
 import preview.android.activity.util.progressOff
 import preview.android.activity.util.progressOn
 import preview.android.data.AccountStore
@@ -31,7 +31,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvDescription.text = changeWordPointColor(binding.tvDescription, "상담")
+        binding.tvDescription.text = changeWordColor(binding.tvDescription, "상담", "point")
 
         binding.btnBack.setOnClickListener {
             view.findNavController().popBackStack()
@@ -52,7 +52,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
         })
 
         binding.btnApply.setOnClickListener {
-            if (binding.etContents.text!!.length < 50) {
+            if (binding.etContents.text!!.length == 50) {
                 // 50자 이상 입력하라고 안내
             } else {
                 progressOn(progressDialog)
@@ -61,6 +61,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
                         contents = binding.etContents.text.toString()
                     )
                 )
+                Log.e("MentorInfoStore", MentorInfoStore.form.value.toString())
                 vm.sendForm(AccountStore.token.value!!, MentorInfoStore.form.value!!)
             }
         }

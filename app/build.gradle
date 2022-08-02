@@ -29,6 +29,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "KAKAO_API_KEY", properties["KAKAO_API_KEY"]
+        buildConfigField "String", "FCM_KEY", properties['FCM_KEY']
         manifestPlaceholders = [kakao_key: kakao_key]
     }
 
@@ -88,6 +89,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
 
     // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"

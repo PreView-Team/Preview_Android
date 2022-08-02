@@ -23,26 +23,26 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.updateFragmentState(MainViewModel.FragmentState.newMentor)
-        vm.getCategoryMentorPostList(AccountStore.token.value!!, 1)
+        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "디자인")
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     // 
                     0 -> {
-                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 1)
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "디자인")
                     }
 
                     1 -> {
-                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 2)
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "프로그래밍")
                     }
 
                     2 -> {
-                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 3)
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "1")
                     }
 
                     3 -> {
-                        vm.getCategoryMentorPostList(AccountStore.token.value!!, 4)
+                        vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "1")
                     }
                 }
             }

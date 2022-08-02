@@ -4,10 +4,7 @@ import android.util.Log
 import kotlinx.coroutines.flow.callbackFlow
 import preview.android.activity.api.MentorService
 import preview.android.activity.util.createMentorList
-import preview.android.model.Form
-import preview.android.model.MentorPost
-import preview.android.model.PostId
-import preview.android.model.Writing
+import preview.android.model.*
 
 class MentorRepository(private val api: MentorService) {
 
@@ -21,13 +18,23 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun getCategoryMentorPostList(token: String, categoryId: Int) = callbackFlow {
-        val request = api.getCatergoryPostList("Bearer $token", categoryId)
+    suspend fun getCategoryNewMentorPostList(token: String, categoryName: String) = callbackFlow {
+        val request = api.getCatergoryPostList("Bearer $token", "new", categoryName)
         if (request.isSuccessful && request.body() != null) {
-            trySend(createMentorList())
-
+            trySend(request.body()!!)
         } else {
-            trySend(request.errorBody()!!.string())
+            trySend("ERROR :" + request.errorBody()!!.string())
+        }
+        close()
+    }
+
+
+    suspend fun getCategoryRecommendMentorPostList(token: String, categoryName: String) = callbackFlow {
+        val request = api.getCatergoryPostList("Bearer $token", "recommendation",categoryName)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            trySend("ERROR :" + request.errorBody()!!.string())
         }
         close()
     }
@@ -86,14 +93,26 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun sendForm(token: String, form: Form) = callbackFlow {
-        val request = api.createFrom("Bearer $token", form)
+    suspend fun editPost(token: String, postId: Int, writing: Writing) = callbackFlow {
+        val request = api.editPost("Bearer $token", EditPost(postId, "test", "testcontents"))
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("sendForm ERROR", request.code().toString())
+            Log.e("editPost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
+
+    suspend fun deletePost(token:String, postId : Int) = callbackFlow {
+        val request = api.deletePost("Bearer $token", postId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("deletePost ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
 }

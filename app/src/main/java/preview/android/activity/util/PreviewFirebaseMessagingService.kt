@@ -12,15 +12,21 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import preview.android.R
+import preview.android.activity.login.LoginActivity
 import preview.android.activity.main.MainActivity
 
 class PreviewFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        if (remoteMessage.data.isNotEmpty()) {
-            showNotification(remoteMessage)
-        }
-        Log.e("onMessageReceived", remoteMessage.toString())
+
+        showNotification(remoteMessage)
+        Log.e("onMessageReceived1", remoteMessage.data.toString())
+        Log.e("onMessageReceived1-1", remoteMessage.data["title"].toString())
+        Log.e("onMessageReceived1-2", remoteMessage.data["body"].toString())
+        Log.e("onMessageReceived2", remoteMessage.notification.toString())
+        Log.e("onMessageReceived2-1", ""+ remoteMessage.notification?.body.toString())
+        Log.e("onMessageReceived2-2", ""+ remoteMessage.notification?.title.toString())
+
     }
 
     override fun onMessageSent(p0: String) {
@@ -34,8 +40,8 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun showNotification(remoteMessage: RemoteMessage) {
-
-        val intent = Intent(this, MainActivity::class.java)
+        Log.e("showNotification", "!!")
+        val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this, 0 /* Request code */, intent,
@@ -47,8 +53,8 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_baseline_home)
-            .setContentTitle(remoteMessage.notification?.title)
-            .setContentText(remoteMessage.notification?.body)
+            .setContentTitle(remoteMessage.data["title"].toString())
+            .setContentText(remoteMessage.data["body"].toString())
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)

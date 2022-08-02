@@ -10,7 +10,7 @@ import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
-import preview.android.activity.util.changeWordSkyBlueColor
+import preview.android.activity.util.changeWordColor
 import preview.android.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvDescription.text = changeWordSkyBlueColor(binding.tvDescription, "매칭활동")
+        binding.tvDescription.text = changeWordColor(binding.tvDescription, "매칭활동", "skyblue")
 
         vm.updateFragmentState(MainViewModel.FragmentState.home)
         vm.getNewMentorThumbnailList()

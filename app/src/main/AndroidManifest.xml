@@ -13,10 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
-            android:name=".activity.profile.ProfileActivity"
+            android:name=".activity.management.chat.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.mentorprofile.MentorProfileActivity"
+            android:name=".activity.management.receiveform.ReceiveFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.management.sendform.SendFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.management.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.management.mentorprofile.MentorProfileActivity"
             android:exported="false" />
         <activity
             android:name=".activity.mentorinfo.MentorInfoActivity"

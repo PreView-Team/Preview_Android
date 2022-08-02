@@ -128,7 +128,7 @@ class LoginRepository(private val api: AuthService) {
     suspend fun loginToServer(account: Account) = callbackFlow {
         val request = api.login(LoginData(account.kakaoAccessToken))
         if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!.token!!)
+            trySend(request.body()!!)
         } else {
             trySend(request.code().toString())
         }

@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
+import preview.android.activity.util.filtJsonArray
 import preview.android.model.MentorPost
 import preview.android.model.Writing
 import preview.android.repository.MentorRepository
@@ -18,13 +20,6 @@ class MainViewModel @Inject constructor(
     private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
 
-    companion object {
-        const val NEW_MENTOR = 1
-        const val RECOMMEND_MENTOR = 2
-        const val HOME = 3
-        const val COMMUNITY = 4
-        const val SETTING = 5
-    }
 
     sealed class FragmentState {
         object newMentor : FragmentState()
@@ -100,14 +95,20 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getCategoryMentorPostList(token: String, categoryId: Int) = viewModelScope.launch {
-        mentorRepository.getCategoryMentorPostList(token, categoryId).collect { response ->
-            Log.e("POST LIST", response.toString())
-            // 분류해서 리스트에 넣어야함
-            updateNewMentorPostList(response as List<MentorPost>)
+    fun getCategoryNewMentorPostList(token: String, categoryName: String) =
+        viewModelScope.launch {
+            mentorRepository.getCategoryNewMentorPostList(token, categoryName).collect { response ->
+                Log.e("new LIST", response.toString())
+                updateNewMentorPostList(filtJsonArray(response as JsonArray))
+            }
         }
-    }
-
+    fun getCategoryRecommendMentorPostList(token: String, categoryName: String) =
+        viewModelScope.launch {
+            mentorRepository.getCategoryRecommendMentorPostList(token, categoryName).collect { response ->
+                Log.e("recommend LIST", response.toString())
+                updateRecommendMentorPostList(filtJsonArray(response as JsonArray))
+            }
+        }
     fun setWriting(writing: Writing) {
         _writing.value = writing
     }
@@ -137,4 +138,16 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun editPost(token: String, postId: Int, writing: Writing) = viewModelScope.launch {
+        mentorRepository.editPost(token, postId, writing).collect { response ->
+            Log.e("editPost", response.toString())
+
+        }
+    }
+    fun deletePost(token: String, postId: Int) = viewModelScope.launch {
+        mentorRepository.deletePost(token, postId).collect { response ->
+            Log.e("deletePost", response.toString())
+
+        }
+    }
 }
