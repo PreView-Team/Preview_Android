@@ -98,7 +98,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
 
-    //kakao login
+    // kakao login
     implementation "com.kakao.sdk:v2-user:2.8.6"
 
+    // workmanager
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
 }

@@ -8,6 +8,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import preview.android.activity.api.AuthService
 import preview.android.activity.api.FormService
 import preview.android.activity.api.MentorService
+import preview.android.activity.api.ReviewService
 import preview.android.repository.*
 
 @Module
@@ -32,4 +33,8 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideAlarmRepository() : AlarmRepository = AlarmRepository()
+
+    @Provides
+    @ViewModelScoped
+    fun provideReviewRepository(api : ReviewService) : ReviewRepository = ReviewRepository(api)
 }

@@ -10,6 +10,7 @@ import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.mentorinfo.MentorInfoActivity
+import preview.android.activity.review.ReviewActivity
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentNewMentorBinding
 
@@ -60,7 +61,8 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
-                    val intent = Intent(activity, MentorInfoActivity::class.java)
+                    //val intent = Intent(activity, MentorInfoActivity::class.java)
+                    val intent = Intent(activity, ReviewActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
                 },
