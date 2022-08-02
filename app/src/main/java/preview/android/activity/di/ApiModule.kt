@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import preview.android.activity.api.AuthService
 import preview.android.activity.api.FormService
 import preview.android.activity.api.MentorService
+import preview.android.activity.api.ReviewService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -49,5 +50,9 @@ object ApiModule {
     @Provides
     @ViewModelScoped
     fun provideFormService(): FormService = buildRetrofit(baseUrl, FormService::class)
+
+    @Provides
+    @ViewModelScoped
+    fun provideReviewService() : ReviewService = buildRetrofit(baseUrl, ReviewService::class)
 
 }
