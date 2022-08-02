@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.30648148148148147" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_blue_background.xml" value="0.224" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_blue_border.xml" value="0.224" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/app_bar_background.xml" value="0.1235" />
@@ -90,23 +91,38 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.16799999999999998" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/menu/top_app_bar_menu.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/menu/write_dialog_app_bar_menu.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable-v24/curved_blue_border.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable-v24/curved_primary_background.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/app_bar_background.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/curved_blue_background_10.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/curved_light_blue_background_10.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/curved_navy_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/curved_primary_background_10.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/curved_yellow_background.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/ic_baseline_bookmark.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_overlap.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable/ic_baseline_comment.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_community.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_mentor.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_setting.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_image_login.xml" value="0.1435" />
+        <entry key="app/src/main/res/drawable/ic_image_signup.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_comment.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_favorite.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_navy_next.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1661651611328125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2545289855072464" />
+        <entry key="app/src/main/res/layout/activity_mentor_info.xml" value="0.23728088926891835" />
+        <entry key="app/src/main/res/layout/activity_mentor_profile.xml" value="0.23728088926891835" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22269592285156245" />
         <entry key="app/src/main/res/layout/activity_sample.xml" value="0.2545289855072464" />
+        <entry key="app/src/main/res/layout/certify_mentor_dialog.xml" value="0.23728088926891835" />
         <entry key="app/src/main/res/layout/fragment_board.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_community_home.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_complete_sign_up.xml" value="0.206549072265625" />
+        <entry key="app/src/main/res/layout/fragment_complete_submit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_find_team_member.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_info_input.xml" value="0.21448822021484373" />
@@ -114,8 +130,10 @@
         <entry key="app/src/main/res/layout/fragment_interview_review.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_mentoring.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.11596322607605516" />
         <entry key="app/src/main/res/layout/item_best_post.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/item_mentor.xml" value="0.2545289855072464" />
+        <entry key="app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.11596322607605516" />
         <entry key="app/src/main/res/layout/item_post.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.28854166666666664" />
       </map>

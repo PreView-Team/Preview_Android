@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import preview.android.activity.api.AuthService
+import preview.android.activity.api.dto.EditNickname
+import preview.android.activity.api.dto.EditUserData
 import preview.android.activity.api.dto.LoginData
 import preview.android.model.Account
 import kotlin.coroutines.resume
@@ -141,6 +143,43 @@ class LoginRepository(private val api: AuthService) {
         } else {
             trySend(request.errorBody()!!.string())
         }
+
+        close()
+    }
+
+    suspend fun editNickname(token: String, nickname: EditNickname) = callbackFlow {
+
+        val request = api.editNickname("Bearer $token", nickname)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.code())
+        } else {
+            trySend(request.code())
+        }
+
+        close()
+    }
+
+    suspend fun editUser(token: String, job: EditUserData) = callbackFlow {
+        val request = api.editUser("Bearer $token", job)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!.result)
+        } else {
+            trySend(request.errorBody()!!.string())
+        }
+
+    close()
+    }
+
+    suspend fun signOut(token: String) = callbackFlow {
+
+        val request = api.signOut("Bearer $token")
+        if (request.isSuccessful && request.body() != null) {
+            Log.i("SIGN OUT:", request.body()!!.result)
+            trySend(request.code())
+        } else {
+        trySend(request.code())
+        Log.i("errorBody:", request.errorBody()!!.string())
+    }
 
         close()
     }

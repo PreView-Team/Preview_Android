@@ -12,3 +12,7 @@ data class LoginResponse(
     @SerializedName(value = "message") var message: String?,
     @SerializedName(value = "httpCode") var httpCode: String?
 )
+
+data class EditUserData(
+    @SerializedName(value = "jobDtoSet")  var jobDtoSet: List<String>
+)
