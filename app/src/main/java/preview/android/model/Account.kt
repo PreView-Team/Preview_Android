@@ -11,4 +11,3 @@ data class Account(
         return "nickname = ${nickname}, kakaoAccessToken = ${kakaoAccessToken}, jobNames =${jobNames} "
     }
 }
-

@@ -1,6 +1,7 @@
 package preview.android.activity.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -23,10 +24,24 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
         }
 
         binding.btnNext.setOnClickListener {
-            // TODO: jobNames 변경필요
+
+            val jobList = mutableListOf<String>()
+            if (binding.checkDesign.isChecked) {
+                jobList.add(binding.checkDesign.text.toString())
+            }
+            if (binding.checkMarketing.isChecked) {
+                jobList.add(binding.checkMarketing.text.toString())
+            }
+            if (binding.checkPm.isChecked) {
+                jobList.add(binding.checkPm.text.toString())
+            }
+            if (binding.checkProgramming.isChecked) {
+                jobList.add(binding.checkProgramming.text.toString())
+            }
+
             val account = vm.loadAccount().copy(
                 nickname = binding.etNickname.text.toString(),
-                jobNames = listOf("디자인")
+                jobNames = jobList
             )
             vm.signUp(account)
             AccountStore.updateNickname(account.nickname)

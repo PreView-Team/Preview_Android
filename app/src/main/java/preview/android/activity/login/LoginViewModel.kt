@@ -10,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
+import preview.android.activity.api.dto.EditNickname
+import preview.android.activity.api.dto.EditUserData
 import preview.android.activity.api.dto.LoginResponse
 import preview.android.model.Account
 import preview.android.repository.LoginRepository
@@ -36,6 +38,12 @@ class LoginViewModel @Inject constructor(
 
     private val _nicknameResponseResult = MutableLiveData<String>()
     val nicknameResponseResult: LiveData<String> get() = _nicknameResponseResult
+
+    private val _editNicknameResponseResult = MutableLiveData<Int>()
+    val editNicknameResponseResult: LiveData<Int> get() = _editNicknameResponseResult
+
+    private val _signOutResponseResult = MutableLiveData<Int>()
+    val signOutResponseResult: LiveData<Int> get() = _signOutResponseResult
 
 
     fun loadRefreshToken(): String {
@@ -86,6 +94,14 @@ class LoginViewModel @Inject constructor(
         _nicknameResponseResult.value = result
     }
 
+    fun setEditNicknameResponseResult(result: Int) {
+        _editNicknameResponseResult.value = result
+    }
+
+    fun setSignOutResponseResult(result: Int) {
+        _signOutResponseResult.value = result
+    }
+
     fun loginKaKao(context: Context) = viewModelScope.launch {
         runCatching {
             loginRepository.login(context)
@@ -133,6 +149,29 @@ class LoginViewModel @Inject constructor(
         loginRepository.checkNickname(nickname).collect { value ->
             Log.e("NICKNAME CHECK", value.toString())
             setNicknameResponseResult(value.toString())
+        }
+    }
+
+    fun editNickname(token: String, nickname: EditNickname) = viewModelScope.launch {
+
+        loginRepository.editNickname(token, nickname).collect { value ->
+            Log.e("NICKNAME EDIT", value.toString())
+            setEditNicknameResponseResult(value)
+        }
+    }
+
+    fun editUser(token: String,job: EditUserData) = viewModelScope.launch {
+
+        loginRepository.editUser(token, job).collect { value ->
+            Log.e("USER EDIT", value)
+        }
+    }
+
+    fun signOut(token: String) = viewModelScope.launch {
+
+        loginRepository.signOut(token).collect { value ->
+            Log.e("SIGNOUT", value.toString())
+            setSignOutResponseResult(value)
         }
     }
 

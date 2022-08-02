@@ -1,16 +1,10 @@
 package preview.android.activity.api
 
-import preview.android.activity.api.dto.LoginData
-import preview.android.activity.api.dto.LoginResponse
-import preview.android.activity.api.dto.NicknameResponse
-import preview.android.activity.api.dto.SignUpResponse
+import preview.android.activity.api.dto.*
 import preview.android.model.Account
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AuthService {
     @POST("/api/user/kakao/signup")
@@ -21,4 +15,23 @@ interface AuthService {
 
     @GET("/api/user/nickname/{nickname}")
     suspend fun nickname(@Path("nickname") nickname: String): Response<NicknameResponse>
+
+    @PUT("/api/user/nickname")
+    suspend fun editNickname(
+        @Header("Authorization") token: String,
+        @Body nickname: EditNickname
+    ): Response<EditNicknameResponse>
+
+
+    @PUT("/api/user")
+    suspend fun editUser(
+        @Header("Authorization") token: String,
+        @Body jobDtoSet: EditUserData
+    ): Response<EditNicknameResponse>
+
+    @DELETE("/api/user")
+    suspend fun signOut(
+        @Header("Authorization") token: String
+    ): Response<SignUpResponse>
+
 }

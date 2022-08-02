@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -66,11 +68,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:layout_marginTop="20dp"
             android:id="@+id/textView36"
             style="@style/text_main_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="관심 직군"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView25"
@@ -85,13 +87,54 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView36">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_jobname"
-                style="@style/text_caption_light"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="직군 입력" />
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                android:id="@+id/et_jobname"-->
+            <!--                style="@style/text_caption_light"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:hint="직군 입력" />-->
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/light_blue"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView36">
+
+            <CheckBox
+                android:id="@+id/check_pm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary"
+                android:text="PM" />
+
+            <CheckBox
+                android:id="@+id/check_design"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary"
+                android:text="디자인" />
+
+            <CheckBox
+                android:id="@+id/check_marketing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary"
+                android:text="마케팅" />
+
+            <CheckBox
+                android:id="@+id/check_programming"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary"
+                android:text="프로그래밍" />
+        </LinearLayout>
 
 
         <com.google.android.material.button.MaterialButton
