@@ -14,6 +14,10 @@ import com.google.firebase.messaging.RemoteMessage
 import preview.android.R
 import preview.android.activity.login.LoginActivity
 import preview.android.activity.main.MainActivity
+import preview.android.data.AlarmStore
+import preview.android.model.Alarm
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PreviewFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -58,6 +62,13 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+
+        val curTime = Date()
+        val format = SimpleDateFormat("mm-dd hh-mm-ss", Locale.KOREAN)
+        val timeZone = TimeZone.getTimeZone("Asia/Seoul")
+        format.timeZone = timeZone
+
+        AlarmStore.addAlarm(Alarm(title = remoteMessage.data["title"].toString(), content = remoteMessage.data["body"].toString(), time = format.format(curTime)))
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
