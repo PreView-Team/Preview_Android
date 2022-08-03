@@ -63,12 +63,9 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
 
-        val curTime = Date()
-        val format = SimpleDateFormat("mm-dd hh-mm-ss", Locale.KOREAN)
-        val timeZone = TimeZone.getTimeZone("Asia/Seoul")
-        format.timeZone = timeZone
 
-        AlarmStore.addAlarm(Alarm(title = remoteMessage.data["title"].toString(), content = remoteMessage.data["body"].toString(), time = format.format(curTime)))
+
+        // AlarmStore.addAlarm(Alarm(title = remoteMessage.data["title"].toString(), content = remoteMessage.data["body"].toString(), time = format.format(curTime)))
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
