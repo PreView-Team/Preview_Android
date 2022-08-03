@@ -37,6 +37,9 @@ class LoginViewModel @Inject constructor(
     private val _nickname = MutableLiveData<String>()
     val nickname: LiveData<String> get() = _nickname
 
+    private val _signUpResponseResult = MutableLiveData<String>()
+    val signUpResponseResult: LiveData<String> get() = _signUpResponseResult
+
     private val _nicknameResponseResult = MutableLiveData<String>()
     val nicknameResponseResult: LiveData<String> get() = _nicknameResponseResult
 
@@ -103,6 +106,10 @@ class LoginViewModel @Inject constructor(
         _signOutResponseResult.value = result
     }
 
+    fun setSignUpResponseResult(result: String) {
+        _signUpResponseResult.value = result
+    }
+
     fun loginKaKao(context: Context) = viewModelScope.launch {
         runCatching {
             loginRepository.login(context)
@@ -128,16 +135,23 @@ class LoginViewModel @Inject constructor(
 
         loginRepository.signUp(account).collect { value ->
             Log.e("SIGNUP", value.toString())
+            when (value) {
+                is String -> {
+                    setSignUpResponseResult(value)
+                }
+                else -> {
+                    setSignUpResponseResult("success")
+                }
+            }
         }
     }
 
     fun loginToServer(account: Account) = viewModelScope.launch {
         loginRepository.loginToServer(account).collect { value ->
-            if(value is LoginResponse) {
+            if (value is LoginResponse) {
                 Log.e("LOGINTOSERVER response", value.toString())
                 setResponseResult(value.token!!)
-            }
-            else{
+            } else {
                 Log.e("else response", value.toString())
                 setResponseResult(value.toString())
             }
@@ -161,7 +175,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun editUser(token: String,job: EditUserData) = viewModelScope.launch {
+    fun editUser(token: String, job: EditUserData) = viewModelScope.launch {
 
         loginRepository.editUser(token, job).collect { value ->
             Log.e("USER EDIT", value)
