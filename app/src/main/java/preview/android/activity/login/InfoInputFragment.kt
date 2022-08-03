@@ -1,5 +1,6 @@
 package preview.android.activity.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,9 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
+import preview.android.activity.main.MainActivity
+import preview.android.activity.util.ERROR_CODE_400
+import preview.android.activity.util.ERROR_UNAUTHORIZED
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentInfoInputBinding
 
@@ -44,9 +48,6 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
                 jobNames = jobList
             )
             vm.signUp(account)
-            AccountStore.updateNickname(account.nickname)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
         }
 
         vm.nicknameResponseResult.observe(viewLifecycleOwner) { result ->
@@ -60,5 +61,16 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
             }
         }
 
+        vm.signUpResponseResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                "success" -> {
+                    AccountStore.updateNickname(vm.loadAccount().nickname)
+                    vm.loginToServer(vm.loadAccount())
+                }
+                else -> {
+                    Toast.makeText(activity, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

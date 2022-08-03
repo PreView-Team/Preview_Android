@@ -1,15 +1,13 @@
 package preview.android.activity.login
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONArray
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.main.MainActivity
@@ -81,14 +79,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             if (responseResult == ERROR_CODE_400) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
-            }
-            else if(responseResult == ERROR_UNAUTHORIZED){
+            } else if (responseResult == ERROR_UNAUTHORIZED) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
-            }
-            else {
+            } else {
                 AccountStore.updateToken(responseResult)
-                startActivity(Intent(this, MainActivity::class.java))
+                val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.layout_login)
+                if (fragment is InfoInputFragment) {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
+                } else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
             }
 
         }

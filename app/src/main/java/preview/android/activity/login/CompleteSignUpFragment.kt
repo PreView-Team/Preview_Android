@@ -25,7 +25,7 @@ class CompleteSignUpFragment : BaseFragment<FragmentCompleteSignUpBinding, Login
 
         binding.nickname = AccountStore.nickname.value
         binding.btnGoHome.setOnClickListener {
-            vm.loginToServer(vm.loadAccount())
+            startActivity(Intent(activity, MainActivity::class.java))
         }
 
     }
