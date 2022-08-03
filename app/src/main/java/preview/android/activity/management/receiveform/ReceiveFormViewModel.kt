@@ -13,9 +13,12 @@ import preview.android.activity.api.dto.FormDetailResponse
 import preview.android.activity.api.dto.ReceiveFormDetailResponse
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
+import preview.android.data.AccountStore.token
+import preview.android.model.AlarmObject
 import preview.android.model.Message
 import preview.android.model.ReceiveFormThumbnail
 import preview.android.model.SendFormThumbnail
+import preview.android.repository.AlarmRepository
 import preview.android.repository.ChatRepository
 import preview.android.repository.FormRepository
 import preview.android.repository.MentorRepository
@@ -24,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ReceiveFormViewModel @Inject constructor(
     private val formRepository: FormRepository,
-    private val chatRepository: ChatRepository
+    private val chatRepository: ChatRepository,
+    private val alarmRepository: AlarmRepository
 ) : BaseViewModel() {
 
     private val _receiveFormThumbnailList = MutableListLiveData<ReceiveFormThumbnail>()
@@ -45,34 +49,43 @@ class ReceiveFormViewModel @Inject constructor(
     fun getReceiveForms(token: String) = viewModelScope.launch {
         formRepository.getReceiveForms(token).collect { response ->
 
-            Log.e("response", response.toString())
+            //Log.e("response", response.toString())
             updateReceiveThumbnailList(filtJsonArray(response as JsonArray))
         }
     }
 
     fun getReceiveFormDetail(token: String, formId: Int) = viewModelScope.launch {
         formRepository.getReceiveFormDetail(token, formId).collect { response ->
-            Log.e("getReceiveFormDetail", response.toString())
+            //Log.e("getReceiveFormDetail", response.toString())
             setReceiveFormDetail(response as ReceiveFormDetailResponse)
         }
     }
 
     fun aceeptForm(token: String, formId: Int) = viewModelScope.launch {
         formRepository.acceptForm(token, formId).collect { response ->
-            Log.e("acceptForm", response.toString())
+            //Log.e("acceptForm", response.toString())
         }
     }
 
     fun refuseForm(token: String, formId: Int) = viewModelScope.launch {
         formRepository.refuseForm(token, formId).collect { response ->
-            Log.e("acceptForm", response.toString())
+           //Log.e("acceptForm", response.toString())
         }
     }
 
-    fun createRoom(nickname : String) = viewModelScope.launch{
-        chatRepository.createChatRoom(nickname).collect {
-            Log.e("createRoom reponse", it)
+    fun createRoom(menteeNickname : String) = viewModelScope.launch{
+        chatRepository.createChatRoom(menteeNickname).collect {
+            //Log.e("createRoom reponse", it)
         }
+    }
 
+    fun addAlarm(nickname : String, alarmObject: AlarmObject) = viewModelScope.launch{
+        runCatching {
+            alarmRepository.addAlarm(nickname,  alarmObject)
+        }.onSuccess {
+            Log.e("rfviewmodel addAlarm", "success")
+        }.onFailure {
+            Log.e("addAlarm", "fail" + it.message.toString())
+        }
     }
 }

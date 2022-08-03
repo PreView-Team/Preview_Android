@@ -1,17 +1,22 @@
 package preview.android.repository
 
 import android.util.Log
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.json.JSONObject
 import preview.android.BuildConfig
+import preview.android.model.Alarm
+import preview.android.model.AlarmObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import kotlin.coroutines.resume
 
 class AlarmRepository {
+    val db = Firebase.firestore
 
-    suspend fun sendNotice(token: String, myNickname : String): Boolean =
+    suspend fun sendNotice(token: String, myNickname: String): Boolean =
         suspendCancellableCoroutine { continuation ->
             try {
                 var notificationObject = JSONObject()
@@ -43,4 +48,34 @@ class AlarmRepository {
                 continuation.resume(false)
             }
         }
+
+    suspend fun readAlarmList(myNickname: String): Any =
+        suspendCancellableCoroutine { continuation ->
+            db.collection(myNickname).get().addOnSuccessListener { result ->
+                continuation.resume(result)
+            }.addOnFailureListener { error ->
+                continuation.resume(error)
+            }
+        }
+
+    suspend fun createAlarmList(
+        nickname: String,
+        alarmlist: AlarmObject
+    ): Boolean = suspendCancellableCoroutine { continutaion ->
+        db.collection(nickname).document(nickname).set(alarmlist).addOnSuccessListener {
+            continutaion.resume(true)
+        }.addOnFailureListener {
+            Log.e("addAlarmList fail", it.toString())
+            continutaion.resume(false)
+        }
+    }
+
+    // 대상의 닉네임으로 추가해야함
+    suspend fun addAlarm(nickname: String, alarmlist: AlarmObject) : Boolean = suspendCancellableCoroutine { continuation ->
+        db.collection(nickname).document(nickname).update("value", alarmlist.value).addOnSuccessListener {
+            continuation.resume(true)
+        }.addOnFailureListener {
+            continuation.resume(false)
+        }
+    }
 }

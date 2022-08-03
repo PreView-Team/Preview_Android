@@ -18,6 +18,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -29,6 +30,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -204,3 +206,13 @@ inline fun <reified T> filtJsonArray(list: JsonArray): List<T> {
     val type = object : TypeToken<List<T>>() {}.type
     return Gson().fromJson(list, type)
 }
+
+fun getCurrentTime() : String{
+    val curTime = Date()
+    val format = SimpleDateFormat("MM월 dd일 HH시 mm분", Locale.KOREAN)
+    val timeZone = TimeZone.getTimeZone("Asia/Seoul")
+    format.timeZone = timeZone
+
+    return format.format(curTime)
+}
+inline fun <reified T> DocumentSnapshot.toObjectNonNull(): T = toObject(T::class.java)!!

@@ -10,8 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
-import preview.android.data.AlarmStore
-import preview.android.model.Alarm
+import preview.android.model.AlarmObject
 import preview.android.model.Message
 import preview.android.repository.AlarmRepository
 import preview.android.repository.ChatRepository
@@ -40,21 +39,21 @@ class ChatViewModel @Inject constructor(
 
     fun readChatRoomList() = viewModelScope.launch {
         chatRepository.readChatRoom().collect { list ->
-            Log.e("readChatRoomList", list.toString())
+            //Log.e("readChatRoomList", list.toString())
             updateChatRoomList(list)
         }
     }
 
     fun readChatList(nickname: String) = viewModelScope.launch {
         chatRepository.readChat(nickname).collect { list ->
-            Log.e("readChatList", list.toString())
+           // Log.e("readChatList", list.toString())
             updateMessageList(list)
         }
     }
 
     fun sendChat(nickname: String, message: Message, count: Int) = viewModelScope.launch {
         chatRepository.sendChat(nickname, message, count).collect {
-            Log.e("response", it)
+            //Log.e("response", it)
         }
     }
 
@@ -62,9 +61,19 @@ class ChatViewModel @Inject constructor(
         runCatching {
             alarmRepository.sendNotice(token, myNickname)
         }.onSuccess {
-            Log.e("sendNotice", it.toString())
+            //Log.e("sendNotice", it.toString())
         }.onFailure {
-            Log.e("sendNotice", it.toString())
+           // Log.e("sendNotice", it.toString())
+        }
+    }
+
+    fun addAlarm(nickname : String, alarmObject: AlarmObject) = viewModelScope.launch{
+        runCatching {
+            alarmRepository.addAlarm(nickname,  alarmObject)
+        }.onSuccess {
+            Log.e("chatviewmodel addAlarm", "success")
+        }.onFailure {
+            Log.e("addAlarm", "fail" + it.message.toString())
         }
     }
 }

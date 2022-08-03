@@ -1,16 +1,18 @@
 package preview.android.activity.management.receiveform.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.management.receiveform.ReceiveFormViewModel
+import preview.android.activity.util.getCurrentTime
 import preview.android.data.AccountStore
+import preview.android.data.AlarmStore
 import preview.android.databinding.FragmentReceiveFormDetailBinding
+import preview.android.model.Alarm
+import preview.android.model.AlarmObject
 
 
 class ReceiveFormDetailFragment :
@@ -31,6 +33,13 @@ class ReceiveFormDetailFragment :
         binding.btnAccept.setOnClickListener {
             vm.aceeptForm(AccountStore.token.value!!, bundle.getInt("formId"))
             vm.createRoom(vm.receiveFormDetail.value!!.username)
+            val alarmList =  AlarmStore.alarmObject.value!!.value.toMutableList()
+            alarmList.add(Alarm(title = "${AccountStore.nickname.value!!}님이 메시지를 보냈습니다.", content = "지금 확인하기", time = getCurrentTime()))
+            alarmList.forEach {
+                Log.e("alarm Item", it.toString())
+            }
+            vm.addAlarm(vm.receiveFormDetail.value!!.username, AlarmObject().copy(value = alarmList))
+            AlarmStore.updateAlarmList(AlarmObject().copy(value = alarmList))
         }
 
         binding.btnRefuse.setOnClickListener {

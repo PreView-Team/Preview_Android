@@ -21,6 +21,8 @@ class CompleteSignUpFragment : BaseFragment<FragmentCompleteSignUpBinding, Login
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        vm.createAlarmList(AccountStore.nickname.value!!)
+
         binding.nickname = AccountStore.nickname.value
         binding.btnGoHome.setOnClickListener {
             vm.loginToServer(vm.loadAccount())

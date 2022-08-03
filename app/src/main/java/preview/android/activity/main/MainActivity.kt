@@ -44,6 +44,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        vm.readAlarmList(AccountStore.nickname.value!!)
+
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
         binding.bnvMain.setupWithNavController(navController)

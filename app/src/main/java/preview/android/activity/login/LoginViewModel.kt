@@ -2,24 +2,25 @@ package preview.android.activity.login
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.api.dto.EditNickname
 import preview.android.activity.api.dto.EditUserData
 import preview.android.activity.api.dto.LoginResponse
 import preview.android.model.Account
+import preview.android.model.AlarmObject
+import preview.android.repository.AlarmRepository
 import preview.android.repository.LoginRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val alarmRepository: AlarmRepository
 ) : BaseViewModel() {
     private val _refreshToken = MutableLiveData<String>("")
     val refreshToken: LiveData<String> get() = _refreshToken
@@ -172,6 +173,16 @@ class LoginViewModel @Inject constructor(
         loginRepository.signOut(token).collect { value ->
             Log.e("SIGNOUT", value.toString())
             setSignOutResponseResult(value)
+        }
+    }
+
+    fun createAlarmList(myNickname: String) = viewModelScope.launch {
+        runCatching {
+            alarmRepository.createAlarmList(myNickname, AlarmObject())
+        }.onSuccess {
+            Log.e("createAlarmList", "success")
+        }.onFailure {
+            Log.e("createAlarmList", "fail" + it.message.toString())
         }
     }
 

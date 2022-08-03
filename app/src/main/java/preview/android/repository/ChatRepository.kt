@@ -20,7 +20,9 @@ import java.util.HashMap
 class ChatRepository {
 
     val database = Firebase.database
-    val myRef = database.getReference("mentorNickName")
+
+    val myRef = database.getReference(AccountStore.nickname.value!!)
+    //val myRef = database.getReference("mentorNickName") // 내가 멘토라면
 
     fun createChatRoom(nickname: String) = callbackFlow {
         val createList = arrayListOf<Message>()

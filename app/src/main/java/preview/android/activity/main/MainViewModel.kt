@@ -4,20 +4,27 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
+import preview.android.activity.util.toObjectNonNull
+import preview.android.data.AlarmStore
+import preview.android.model.Alarm
+import preview.android.model.AlarmObject
 import preview.android.model.MentorPost
 import preview.android.model.Writing
+import preview.android.repository.AlarmRepository
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mentorRepository: MentorRepository
+    private val mentorRepository: MentorRepository,
+    private val alarmRepository: AlarmRepository
 ) : BaseViewModel() {
 
 
@@ -102,13 +109,16 @@ class MainViewModel @Inject constructor(
                 updateNewMentorPostList(filtJsonArray(response as JsonArray))
             }
         }
+
     fun getCategoryRecommendMentorPostList(token: String, categoryName: String) =
         viewModelScope.launch {
-            mentorRepository.getCategoryRecommendMentorPostList(token, categoryName).collect { response ->
-                Log.e("recommend LIST", response.toString())
-                updateRecommendMentorPostList(filtJsonArray(response as JsonArray))
-            }
+            mentorRepository.getCategoryRecommendMentorPostList(token, categoryName)
+                .collect { response ->
+                    Log.e("recommend LIST", response.toString())
+                    updateRecommendMentorPostList(filtJsonArray(response as JsonArray))
+                }
         }
+
     fun setWriting(writing: Writing) {
         _writing.value = writing
     }
@@ -144,9 +154,34 @@ class MainViewModel @Inject constructor(
 
         }
     }
+
     fun deletePost(token: String, postId: Int) = viewModelScope.launch {
         mentorRepository.deletePost(token, postId).collect { response ->
             Log.e("deletePost", response.toString())
+
+        }
+    }
+
+    fun readAlarmList(myNickname: String) = viewModelScope.launch {
+        runCatching {
+            alarmRepository.readAlarmList(myNickname)
+        }.onSuccess { value ->
+            when (value) {
+                is QuerySnapshot -> {
+                    var list = mutableListOf<AlarmObject>()
+                    value.documents.forEach { documentSnapshot ->
+                        Log.e("value documents 1", documentSnapshot.data.toString())
+                        Log.e("value documents 2", documentSnapshot.data!!.values.size.toString())
+                        Log.e("value documents 3", documentSnapshot.data!!.values.toString())
+                        list.add(documentSnapshot.toObjectNonNull())
+                    }
+                    AlarmStore.updateAlarmList(list.get(0))
+                }
+                is Throwable -> {
+                    Log.e("Error", "!!")
+                }
+            }
+        }.onFailure {
 
         }
     }

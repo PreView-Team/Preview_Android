@@ -1,18 +1,16 @@
 package preview.android.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import preview.android.activity.util.MutableListLiveData
-import preview.android.model.Alarm
+import preview.android.model.AlarmObject
 
 object AlarmStore {
 
-    private val _alarmList = MutableListLiveData<Alarm>()
-    val alarmList : LiveData<List<Alarm>> get() = _alarmList
+    private val _alarmObject = MutableLiveData<AlarmObject>()
+    val alarmObject: LiveData<AlarmObject> get() = _alarmObject
 
-    fun addAlarm(alarm : Alarm) {
-        val list =_alarmList.value!!.toMutableList()
-        list.add(alarm)
-        _alarmList.backgroundClear()
-        _alarmList.backgroundAddAll(list)
+    fun updateAlarmList(alarmObject: AlarmObject) {
+        _alarmObject.value = alarmObject
     }
 }
