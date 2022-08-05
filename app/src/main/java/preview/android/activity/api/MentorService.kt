@@ -30,6 +30,11 @@ interface MentorService {
         @Path("kakaoId") kakoId: Long
     ): Response<MentorRegistResponse>
 
+    @GET("/api/mentor")
+    suspend fun getMentorInfo(
+        @Header("Authorization") token: String
+    ): Response<GetMentorInfoResponse>
+
     @POST("/api/post/like")
     suspend fun like(
         @Header("Authorization") token: String,
@@ -60,4 +65,10 @@ interface MentorService {
         @Body postId: Int
     ) : Response<MentorPostResponse>
 
+
+    @PUT("/api/mentor")
+    suspend fun editMentorInfo(
+        @Header("Authorization") token: String,
+        @Body editMentorInfo: EditMentorInfo
+    ) : Response<MentorRegistResponse>
 }

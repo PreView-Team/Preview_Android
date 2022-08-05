@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
 import preview.android.activity.util.toObjectNonNull
+import preview.android.data.AccountStore
 import preview.android.data.AlarmStore
 import preview.android.model.Alarm
 import preview.android.model.AlarmObject
@@ -175,7 +177,9 @@ class MainViewModel @Inject constructor(
                         Log.e("value documents 3", documentSnapshot.data!!.values.toString())
                         list.add(documentSnapshot.toObjectNonNull())
                     }
-                    AlarmStore.updateAlarmList(list.get(0))
+                    if(list.size > 0) {
+                        AlarmStore.updateAlarmList(list.get(0))
+                    }
                 }
                 is Throwable -> {
                     Log.e("Error", "!!")
@@ -183,6 +187,12 @@ class MainViewModel @Inject constructor(
             }
         }.onFailure {
 
+        }
+    }
+
+    fun editMentorInfo() = viewModelScope.launch{
+        mentorRepository.editMentorInfo(AccountStore.token.value!!).collect{
+            Log.e("editMentorInfo", it.toString())
         }
     }
 }

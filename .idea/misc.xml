@@ -11,6 +11,7 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/btn_kakao_login.xml" value="0.194" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/card_drop_shadow.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/cardview_shadow.xml" value="0.1295" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/check_overlap_icon.xml" value="0.2235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/circle_image_background.xml" value="0.259" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background_10.xml" value="0.224" />
@@ -89,7 +90,9 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form.xml" value="0.1" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_1st.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.2" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_alarm.xml" value="0.171875" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_best_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat.xml" value="0.11145833333333334" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_me.xml" value="0.11145833333333334" />
@@ -97,6 +100,7 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_form_thumbnail.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_jobnames.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_post.xml" value="0.264" />

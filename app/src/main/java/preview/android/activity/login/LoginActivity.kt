@@ -48,34 +48,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             Log.e("SharedPreferences", "저장 안됨")
         } else {
             Log.e("SPF", "저장 되어 있음 $savedKakaoAccessToken $savedNickname $savedJobs ")
-
-            AccountStore.updateNickname(savedNickname)
-
-            vm.setAccount(Account(savedKakaoAccessToken, savedNickname, savedJobs))
+            vm.setKakaoAccount(Account(savedKakaoAccessToken, savedNickname, savedJobs))
         }
 
         binding.btnKakao.setOnClickListener {
             vm.loginKaKao(this)
         }
 
-        vm.account.observe(this) { account ->
-            Log.e("ACCOUNT", account.toString())
-
-            val edit = pref.edit()
-            val set: Set<String> = account.jobNames.toSet()
-
-            edit.putString("kakaoAccessToken", account.kakaoAccessToken)
-            edit.putString("nickname", account.nickname)
-            edit.putStringSet("job", set)
-            edit.commit()
-
-            AccountStore.updateNickname(account.nickname)
-
-            vm.loginToServer(account)
+        vm.kakaoAccount.observe(this) { kakaoAccount ->
+            vm.loginToServer(kakaoAccount)
         }
 
         vm.responseResult.observe(this) { responseResult ->
-            Log.e("RESPONSE RESULT ", "!!" + responseResult)
+            Log.e("RESPONSE RESULT ", "token: " + responseResult)
+
+            AccountStore.updateToken(responseResult)
+
             if (responseResult == ERROR_CODE_400) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
@@ -83,18 +71,36 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
             } else {
-                AccountStore.updateToken(responseResult)
-                val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.layout_login)
-                if (fragment is InfoInputFragment) {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
-                } else {
-                    startActivity(Intent(this, MainActivity::class.java))
-                }
+                vm.getUserDetail(responseResult)
             }
 
         }
+        vm.getUserInfoResponseResult.observe(this) { getUserInfoResponse ->
 
+            AccountStore.updateMenteeNickname(getUserInfoResponse.nickname)
+            if(getUserInfoResponse.isMentored) {
+                AccountStore.updateIsMentored(getUserInfoResponse.isMentored)
+                vm.getMentorInfo(AccountStore.token.value!!)
+            }
+            val edit = pref.edit()
+            val set: Set<String> = vm.kakaoAccount.value!!.jobNames.toSet()
+
+            edit.putString("kakaoAccessToken", vm.kakaoAccount.value!!.kakaoAccessToken)
+            edit.putString("nickname", vm.kakaoAccount.value!!.nickname)
+            edit.putStringSet("job", set)
+            edit.commit()
+            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.layout_login)
+            if (fragment is InfoInputFragment) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
+            } else {
+//                    supportFragmentManager.beginTransaction()
+//                        .replace(R.id.layout_login, InfoInputFragment()).commit()
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
+        vm.getMentorInfoResponseResult.observe(this){
+            AccountStore.updateMentorNickname(it.nickname)
+        }
     }
-
 }

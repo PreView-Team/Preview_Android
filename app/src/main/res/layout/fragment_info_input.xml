@@ -55,6 +55,7 @@
             android:layout_marginHorizontal="20dp"
             app:endIconDrawable="@drawable/ic_baseline_check_overlap"
             app:endIconMode="custom"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView35">
@@ -64,7 +65,7 @@
                 style="@style/text_caption_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="이름 입력" />
+                android:hint="닉네임 입력" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -78,63 +79,28 @@
             app:layout_constraintStart_toStartOf="@+id/textView25"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout_nickname" />
 
+
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            android:id="@+id/menu_jobnames"
+            style="@style/Outlined.ExposedDropdownMenu"
+
+            android:hint="관심있는 직무 선택"
             android:layout_width="0dp"
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView36"
             app:layout_constraintTop_toBottomOf="@+id/textView36">
 
-            <!--            <com.google.android.material.textfield.TextInputEditText-->
-            <!--                android:id="@+id/et_jobname"-->
-            <!--                style="@style/text_caption_light"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:hint="직군 입력" />-->
+            <AutoCompleteTextView
+                android:id="@+id/tf_jobnames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/light_blue"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView36">
-
-            <CheckBox
-                android:id="@+id/check_pm"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primary"
-                android:text="PM" />
-
-            <CheckBox
-                android:id="@+id/check_design"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primary"
-                android:text="디자인" />
-
-            <CheckBox
-                android:id="@+id/check_marketing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primary"
-                android:text="마케팅" />
-
-            <CheckBox
-                android:id="@+id/check_programming"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:buttonTint="@color/primary"
-                android:text="프로그래밍" />
-        </LinearLayout>
 
 
         <com.google.android.material.button.MaterialButton

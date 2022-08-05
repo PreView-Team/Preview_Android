@@ -1,6 +1,7 @@
 package preview.android.activity.login
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import preview.android.activity.util.ERROR_CODE_400
 import preview.android.activity.util.ERROR_UNAUTHORIZED
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentInfoInputBinding
+import android.widget.ArrayAdapter
 
 @AndroidEntryPoint
 class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>(
@@ -23,29 +25,19 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val items = listOf("1","2","3","4")
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, items)
+        binding.tfJobnames.setAdapter(adapter)
         binding.textInputLayoutNickname.setEndIconOnClickListener {
             vm.checkNickname(binding.etNickname.text.toString())
         }
 
         binding.btnNext.setOnClickListener {
 
-            val jobList = mutableListOf<String>()
-            if (binding.checkDesign.isChecked) {
-                jobList.add(binding.checkDesign.text.toString())
-            }
-            if (binding.checkMarketing.isChecked) {
-                jobList.add(binding.checkMarketing.text.toString())
-            }
-            if (binding.checkPm.isChecked) {
-                jobList.add(binding.checkPm.text.toString())
-            }
-            if (binding.checkProgramming.isChecked) {
-                jobList.add(binding.checkProgramming.text.toString())
-            }
 
             val account = vm.loadAccount().copy(
                 nickname = binding.etNickname.text.toString(),
-                jobNames = jobList
+               // jobNames =
             )
             vm.signUp(account)
         }
@@ -56,7 +48,12 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
                     Toast.makeText(activity, "사용 불가능한 닉네임입니다.", Toast.LENGTH_SHORT).show()
                 }
                 "false" -> {
-                    Toast.makeText(activity, "사용 가능한 닉네입입니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "사용 가능한 닉네임입니다.", Toast.LENGTH_SHORT).show()
+                    binding.textInputLayoutNickname.setEndIconTintList(
+                        ColorStateList.valueOf(
+                            getResources().getColor(R.color.orange)
+                        )
+                    )
                 }
             }
         }
@@ -64,7 +61,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
         vm.signUpResponseResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 "success" -> {
-                    AccountStore.updateNickname(vm.loadAccount().nickname)
+                    AccountStore.updateMenteeNickname(vm.loadAccount().nickname)
                     vm.loginToServer(vm.loadAccount())
                 }
                 else -> {

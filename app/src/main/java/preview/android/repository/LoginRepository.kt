@@ -56,6 +56,7 @@ class LoginRepository(private val api: AuthService) {
         getUser().let { value ->
             when(value){
                 is User ->{
+                    Log.e("GET USER", value.toString())
                     account = account.copy(nickname = value.kakaoAccount?.profile?.nickname!!)
                 }
                 is Throwable ->{
@@ -180,6 +181,19 @@ class LoginRepository(private val api: AuthService) {
         trySend(request.code())
         Log.i("errorBody:", request.errorBody()!!.string())
     }
+
+        close()
+    }
+
+    suspend fun getUserInfo(token: String) = callbackFlow {
+        val request = api.getUserInfo("Bearer $token")
+        if (request.isSuccessful && request.body() != null) {
+            Log.i("getUserInfo:", request.body()!!.toString())
+            trySend(request.body())
+        } else {
+            trySend(request.code())
+            Log.i("errorBody:", request.errorBody()!!.string())
+        }
 
         close()
     }

@@ -16,31 +16,46 @@ import preview.android.model.Message
 
 class ChatAdapter(
 ) : ListAdapter<Message, RecyclerView.ViewHolder>(diffUtil) {
+
+    private var isMentored = false
+
     override fun getItemViewType(position: Int): Int {
-        if(currentList[position].nickname == AccountStore.nickname.value){ // TODO: mentornickname과 같을때 mychat 처리
-            return MY_CHAT
+        if (isMentored) {
+            if (currentList[position].nickname == AccountStore.mentorNickname.value) { // TODO: mentornickname과 같을때 mychat 처리 // TODO: 멘토/멘티 뭐로 설정해야하는지 확인
+                return MY_CHAT
+            } else {
+                return OTHER_CHAT
+            }
+        } else {
+            if (currentList[position].nickname == AccountStore.menteeNickname.value) { // TODO: mentornickname과 같을때 mychat 처리 // TODO: 멘토/멘티 뭐로 설정해야하는지 확인
+                return MY_CHAT
+            } else {
+                return OTHER_CHAT
+            }
         }
-        else{
-            return OTHER_CHAT
-        }
+    }
+
+    fun setMentoredTrue() {
+        isMentored = true
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return if(viewType == MY_CHAT) {
+        return if (viewType == MY_CHAT) {
             MentorViewHolder(
-                ItemChatMentorBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                ItemChatMentorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
         } else {
             MenteeViewHolder(
-                ItemChatMenteeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                ItemChatMenteeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(getItemViewType(position) == MY_CHAT){
+        if (getItemViewType(position) == MY_CHAT) {
             (holder as MentorViewHolder).bind(currentList[position])
-        }
-        else{
+        } else {
             (holder as MenteeViewHolder).bind(currentList[position])
         }
     }
@@ -48,11 +63,12 @@ class ChatAdapter(
 
     class MentorViewHolder(
         private val binding: ItemChatMentorBinding
-        ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
             binding.message = message
         }
     }
+
     class MenteeViewHolder(
         private val binding: ItemChatMenteeBinding
 
@@ -61,6 +77,7 @@ class ChatAdapter(
             binding.message = message
         }
     }
+
     private companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Message>() {
             override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {

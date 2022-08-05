@@ -115,4 +115,25 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
+    suspend fun getMentorInfo(token: String) = callbackFlow {
+        val request = api.getMentorInfo("Bearer $token")
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("getMentorInfo ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun editMentorInfo(token: String) = callbackFlow {
+        val request = api.editMentorInfo("Bearer $token", EditMentorInfo(nickname = "30mentorNickname"))
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("getMentorInfo ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
 }

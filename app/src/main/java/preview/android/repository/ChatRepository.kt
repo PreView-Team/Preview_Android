@@ -21,13 +21,13 @@ class ChatRepository {
 
     val database = Firebase.database
 
-    val myRef = database.getReference(AccountStore.nickname.value!!)
-    //val myRef = database.getReference("mentorNickName") // 내가 멘토라면
+    //val myRef = database.getReference(AccountStore.nickname.value!!)
 
-    fun createChatRoom(nickname: String) = callbackFlow {
+    fun createChatRoom(menteeNickname: String) = callbackFlow {
+        val myRef = database.getReference(AccountStore.mentorNickname.value!!)
         val createList = arrayListOf<Message>()
         createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다", count = 0, mentorToken = AccountStore.myFCMToken)) // menteeToken = 멘티 fcmToken
-        myRef.child(nickname).setValue(createList).addOnSuccessListener {
+        myRef.child(menteeNickname).setValue(createList).addOnSuccessListener {
             trySend("success")
         }.addOnFailureListener {
             trySend("fail")
@@ -35,8 +35,9 @@ class ChatRepository {
         close()
     }
 
-    suspend fun readChatRoom() = callbackFlow {
-        myRef.addValueEventListener(object : ValueEventListener {
+    suspend fun readMentorsChatRoom(mentorNickname: String) = callbackFlow {
+        val myRef = database.getReference(mentorNickname)
+        myRef.addValueEventListener(object : ValueEventListener { // 들어온 닉네임으로 되어있는 realtimeDB에서 읽어옴
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val chatRoomList = arrayListOf<String>()
@@ -53,7 +54,7 @@ class ChatRepository {
 
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
-                Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
+                // Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
                 trySend(arrayListOf())
             }
         })
@@ -61,25 +62,24 @@ class ChatRepository {
     }
 
 
-    suspend fun readChat(nickname: String) = callbackFlow {
+    suspend fun readChat(mentorNickname: String, menteeNickname: String) = callbackFlow {
+        val myRef = database.getReference(mentorNickname)
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val list = arrayListOf<Message>()
-                    dataSnapshot.child(nickname).children.forEach { dataSnapshot ->
+                    dataSnapshot.child(menteeNickname).children.forEach { dataSnapshot ->
                         val map = dataSnapshot.value as HashMap<String, String>
                         list.add(
                             Message(
                                 nickname = map.get("nickname")!!,
                                 message = map.get("message")!!,
-                                count = list.size
+                                count = list.size,
+                                time = map.get("time")!!
                             )
                         )
 
                     }
-                    Log.e("list value1", list.size.toString())
-                    Log.e("list foreach", list.toString())
-
                     trySend(list)
                     // vm.updateMessageList(list)
                 }
@@ -93,8 +93,9 @@ class ChatRepository {
         awaitClose()
     }
 
-    fun sendChat(nickname: String, message: Message, count: Int) = callbackFlow {
-        myRef.child(nickname + "/" + count).setValue(message).addOnSuccessListener {
+    fun sendChat(mentorNickname: String, menteeNickname: String, message: Message, count: Int) = callbackFlow {
+        val myRef = database.getReference(mentorNickname)
+        myRef.child(menteeNickname + "/" + count).setValue(message).addOnSuccessListener {
             trySend("success")
         }.addOnFailureListener {
             trySend("fail")

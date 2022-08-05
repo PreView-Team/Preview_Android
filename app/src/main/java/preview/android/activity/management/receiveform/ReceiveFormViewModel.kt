@@ -48,9 +48,10 @@ class ReceiveFormViewModel @Inject constructor(
 
     fun getReceiveForms(token: String) = viewModelScope.launch {
         formRepository.getReceiveForms(token).collect { response ->
-
-            //Log.e("response", response.toString())
-            updateReceiveThumbnailList(filtJsonArray(response as JsonArray))
+            if(response !is String){
+                //Log.e("response", response.toString())
+                updateReceiveThumbnailList(filtJsonArray(response as JsonArray))
+            }
         }
     }
 

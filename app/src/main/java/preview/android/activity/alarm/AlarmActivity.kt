@@ -25,7 +25,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.readAlarmList(AccountStore.nickname.value!!)
+        vm.readAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘티/멘토 둘중에 알림 뭐로보내는지 확인
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true

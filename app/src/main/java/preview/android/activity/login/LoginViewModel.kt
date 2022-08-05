@@ -8,19 +8,20 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
-import preview.android.activity.api.dto.EditNickname
-import preview.android.activity.api.dto.EditUserData
-import preview.android.activity.api.dto.LoginResponse
+import preview.android.activity.api.dto.*
+import preview.android.data.AccountStore
 import preview.android.model.Account
 import preview.android.model.AlarmObject
 import preview.android.repository.AlarmRepository
 import preview.android.repository.LoginRepository
+import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
-    private val alarmRepository: AlarmRepository
+    private val alarmRepository: AlarmRepository,
+    private val mentorRepository: MentorRepository
 ) : BaseViewModel() {
     private val _refreshToken = MutableLiveData<String>("")
     val refreshToken: LiveData<String> get() = _refreshToken
@@ -28,8 +29,8 @@ class LoginViewModel @Inject constructor(
     private val _kakaoAccessToken = MutableLiveData<String>("")
     val kakaoAccessToken: LiveData<String> get() = _kakaoAccessToken
 
-    private val _account = MutableLiveData<Account>()
-    val account: LiveData<Account> get() = _account
+    private val _kakaoAccount = MutableLiveData<Account>()
+    val kakaoAccount: LiveData<Account> get() = _kakaoAccount
 
     private val _responseResult = MutableLiveData<String>()
     val responseResult: LiveData<String> get() = _responseResult
@@ -49,6 +50,11 @@ class LoginViewModel @Inject constructor(
     private val _signOutResponseResult = MutableLiveData<Int>()
     val signOutResponseResult: LiveData<Int> get() = _signOutResponseResult
 
+    private val _getUserInfoResponseResult = MutableLiveData<GetUserInfoResponse>()
+    val getUserInfoResponseResult : LiveData<GetUserInfoResponse> get() = _getUserInfoResponseResult
+
+    private val _getMentorInfoResponseResult = MutableLiveData<GetMentorInfoResponse>()
+    val getMentorInfoResponseResult : LiveData<GetMentorInfoResponse> get() = _getMentorInfoResponseResult
 
     fun loadRefreshToken(): String {
         return _refreshToken.value!!
@@ -67,11 +73,11 @@ class LoginViewModel @Inject constructor(
     }
 
     fun loadAccount(): Account {
-        return _account.value!!
+        return _kakaoAccount.value!!
     }
 
-    fun setAccount(account: Account) {
-        _account.value = account
+    fun setKakaoAccount(account: Account) {
+        _kakaoAccount.value = account
     }
 
     fun loadResponseResult(): String {
@@ -110,13 +116,22 @@ class LoginViewModel @Inject constructor(
         _signUpResponseResult.value = result
     }
 
+    fun setGetUserInfoResponseResult(result : GetUserInfoResponse){
+        _getUserInfoResponseResult.value = result
+    }
+
+    fun setGetMentorInfoResponseResult(result : GetMentorInfoResponse){
+        _getMentorInfoResponseResult.value = result
+    }
+
     fun loginKaKao(context: Context) = viewModelScope.launch {
         runCatching {
             loginRepository.login(context)
         }.onSuccess { value ->
             when (value) {
                 is Account -> {
-                    setAccount(value)
+                    Log.e("LOGINKAKO accoutn", value.toString())
+                    setKakaoAccount(value)
                     setKakaoAccessToken(value.kakaoAccessToken)
                 }
                 is Throwable -> {
@@ -200,4 +215,23 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun getUserDetail(token: String) = viewModelScope.launch {
+        loginRepository.getUserInfo(token).collect{
+            if(it is GetUserInfoResponse) {
+                Log.e("getUserDetail", it.toString())
+                setGetUserInfoResponseResult(it)
+            }
+            else{
+                setGetMentorInfoResponseResult(GetMentorInfoResponse())
+            }
+        }
+    }
+
+    fun getMentorInfo(token: String)= viewModelScope.launch {
+        mentorRepository.getMentorInfo(token).collect {
+            val getMentorInfoResponse = it as GetMentorInfoResponse
+            Log.e("getMentorInfo", it.toString())
+            setGetMentorInfoResponseResult(getMentorInfoResponse)
+        }
+    }
 }

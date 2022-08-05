@@ -34,4 +34,9 @@ interface AuthService {
         @Header("Authorization") token: String
     ): Response<SignUpResponse>
 
+    @GET("/api/user")
+    suspend fun getUserInfo(
+        @Header("Authorization") token: String
+    ) : Response<GetUserInfoResponse>
+
 }

@@ -1,15 +1,17 @@
 package preview.android.activity.management.chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemChatRoomBinding
+import preview.android.model.ChatRoom
 
 class ChatRoomAdpater(
-    private val onClicked : (String) -> Unit
-) : ListAdapter<String, ChatRoomAdpater.ViewHolder>(diffUtil) {
+    private val onClicked : (ChatRoom) -> Unit
+) : ListAdapter<ChatRoom, ChatRoomAdpater.ViewHolder>(diffUtil) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,25 +24,24 @@ class ChatRoomAdpater(
         holder.bind(getItem(position))
     }
 
-
     class ViewHolder(
         private val binding: ItemChatRoomBinding,
-        private val onClicked : (String) -> Unit
+        private val onClicked : (ChatRoom) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(nickname: String) {
-            binding.nickname = nickname
+        fun bind(chatRoom: ChatRoom) {
+            binding.chatroom = chatRoom
             binding.layoutChatRoom.setOnClickListener {
-                onClicked(nickname)
+                onClicked(chatRoom)
             }
         }
     }
 
     private companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<String>() {
-            override fun areContentsTheSame(oldItem: String, newItem: String) =
+        val diffUtil = object : DiffUtil.ItemCallback<ChatRoom>() {
+            override fun areContentsTheSame(oldItem: ChatRoom, newItem: ChatRoom) =
                 oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: String, newItem: String) =
+            override fun areItemsTheSame(oldItem: ChatRoom, newItem: ChatRoom) =
                 oldItem == newItem
         }
     }

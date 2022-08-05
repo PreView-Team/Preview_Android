@@ -33,12 +33,36 @@ class ReceiveFormDetailFragment :
         binding.btnAccept.setOnClickListener {
             vm.aceeptForm(AccountStore.token.value!!, bundle.getInt("formId"))
             vm.createRoom(vm.receiveFormDetail.value!!.username)
-            val alarmList =  AlarmStore.alarmObject.value!!.value.toMutableList()
-            alarmList.add(Alarm(title = "${AccountStore.nickname.value!!}님이 메시지를 보냈습니다.", content = "지금 확인하기", time = getCurrentTime()))
-            alarmList.forEach {
-                Log.e("alarm Item", it.toString())
+            var alarmList = mutableListOf<Alarm>()
+            if (AlarmStore.alarmObject.value != null) {
+                alarmList = AlarmStore.alarmObject.value!!.value.toMutableList()
+                alarmList.add(
+                    Alarm(
+                        title = "${AccountStore.mentorNickname.value!!}님이 메시지를 보냈습니다.",
+                        content = "지금 확인하기",
+                        time = getCurrentTime()
+                    )
+                )
+                alarmList.forEach {
+                    Log.e("alarm if Item", it.toString())
+                }
             }
-            vm.addAlarm(vm.receiveFormDetail.value!!.username, AlarmObject().copy(value = alarmList))
+            else{
+                alarmList.add(
+                    Alarm(
+                        title = "${AccountStore.mentorNickname.value!!}님이 메시지를 보냈습니다.",
+                        content = "지금 확인하기",
+                        time = getCurrentTime()
+                    )
+                )
+                alarmList.forEach {
+                    Log.e("alarm else Item", it.toString())
+                }
+            }
+            vm.addAlarm(
+                vm.receiveFormDetail.value!!.username,
+                AlarmObject().copy(value = alarmList)
+            )
             AlarmStore.updateAlarmList(AlarmObject().copy(value = alarmList))
         }
 

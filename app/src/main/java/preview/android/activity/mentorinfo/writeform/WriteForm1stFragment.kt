@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.mentorinfo.MentorInfoViewModel
+import preview.android.data.AccountStore
 import preview.android.data.MentorInfoStore
 import preview.android.databinding.FragmentWriteForm1stBinding
 import preview.android.model.Form
@@ -25,14 +26,16 @@ class WriteForm1stFragment : BaseFragment<FragmentWriteForm1stBinding, MentorInf
 
         binding.etContact.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
+        binding.tvName.text = AccountStore.menteeNickname.value!!
+
         binding.btnApply.setOnClickListener {
-            if (binding.etName.text.toString().isNotEmpty() && binding.etContact.text.toString()
+            if (binding.etContact.text.toString()
                     .isNotEmpty()
             ) {
                 MentorInfoStore.updateForm(
                     Form(
                         postId = MentorInfoStore.mentorPost.value!!.postId,
-                        name = binding.etName.text.toString(),
+                        name = AccountStore.menteeNickname.value!!, // 멘티값 고정
                         phoneNumber = binding.etContact.text.toString()
                         // jobNames =
                     )

@@ -63,12 +63,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
 //                }
 //            }
 //        }
+        binding.layoutMentorprofile.setOnClickListener {
+            vm.editMentorInfo()
 
+           // AccountStore.updateMentorNickname(it.nickname) TODO: 멘토 닉네임 변경시 accountStore에서 멘토닉네임도 변경해줘야함
+        }
 
         binding.layoutProfile.setOnClickListener {
             val intent = Intent(context, ProfileActivity::class.java)
             startActivity(intent)
         }
+
         binding.layoutReceiveForm.setOnClickListener {
             val intent = Intent(context, ReceiveFormActivity::class.java)
             startActivity(intent)
@@ -78,6 +83,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
             startActivity(intent)
         }
         binding.layoutChat.setOnClickListener {
+            // TODO : isMentored = true 인 경우만 들어가게
             val intent = Intent(context, ChatActivity::class.java)
             startActivity(intent)
         }
