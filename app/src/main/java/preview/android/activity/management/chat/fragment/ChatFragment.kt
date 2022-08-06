@@ -29,7 +29,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
         super.onViewCreated(view, savedInstanceState)
 
         val chatRoom = requireArguments().getSerializable("chatRoom")!! as ChatRoom
-
+        Log.e("chatRoom", chatRoom.toString())
         binding.rvChat.run {
             setHasFixedSize(true)
             setItemViewCacheSize(10)
@@ -48,7 +48,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
         }
         binding.btnSend.setOnClickListener {
             if (binding.etMessage.text.toString() != "") {
+
+                Log.e("mentorToken!!", vm.messageList.value.get(0).mentorToken)
+                Log.e("menteeToken!!", vm.messageList.value.get(0).menteeToken)
                 if (chatRoom.nickname.contains("멘티")) {
+                    Log.e("i am mentor", "!!")
                     val menteeNickname = chatRoom.nickname.replace(" 멘티", "")
                     val message = Message(
                         nickname = AccountStore.mentorNickname.value!!,
@@ -63,14 +67,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                         vm.messageList.value.size
                     )
 
-                    // 알람을 상대방꺼로보내야함
+                    // 알람
                     vm.sendNotice(
-                        getFCMToken(),
-                        AccountStore.mentorNickname.value!!
-                    ) // 상대방 fcm토큰으로 보내야함
+                        vm.messageList.value.get(0).menteeToken, //상대방 토큰으로
+                        AccountStore.mentorNickname.value!!, //내 이름으로 보냄
+                        binding.etMessage.text.toString()
+                    )
 
-
-                    // 알람을 상대방꺼로
                     val alarmList = mutableListOf<Alarm>()
                     alarmList.add(
                         Alarm(
@@ -82,6 +85,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                     vm.addAlarm(menteeNickname, AlarmObject().copy(value = alarmList))
 
                 } else {
+                    Log.e("i am mentor", "!!")
                     val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
                     val message = Message(
                         nickname = AccountStore.menteeNickname.value!!,
@@ -97,7 +101,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                     )
 
                     // 알람은 상대방꺼로
-                    vm.sendNotice(getFCMToken(), mentorNickname)
+                    vm.sendNotice(
+                        vm.messageList.value.get(0).mentorToken, // 상대방 토큰
+                        AccountStore.menteeNickname.value!!, // 내 이름
+                        binding.etMessage.text.toString()
+                    )
 
                     val alarmList = mutableListOf<Alarm>()
                     alarmList.add(

@@ -40,6 +40,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:text="@{receiveformdetail.fcmToken}"
+
+            android:id="@+id/tv_token"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btn_refuse"
             android:text="거절"

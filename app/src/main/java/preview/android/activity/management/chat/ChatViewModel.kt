@@ -148,13 +148,13 @@ class ChatViewModel @Inject constructor(
             }
         }
 
-    fun sendNotice(token: String, myNickname: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun sendNotice(token: String, myNickname: String, contents : String) = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
-            alarmRepository.sendNotice(token, myNickname)
+            alarmRepository.sendNotice(token, myNickname, contents)
         }.onSuccess {
-            //Log.e("sendNotice", it.toString())
+            Log.e("sendNotice success", it.toString())
         }.onFailure {
-            // Log.e("sendNotice", it.toString())
+            Log.e("sendNotice fail", it.toString())
         }
     }
 

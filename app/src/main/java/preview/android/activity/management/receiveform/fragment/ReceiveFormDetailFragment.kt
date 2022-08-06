@@ -32,7 +32,7 @@ class ReceiveFormDetailFragment :
 
         binding.btnAccept.setOnClickListener {
             vm.aceeptForm(AccountStore.token.value!!, bundle.getInt("formId"))
-            vm.createRoom(vm.receiveFormDetail.value!!.username)
+            vm.createRoom(vm.receiveFormDetail.value!!.username, vm.receiveFormDetail.value!!.fcmToken)
             var alarmList = mutableListOf<Alarm>()
             if (AlarmStore.alarmObject.value != null) {
                 alarmList = AlarmStore.alarmObject.value!!.value.toMutableList()

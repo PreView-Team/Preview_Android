@@ -57,7 +57,7 @@ class ReceiveFormViewModel @Inject constructor(
 
     fun getReceiveFormDetail(token: String, formId: Int) = viewModelScope.launch {
         formRepository.getReceiveFormDetail(token, formId).collect { response ->
-            //Log.e("getReceiveFormDetail", response.toString())
+            Log.e("getReceiveFormDetail", response.toString())
             setReceiveFormDetail(response as ReceiveFormDetailResponse)
         }
     }
@@ -74,8 +74,8 @@ class ReceiveFormViewModel @Inject constructor(
         }
     }
 
-    fun createRoom(menteeNickname : String) = viewModelScope.launch{
-        chatRepository.createChatRoom(menteeNickname).collect {
+    fun createRoom(menteeNickname : String, menteeFCMToken : String) = viewModelScope.launch{
+        chatRepository.createChatRoom(menteeNickname, menteeFCMToken).collect {
             //Log.e("createRoom reponse", it)
         }
     }

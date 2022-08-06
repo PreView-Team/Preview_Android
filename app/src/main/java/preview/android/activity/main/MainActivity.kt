@@ -24,10 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.alarm.AlarmActivity
-import preview.android.activity.util.changeFabClose
-import preview.android.activity.util.changeFabOpen
-import preview.android.activity.util.isFabOpened
-import preview.android.activity.util.showDialogFragment
+import preview.android.activity.util.*
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityMainBinding
 import preview.android.model.Writing
@@ -43,6 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AccountStore.updateFcmToken(getFCMToken())
 
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController

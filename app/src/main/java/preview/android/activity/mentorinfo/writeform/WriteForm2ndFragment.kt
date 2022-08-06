@@ -14,6 +14,7 @@ import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.mentorinfo.MentorInfoViewModel
 import preview.android.activity.util.changeWordColor
+import preview.android.activity.util.getFCMToken
 import preview.android.activity.util.progressOff
 import preview.android.activity.util.progressOn
 import preview.android.data.AccountStore
@@ -58,7 +59,8 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
                 progressOn(progressDialog)
                 MentorInfoStore.updateForm(
                     MentorInfoStore.form.value!!.copy(
-                        contents = binding.etContents.text.toString()
+                        contents = binding.etContents.text.toString(),
+                        fcmToken = AccountStore.myFCMToken.value!!
                     )
                 )
                 Log.e("MentorInfoStore", MentorInfoStore.form.value.toString())

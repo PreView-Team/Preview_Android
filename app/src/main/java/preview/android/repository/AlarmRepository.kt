@@ -16,7 +16,7 @@ import kotlin.coroutines.resume
 class AlarmRepository {
     val db = Firebase.firestore
 
-    suspend fun sendNotice(token: String, myNickname: String): Boolean =
+    suspend fun sendNotice(token: String, myNickname: String, content : String): Boolean =
         suspendCancellableCoroutine { continuation ->
             try {
                 var notificationObject = JSONObject()

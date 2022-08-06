@@ -26,9 +26,10 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, MainViewModel>(
         super.onCreate(savedInstanceState)
 
         vm.readAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘티/멘토 둘중에 알림 뭐로보내는지 확인
-        if(AccountStore.isMentored.value!!) {
-            vm.readAlarmList(AccountStore.mentorNickname.value!!)
-        }
+
+//        if (AccountStore.isMentored.value!!) {
+//            vm.readAlarmList(AccountStore.mentorNickname.value!!)
+//        }
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true
@@ -44,7 +45,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, MainViewModel>(
             }
         }
 
-        AlarmStore.alarmObject.observe(this){ list ->
+        AlarmStore.alarmObject.observe(this) { list ->
             (binding.rvAlarm.adapter as AlarmAdapter).submitList(list.value.toMutableList())
         }
     }

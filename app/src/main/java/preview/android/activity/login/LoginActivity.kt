@@ -13,6 +13,8 @@ import preview.android.R
 import preview.android.activity.main.MainActivity
 import preview.android.activity.util.ERROR_CODE_400
 import preview.android.activity.util.ERROR_UNAUTHORIZED
+import preview.android.activity.util.deviceToken
+import preview.android.activity.util.getFCMToken
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityLoginBinding
 import preview.android.model.Account
@@ -29,6 +31,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
 
         var keyHash = Utility.getKeyHash(this)
         Log.e(TAG, "해시 키 값 : ${keyHash}")
+
+
+        AccountStore.updateFcmToken(getFCMToken())
+
+
 
         // 로그인 여부 체크는 splash에서 진행
         val pref = getSharedPreferences("loginAccount", MODE_PRIVATE)
@@ -63,7 +70,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             Log.e("RESPONSE RESULT ", "token: " + responseResult)
 
             AccountStore.updateToken(responseResult)
-
             if (responseResult == ERROR_CODE_400) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_login, InfoInputFragment()).commit()
@@ -75,6 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             }
 
         }
+
         vm.getUserInfoResponseResult.observe(this) { getUserInfoResponse ->
 
             AccountStore.updateMenteeNickname(getUserInfoResponse.nickname)

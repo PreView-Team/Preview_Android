@@ -1,5 +1,6 @@
 package preview.android.activity.util
 
+import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -23,7 +24,15 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        showNotification(remoteMessage)
+        val manager : ActivityManager = getSystemService(Context.ACTIVITY_SERVICE ) as ActivityManager
+        val info = manager.getRunningTasks(1)
+        val componentName = info.get(0).topActivity
+        val activityName = componentName!!.shortClassName.substring(1)
+        Log.e("ACTIVITY NAME", activityName)
+
+        if(activityName != "activity.management.chat.ChatActivity"){
+            showNotification(remoteMessage)
+        }
         Log.e("onMessageReceived1", remoteMessage.data.toString())
         Log.e("onMessageReceived1-1", remoteMessage.data["title"].toString())
         Log.e("onMessageReceived1-2", remoteMessage.data["body"].toString())

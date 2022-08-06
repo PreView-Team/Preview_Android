@@ -10,7 +10,9 @@ object AccountStore {
     val kakaoId = 2327958242
    // 2327958242 -> 주이식
    // 2373880354 -> 테스트계정
-    var myFCMToken = ""
+
+    private val _myFCMToken = MutableLiveData<String>()
+    val myFCMToken: LiveData<String> get() = _myFCMToken
 
     private val _menteeNickname = MutableLiveData<String>()
     val menteeNickname: LiveData<String> get() = _menteeNickname
@@ -27,7 +29,9 @@ object AccountStore {
     fun updateToken(token : String){
         _token.value = token
     }
-
+    fun updateFcmToken(fcmToken : String){
+        _myFCMToken.value = fcmToken
+    }
     fun updateMenteeNickname(nickname : String){
         _menteeNickname.value = nickname
     }

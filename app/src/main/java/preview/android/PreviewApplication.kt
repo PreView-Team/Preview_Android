@@ -16,7 +16,6 @@ class PreviewApplication : MultiDexApplication(){
         super.onCreate()
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
         setCrashHandler()
-        AccountStore.myFCMToken = getFCMToken()
     }
 
     private fun setCrashHandler(){

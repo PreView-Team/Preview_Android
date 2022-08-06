@@ -24,6 +24,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
 import preview.android.R
+import preview.android.data.AccountStore
+import preview.android.data.AccountStore.updateFcmToken
 import preview.android.model.MentorPost
 import preview.android.model.Post
 import java.io.File
@@ -124,7 +126,7 @@ fun getFCMToken(): String {
         if (task.isSuccessful) {
             deviceToken = task.result
         }
-        Log.e("token: ", deviceToken.toString())
+        Log.e("fcmtoken!!: ", deviceToken.toString())
     }
     return deviceToken
 }

@@ -24,10 +24,19 @@ class ChatRepository {
 
     //val myRef = database.getReference(AccountStore.nickname.value!!)
 
-    fun createChatRoom(menteeNickname: String) = callbackFlow {
+    fun createChatRoom(menteeNickname: String, menteeFCMToken: String) = callbackFlow {
         val myRef = database.getReference(AccountStore.mentorNickname.value!!)
         val createList = arrayListOf<Message>()
-        createList.add(Message(nickname = "admin", message = "새로운 채팅이 시작되었습니다", count = 0, mentorToken = AccountStore.myFCMToken, time = getCurrentTime())) // menteeToken = 멘티 fcmToken
+        createList.add(
+            Message(
+                nickname = "admin",
+                message = "새로운 채팅이 시작되었습니다",
+                count = 0,
+                menteeToken = menteeFCMToken,
+                mentorToken = AccountStore.myFCMToken.value!!,
+                time = getCurrentTime()
+            )
+        ) // menteeToken = 멘티 fcmToken
         myRef.child(menteeNickname).setValue(createList).addOnSuccessListener {
             trySend("success")
         }.addOnFailureListener {
@@ -76,6 +85,8 @@ class ChatRepository {
                                 nickname = map.get("nickname")!!,
                                 message = map.get("message")!!,
                                 count = list.size,
+                                mentorToken = map.get("mentorToken")!!,
+                                menteeToken = map.get("menteeToken")!!,
                                 time = map.get("time")!!
                             )
                         )
@@ -94,13 +105,14 @@ class ChatRepository {
         awaitClose()
     }
 
-    fun sendChat(mentorNickname: String, menteeNickname: String, message: Message, count: Int) = callbackFlow {
-        val myRef = database.getReference(mentorNickname)
-        myRef.child(menteeNickname + "/" + count).setValue(message).addOnSuccessListener {
-            trySend("success")
-        }.addOnFailureListener {
-            trySend("fail")
+    fun sendChat(mentorNickname: String, menteeNickname: String, message: Message, count: Int) =
+        callbackFlow {
+            val myRef = database.getReference(mentorNickname)
+            myRef.child(menteeNickname + "/" + count).setValue(message).addOnSuccessListener {
+                trySend("success")
+            }.addOnFailureListener {
+                trySend("fail")
+            }
+            close()
         }
-        close()
-    }
 }
