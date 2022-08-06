@@ -44,8 +44,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.readAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘토/멘티 뭐로 설정해야하는지 확인
-
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
         binding.bnvMain.setupWithNavController(navController)

@@ -9,5 +9,5 @@ data class Message(
     val count : Int,
     val mentorToken : String ="",
     val menteeToken : String ="",
-    val time : String = getCurrentTime()
+    val time : String = "",
 ) : Serializable

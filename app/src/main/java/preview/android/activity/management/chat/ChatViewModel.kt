@@ -15,6 +15,7 @@ import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
 import preview.android.data.AccountStore
 import preview.android.model.AlarmObject
+import preview.android.model.ChatRoom
 import preview.android.model.Message
 import preview.android.model.SendFormThumbnail
 import preview.android.repository.AlarmRepository
@@ -30,8 +31,8 @@ class ChatViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private val _messageMap=  MutableListLiveData<Map<String, List<Message>>>()
-    val messageMap :LiveData<List<Map<String, List<Message>>>> get() = _messageMap
+    private val _messageMap = MutableListLiveData<Map<String, List<Message>>>()
+    val messageMap: LiveData<List<Map<String, List<Message>>>> get() = _messageMap
 
     private val _messageList = MutableStateFlow<List<Message>>(listOf())
     val messageList = _messageList.asStateFlow()
@@ -43,9 +44,6 @@ class ChatViewModel @Inject constructor(
     private val _mentorChatList = MutableListLiveData<String>()
     val mentorChatList: LiveData<List<String>> get() = _mentorChatList
 
-    private val _isFinishReadChat = MutableLiveData<Boolean>()
-    val isFinishReadChat :LiveData<Boolean> get() = _isFinishReadChat
-
     private val _sendFormThumbnailList = MutableListLiveData<SendFormThumbnail>()
     val sendFormThumbnailList: LiveData<List<SendFormThumbnail>> get() = _sendFormThumbnailList
 
@@ -54,7 +52,11 @@ class ChatViewModel @Inject constructor(
         _messageMap.add(map)
     }
 
-    fun clearMessageMap(){
+    fun setMessageMap(mapList: List<Map<String, List<Message>>>) = viewModelScope.launch {
+        _messageMap.value = mapList
+    }
+
+    fun clearMessageMap() {
         _messageMap.clear()
     }
 
@@ -77,7 +79,7 @@ class ChatViewModel @Inject constructor(
 
     // 멘토의 하위 멘티 닉네임들을 읽어옴
     fun readChatRoomList(mentorNickname: String) = viewModelScope.launch {
-        Log.e("readChatRoomList","!!")
+        //Log.e("readChatRoomList","!!")
         chatRepository.readMentorsChatRoom(mentorNickname).collect { list ->
             list.forEach { menteeNickname ->
                 readChatList(mentorNickname, menteeNickname)
@@ -88,16 +90,48 @@ class ChatViewModel @Inject constructor(
 
     fun readChatList(mentorNickname: String, menteeNickname: String) = viewModelScope.launch {
         chatRepository.readChat(mentorNickname, menteeNickname).collect { list ->
-            Log.e("readChatList?", list.toString())
+            //Log.e("readChatList?", list.toString())
             val map = mutableMapOf<String, List<Message>>()
             if (mentorNickname == AccountStore.mentorNickname.value) {
                 map.put(menteeNickname + " 멘티", list)
             } else {
                 map.put(mentorNickname + " 멘토", list)
             }
-            addMessageMap(map)
-            _isFinishReadChat.value = true
 
+            //Log.e("Add map?", map.toString())
+            filtMessageMap(map)
+
+        }
+    }
+
+    fun filtMessageMap(map: Map<String, List<Message>>) {
+        var isFiltered = false
+        val messageMap = _messageMap.value?.toMutableList()
+        messageMap?.forEach { mentorChatRoomMap -> // 멘토별 채팅방 맵
+            if (map.keys.toString() == mentorChatRoomMap.keys.toString()) {
+
+                // 비교를 위한 필터링
+                var mapChatRoom = ChatRoom()
+                var mentorChatRoom = ChatRoom()
+                map.forEach { nickname, list ->
+                    mapChatRoom = ChatRoom(nickname = nickname, chatList = list)
+                }
+                mentorChatRoomMap.forEach{ nickname , list ->
+                    mentorChatRoom = ChatRoom(nickname = nickname, chatList = list)
+                }
+
+                // 사이즈 비교
+                if(mapChatRoom.chatList.size >= mentorChatRoom.chatList.size){
+                    _messageMap.add(map)
+                    _messageMap.remove(mentorChatRoomMap)
+                    isFiltered = true
+                }
+                Log.e("size 1", mapChatRoom.chatList.size.toString())
+                Log.e("size 2", mentorChatRoom.chatList.size.toString())
+            }
+        }
+        if(!isFiltered){
+            addMessageMap(map)
         }
     }
 
@@ -106,6 +140,7 @@ class ChatViewModel @Inject constructor(
             _messageList.emit(list)
         }
     }
+
     fun sendChat(mentorNickname: String, menteeNickname: String, message: Message, count: Int) =
         viewModelScope.launch {
             chatRepository.sendChat(mentorNickname, menteeNickname, message, count).collect {
@@ -113,9 +148,9 @@ class ChatViewModel @Inject constructor(
             }
         }
 
-    fun sendNotice(token: String, otherNickname: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun sendNotice(token: String, myNickname: String) = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
-            alarmRepository.sendNotice(token, otherNickname)
+            alarmRepository.sendNotice(token, myNickname)
         }.onSuccess {
             //Log.e("sendNotice", it.toString())
         }.onFailure {
@@ -143,7 +178,7 @@ class ChatViewModel @Inject constructor(
     }
 
     fun getSendForms(token: String) = viewModelScope.launch {
-        Log.e("getSendForms","!!")
+        //Log.e("getSendForms","!!")
         formRepository.getSendForms(token).collect { response ->
             updateSendFormThumbnailList(filtJsonArray(response as JsonArray))
         }

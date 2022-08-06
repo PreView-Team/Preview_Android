@@ -33,6 +33,15 @@ class ChatRoomAdpater(
             binding.layoutChatRoom.setOnClickListener {
                 onClicked(chatRoom)
             }
+            var lastChat = ""
+            var lastTime = ""
+            chatRoom.chatList.last { message ->
+                lastChat = message.message
+                lastTime = message.time.split("분")[0]
+                true
+            }
+            binding.tvTime.text = lastTime
+            binding.tvLastchat.text = lastChat
         }
     }
 

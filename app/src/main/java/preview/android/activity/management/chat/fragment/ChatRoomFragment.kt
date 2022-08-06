@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -43,6 +44,10 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         vm.getSendForms(AccountStore.token.value!!)
         vm.readChatRoomList(AccountStore.mentorNickname.value!!)
 
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.reverseLayout =true
+        layoutManager.stackFromEnd = true
+        binding.rvChatRoom.layoutManager = layoutManager
         binding.rvChatRoom.run {
             setHasFixedSize(true)
 //            setItemViewCacheSize(10)
@@ -72,18 +77,20 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         }
 
         vm.messageMap.observe(viewLifecycleOwner) { mapList ->
-
             val chatRoomList = mutableListOf<ChatRoom>()
             mapList.forEach { map ->
-                Log.e("map", map.toString())
                 map.forEach { nickname, list ->
-                    chatRoomList.add(ChatRoom(nickname, list))
+                    chatRoomList.add(
+                        ChatRoom(
+                            nickname = nickname,
+                            chatList = list,
+                            date = list.last().time
+                        )
+                    )
                 }
             }
-            chatRoomList.sortBy {
-                it.date
-            }
             (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(chatRoomList.toMutableList())
+
 
         }
 
