@@ -11,6 +11,15 @@ import retrofit2.http.*
 
 interface MentorService {
 
+    @GET("/api/home/post/")
+    suspend fun getHomeMentorThumbnail(
+        @Header("Authorization") token: String,
+        @Query("status") status: String,
+        @Query("page") page : Int,
+        @Query("size") size : Int,
+        @Query("sort") sort : String
+    ) : Response<JsonArray>
+
     @POST("/api/post")
     suspend fun createPost(
         @Header("Authorization") token: String,

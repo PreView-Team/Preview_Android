@@ -24,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.alarm.AlarmActivity
+import preview.android.activity.review.ReviewActivity
 import preview.android.activity.util.*
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityMainBinding
@@ -50,6 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         binding.tbMain.setNavigationOnClickListener { view ->
             val intent = Intent(this, AlarmActivity::class.java)
             startActivity(intent)
+        }
+        binding.tbMain.setOnMenuItemClickListener { item ->
+            // 프로필 쪽 이동
+            true
         }
         binding.fab.setOnClickListener {
             if (isFabOpened(binding.fab)) {

@@ -8,13 +8,25 @@ import preview.android.model.*
 
 class MentorRepository(private val api: MentorService) {
 
-    suspend fun getNewMentorThumbnailList() = callbackFlow {
-        trySend(createMentorList())
+    suspend fun getNewMentorThumbnailList(token : String, page: Int, size : Int, sort : String) = callbackFlow {
+        val request = api.getHomeMentorThumbnail("Bearer $token", "new", page, size, sort)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            trySend("ERROR :" + request.errorBody()!!.string())
+        }
         close()
     }
 
-    suspend fun getRecommendMentorThumbnailList() = callbackFlow {
-        trySend(createMentorList())
+    suspend fun getRecommendMentorThumbnailList(token : String, page: Int, size : Int, sort : String) = callbackFlow {
+        val request = api.getHomeMentorThumbnail("Bearer $token", "recommendation", page, size, sort)
+        if(request.isSuccessful && request.body() != null){
+            trySend(request.body()!!)
+        }
+        else{
+            trySend("ERROR :" + request.errorBody()!!.string())
+        }
         close()
     }
 

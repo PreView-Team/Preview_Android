@@ -61,6 +61,9 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
+//                    val intent = Intent(activity, ReviewActivity::class.java)
+//                    intent.putExtra("mentorInfo", mentor)
+//                    startActivity(intent)
                     val intent = Intent(activity, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)

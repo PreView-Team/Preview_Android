@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="mentorpost"
-            type="preview.android.model.MentorPost" />
+            name="mentorThumbnail"
+            type="preview.android.model.MentorThumbnail" />
     </data>
 
     <LinearLayout
@@ -51,7 +51,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="@{mentorpost.nickname}"
+                        android:text="@{mentorThumbnail.nickname}"
                         android:textColor="@color/white"
                         android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:singleLine="true"
-                        android:text="@{mentorpost.category}"
+                        android:text="@{mentorThumbnail.categoryName}"
                         android:textColor="@color/white"
                         android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:singleLine="true"
-                    android:text="@{mentorpost.introduce}"
+                    android:text="@{mentorThumbnail.title}"
                     android:textColor="@color/white"
                     android:textSize="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
 
-                        android:text="@{Integer.toString(mentorpost.likeCount)}"
+                        android:text="@{Integer.toString(mentorThumbnail.likeCnt)}"
                         android:textColor="@color/white"
                         android:textSize="13dp"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"

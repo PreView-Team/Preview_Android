@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.databinding.ItemMentorThumbnailBinding
-import preview.android.model.MentorPost
+import preview.android.model.MentorThumbnail
 
 class HomeMentorAdapter(
-    private val onThumbnailClicked : (MentorPost) -> Unit
-) : ListAdapter<MentorPost, HomeMentorAdapter.ViewHolder>(diffUtil) {
+    private val onThumbnailClicked : (MentorThumbnail) -> Unit
+) : ListAdapter<MentorThumbnail, HomeMentorAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -25,22 +25,22 @@ class HomeMentorAdapter(
 
     class ViewHolder(
         private val binding: ItemMentorThumbnailBinding,
-        private val onThumbnailClicked : (MentorPost) -> Unit
+        private val onThumbnailClicked : (MentorThumbnail) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(mentorPost: MentorPost) {
-            binding.mentorpost = mentorPost
+        fun bind(mentorThumbnail: MentorThumbnail) {
+            binding.mentorThumbnail = mentorThumbnail
             binding.cardview.setOnClickListener {
-                onThumbnailClicked(mentorPost)
+                onThumbnailClicked(mentorThumbnail)
             }
         }
     }
 
     private companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MentorPost>() {
-            override fun areContentsTheSame(oldItem: MentorPost, newItem: MentorPost) =
+        val diffUtil = object : DiffUtil.ItemCallback<MentorThumbnail>() {
+            override fun areContentsTheSame(oldItem: MentorThumbnail, newItem: MentorThumbnail) =
                 oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: MentorPost, newItem: MentorPost) =
+            override fun areItemsTheSame(oldItem: MentorThumbnail, newItem: MentorThumbnail) =
                 oldItem == newItem
         }
     }

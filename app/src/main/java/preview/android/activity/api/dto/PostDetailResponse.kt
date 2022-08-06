@@ -7,7 +7,7 @@ data class PostDetailResponse(
     val title: String,
     val contents: String,
     val nickname: String,
-    val categoryName: String,
+    val jobList: List<String>,
     val createDateTime: String,
     val updateDateTime: String,
     val introduce: String,

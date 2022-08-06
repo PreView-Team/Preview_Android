@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
@@ -15,10 +14,7 @@ import preview.android.activity.util.filtJsonArray
 import preview.android.activity.util.toObjectNonNull
 import preview.android.data.AccountStore
 import preview.android.data.AlarmStore
-import preview.android.model.Alarm
-import preview.android.model.AlarmObject
-import preview.android.model.MentorPost
-import preview.android.model.Writing
+import preview.android.model.*
 import preview.android.repository.AlarmRepository
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
@@ -47,11 +43,11 @@ class MainViewModel @Inject constructor(
     private val _token = MutableLiveData<String>("")
     val token: LiveData<String> get() = _token
 
-    private val _newMentorThumbnailList = MutableListLiveData<MentorPost>()
-    val newMentorThumbnailList: LiveData<List<MentorPost>> get() = _newMentorThumbnailList
+    private val _newMentorThumbnailList = MutableListLiveData<MentorThumbnail>()
+    val newMentorThumbnailList: LiveData<List<MentorThumbnail>> get() = _newMentorThumbnailList
 
-    private val _recommendMentorThumbnailList = MutableListLiveData<MentorPost>()
-    val recommendMentorThumbnailList: LiveData<List<MentorPost>> get() = _recommendMentorThumbnailList
+    private val _recommendMentorThumbnailList = MutableListLiveData<MentorThumbnail>()
+    val recommendMentorThumbnailList: LiveData<List<MentorThumbnail>> get() = _recommendMentorThumbnailList
 
     private val _newMentorPostList = MutableListLiveData<MentorPost>()
     val newMentorPostList: LiveData<List<MentorPost>> get() = _newMentorPostList
@@ -60,12 +56,12 @@ class MainViewModel @Inject constructor(
     val recommendMentorPostList: LiveData<List<MentorPost>> get() = _recommendMentorPostList
 
 
-    fun updateNewMentorThumbnailList(list: List<MentorPost>) {
+    fun updateNewMentorThumbnailList(list: List<MentorThumbnail>) {
         _newMentorThumbnailList.clear()
         _newMentorThumbnailList.addAll(list)
     }
 
-    fun updateRecommendMentorThumbnailList(list: List<MentorPost>) {
+    fun updateRecommendMentorThumbnailList(list: List<MentorThumbnail>) {
         _recommendMentorThumbnailList.clear()
         _recommendMentorThumbnailList.addAll(list)
     }
@@ -92,15 +88,21 @@ class MainViewModel @Inject constructor(
         _token.value = token
     }
 
-    fun getNewMentorThumbnailList() = viewModelScope.launch {
-        mentorRepository.getNewMentorThumbnailList().collect { list ->
-            updateNewMentorThumbnailList(list)
-        }
-    }
+    fun getNewMentorThumbnailList(token: String, page: Int, size: Int, sort: String) =
+        viewModelScope.launch {
 
-    fun getRecommendMentorThumbnailList() = viewModelScope.launch {
-        mentorRepository.getRecommendMentorThumbnailList().collect { list ->
-            updateRecommendMentorThumbnailList(list)
+            Log.e("start getNewMentorThumbnailList","!!")
+            mentorRepository.getNewMentorThumbnailList(token, page, size, sort).collect { response ->
+                //val list = response
+                Log.e("getNewMentorThumbnailList", response.toString())
+                updateNewMentorThumbnailList(filtJsonArray(response as JsonArray))
+            }
+        }
+
+    fun getRecommendMentorThumbnailList(token: String, page: Int, size: Int, sort: String) = viewModelScope.launch {
+        mentorRepository.getRecommendMentorThumbnailList(token, page, size, sort).collect { response ->
+            Log.e("getRecommendMentorThumbnailList", response.toString())
+            updateRecommendMentorThumbnailList(filtJsonArray(response as JsonArray))
         }
     }
 
@@ -177,7 +179,7 @@ class MainViewModel @Inject constructor(
                         Log.e("value documents 3", documentSnapshot.data!!.values.toString())
                         list.add(documentSnapshot.toObjectNonNull())
                     }
-                    if(list.size > 0) {
+                    if (list.size > 0) {
                         AlarmStore.updateAlarmList(list.get(0))
                     }
                 }
@@ -190,8 +192,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun editMentorInfo() = viewModelScope.launch{
-        mentorRepository.editMentorInfo(AccountStore.token.value!!).collect{
+    fun editMentorInfo() = viewModelScope.launch {
+        mentorRepository.editMentorInfo(AccountStore.token.value!!).collect {
             Log.e("editMentorInfo", it.toString())
         }
     }

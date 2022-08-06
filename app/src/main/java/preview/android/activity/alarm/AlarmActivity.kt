@@ -25,7 +25,7 @@ class AlarmActivity : BaseActivity<ActivityAlarmBinding, MainViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.readAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘티/멘토 둘중에 알림 뭐로보내는지 확인
+        vm.readAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘티/멘토 알림 둘다 받게
 
 //        if (AccountStore.isMentored.value!!) {
 //            vm.readAlarmList(AccountStore.mentorNickname.value!!)

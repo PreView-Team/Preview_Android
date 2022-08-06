@@ -2,6 +2,7 @@ package preview.android.activity.main.fragment.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,21 +32,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
         binding.tvDescription.text = changeWordColor(binding.tvDescription, "매칭활동", "skyblue")
 
         vm.updateFragmentState(MainViewModel.FragmentState.home)
-        vm.getNewMentorThumbnailList()
-        vm.getRecommendMentorThumbnailList()
+        vm.getNewMentorThumbnailList(AccountStore.token.value!!, 0,5, "id")
+        vm.getRecommendMentorThumbnailList(AccountStore.token.value!!, 0,5, "id")
 
         binding.rvNewMentor.run {
             setHasFixedSize(true)
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter(
-                onThumbnailClicked = { mentorPost ->
+                onThumbnailClicked = { mentorThumbnail ->
                     val intent = Intent(context, MentorInfoActivity::class.java)
-                    intent.putExtra("mentorInfo", mentorPost)
+                    intent.putExtra("mentorInfo", mentorThumbnail)
                     startActivity(intent)
                 }
             ).apply {
-                submitList(vm.newMentorThumbnailList.value)
+                submitList(listOf())
             }
         }
 
@@ -60,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
                     startActivity(intent)
                 }
             ).apply {
-                submitList(vm.recommendMentorThumbnailList.value)
+                submitList(listOf())
             }
         }
 
@@ -75,11 +76,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
 
 
         vm.newMentorThumbnailList.observe(viewLifecycleOwner) { list ->
-            (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list)
+            Log.e("newMentorThumbnailList observe", list.toString())
+            (binding.rvNewMentor.adapter as HomeMentorAdapter).submitList(list.toMutableList())
 
         }
         vm.recommendMentorThumbnailList.observe(viewLifecycleOwner) { list ->
-            (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list)
+            Log.e("recommendMentorThumbnailList observe", list.toString())
+             (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list.toMutableList())
 
         }
 
