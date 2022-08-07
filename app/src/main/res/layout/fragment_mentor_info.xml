@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="postdetailresponse"
+            type="preview.android.activity.api.dto.PostDetailResponse" />
     </data>
 
     <LinearLayout
@@ -13,11 +15,12 @@
         android:layout_height="match_parent"
         tools:context=".activity.mentorinfo.MentorInfoActivity">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/primary"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="3"
-            android:layout_height="0dp">
+            android:background="@color/primary">
 
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -32,6 +35,19 @@
                 app:shapeAppearanceOverlay="@style/imageview_circle"
                 app:srcCompat="@color/grey_200" />
 
+            <RatingBar
+                android:layout_marginLeft="16dp"
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="@{postdetailresponse.grade}"
+                android:progressTint="@color/orange"
+                app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
+                app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
@@ -41,38 +57,40 @@
                 app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
-                app:layout_constraintTop_toTopOf="@+id/shapeableImageView">
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar">
 
                 <TextView
-                    android:id="@+id/tv_enterprise"
+                    android:id="@+id/tv_jobname"
                     style="@style/text_middle_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="프론트엔드개발자"
+                    android:text="@{postdetailresponse.jobList.toString()}"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/ib_check_verify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:background="@drawable/ic_baseline_check_verify"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_enterprise"
-                    app:layout_constraintStart_toEndOf="@+id/tv_enterprise"
-                    app:layout_constraintTop_toTopOf="@+id/tv_enterprise" />
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_jobname"
+                    app:layout_constraintStart_toEndOf="@+id/tv_jobname"
+                    app:layout_constraintTop_toTopOf="@+id/tv_jobname" />
 
                 <TextView
-                    android:id="@+id/tv_job"
-                    style="@style/text_main_medium"
+                    android:id="@+id/tv_nickname"
+                    style="@style/text_middle_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="프론트엔드 주니어"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_enterprise" />
+                    android:layout_marginStart="8dp"
+                    android:text="@{postdetailresponse.nickname}"
+                    android:textColor="@color/orange"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_jobname"
+                    app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+                    app:layout_constraintTop_toTopOf="@+id/tv_jobname" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,22 +101,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="멘토약력"
+                android:text="소개"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
                 app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
 
             <TextView
-                android:layout_marginTop="8dp"
                 style="@style/text_main_regular"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                android:text="@{postdetailresponse.contents}"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="→  ~~대학교 ~~학과 학사\n→  ~~대학교 ~~학과 석사\n→  ~~대학교 ~~학과 박사"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_weight="6"
@@ -107,7 +127,7 @@
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/text_main_medium"
+                style="@style/text_middle_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -119,6 +139,7 @@
 
 
             <TextView
+                android:id="@+id/tv_introduce"
                 style="@style/text_main_regular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -126,11 +147,43 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/curved_light_blue_background_10"
                 android:padding="8dp"
-                android:text="안녕하세요? 안녕하세요? 안녕하세요?\n안녕하세요? 안녕하세요? 안녕하세요?\n안녕하세요? 안녕하세요? 안녕하세요?\n"
+                android:text="@{postdetailresponse.introduce}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView49"
+                style="@style/text_middle_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="리뷰"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tv_introduce"
+                app:layout_constraintTop_toBottomOf="@+id/tv_introduce" />
+
+            <TextView
+                android:id="@+id/tv_viewall"
+                style="@style/text_caption_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="전체보기"
+                app:layout_constraintBottom_toBottomOf="@+id/textView49"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView49" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/rv_review"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_viewall"
+                app:layout_constraintStart_toStartOf="@+id/textView49"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

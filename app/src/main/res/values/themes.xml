@@ -16,17 +16,11 @@
 
     <style name="Outlined.ExposedDropdownMenu"
         parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="colorSurface">@color/blue</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.ExposedDropdownMenu</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
 
     </style>
 
     <style name="ThemeOverlay.App.ExposedDropdownMenu" parent="">
-        <item name="colorSurface">@color/primary</item>
-        <item name="colorOnSurface">@color/primary</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
     </style>
 
     <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">

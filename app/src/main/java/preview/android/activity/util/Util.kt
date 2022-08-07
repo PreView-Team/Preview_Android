@@ -211,7 +211,7 @@ inline fun <reified T> filtJsonArray(list: JsonArray): List<T> {
 
 fun getCurrentTime() : String{
     val curTime = Date()
-    val format = SimpleDateFormat("a h:mm분 ss초", Locale.KOREAN)
+    val format = SimpleDateFormat("MM/dd a h:mm분 ss초", Locale.KOREAN)
     val timeZone = TimeZone.getTimeZone("Asia/Seoul")
     format.timeZone = timeZone
 

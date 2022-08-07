@@ -1,4 +1,4 @@
-package preview.android.activity.management.chat
+package preview.android.activity.management.mentorprofile.chat
 
 import android.os.Bundle
 import androidx.activity.viewModels

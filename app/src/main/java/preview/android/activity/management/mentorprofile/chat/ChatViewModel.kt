@@ -1,8 +1,7 @@
-package preview.android.activity.management.chat
+package preview.android.activity.management.mentorprofile.chat
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel

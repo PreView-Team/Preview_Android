@@ -90,21 +90,21 @@ class MainViewModel @Inject constructor(
 
     fun getNewMentorThumbnailList(token: String, page: Int, size: Int, sort: String) =
         viewModelScope.launch {
-
-            Log.e("start getNewMentorThumbnailList","!!")
-            mentorRepository.getNewMentorThumbnailList(token, page, size, sort).collect { response ->
-                //val list = response
-                Log.e("getNewMentorThumbnailList", response.toString())
-                updateNewMentorThumbnailList(filtJsonArray(response as JsonArray))
-            }
+            mentorRepository.getNewMentorThumbnailList(token, page, size, sort)
+                .collect { response ->
+                    Log.e("getNewMentorThumbnailList", response.toString())
+                    updateNewMentorThumbnailList(filtJsonArray(response as JsonArray))
+                }
         }
 
-    fun getRecommendMentorThumbnailList(token: String, page: Int, size: Int, sort: String) = viewModelScope.launch {
-        mentorRepository.getRecommendMentorThumbnailList(token, page, size, sort).collect { response ->
-            Log.e("getRecommendMentorThumbnailList", response.toString())
-            updateRecommendMentorThumbnailList(filtJsonArray(response as JsonArray))
+    fun getRecommendMentorThumbnailList(token: String, page: Int, size: Int, sort: String) =
+        viewModelScope.launch {
+            mentorRepository.getRecommendMentorThumbnailList(token, page, size, sort)
+                .collect { response ->
+                    Log.e("getRecommendMentorThumbnailList", response.toString())
+                    updateRecommendMentorThumbnailList(filtJsonArray(response as JsonArray))
+                }
         }
-    }
 
     fun getCategoryNewMentorPostList(token: String, categoryName: String) =
         viewModelScope.launch {

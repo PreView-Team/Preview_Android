@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
+import preview.android.activity.api.dto.PostDetailResponse
 import preview.android.model.Form
 import preview.android.repository.FormRepository
 import preview.android.repository.MentorRepository
@@ -21,9 +22,12 @@ class MentorInfoViewModel @Inject constructor(
     private val _response = MutableLiveData<String>()
     val response: LiveData<String> get() = _response
 
+    private val _postDetail = MutableLiveData<PostDetailResponse>()
+    val postDetail : LiveData<PostDetailResponse> get() = _postDetail
+
     fun sendForm(token: String, form: Form) = viewModelScope.launch {
         formRepository.sendForm(token, form).collect{ response ->
-            Log.e("sendForm", response.toString())
+            Log.e("sendForm response", response.toString())
             _response.value = response.toString()
         }
     }
@@ -31,7 +35,7 @@ class MentorInfoViewModel @Inject constructor(
     fun getPostDetail(token: String, postId: Int) = viewModelScope.launch {
         mentorRepository.getPostDetail(token, postId).collect { response ->
             Log.e("getPostDetail", response.toString())
-
+            _postDetail.value = response as PostDetailResponse
         }
     }
 

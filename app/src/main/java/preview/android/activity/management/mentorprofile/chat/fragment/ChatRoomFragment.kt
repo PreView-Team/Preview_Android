@@ -1,34 +1,18 @@
-package preview.android.activity.management.chat.fragment
+package preview.android.activity.management.mentorprofile.chat.fragment
 
-import android.content.ContentValues
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.management.chat.ChatAdapter
-import preview.android.activity.management.chat.ChatRoomAdpater
-import preview.android.activity.management.chat.ChatViewModel
+import preview.android.activity.management.mentorprofile.chat.ChatRoomAdpater
+import preview.android.activity.management.mentorprofile.chat.ChatViewModel
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentChatRoomBinding
 import preview.android.model.ChatRoom
-import preview.android.model.Message
 
 
 class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
@@ -50,7 +34,8 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         binding.rvChatRoom.layoutManager = layoutManager
         binding.rvChatRoom.run {
             setHasFixedSize(true)
-//            setItemViewCacheSize(10)
+            setItemViewCacheSize(10)
+            addItemDecoration(ChatRoomDecoration(requireContext()))
             adapter = ChatRoomAdpater(
                 onClicked = { chatRoom ->
                     val bundle = bundleOf("chatRoom" to chatRoom)

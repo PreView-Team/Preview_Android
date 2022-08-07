@@ -1,4 +1,4 @@
-package preview.android.activity.management.chat.fragment
+package preview.android.activity.management.mentorprofile.chat.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.management.chat.ChatAdapter
-import preview.android.activity.management.chat.ChatViewModel
+import preview.android.activity.management.mentorprofile.chat.ChatAdapter
+import preview.android.activity.management.mentorprofile.chat.ChatViewModel
 import preview.android.activity.util.getCurrentTime
-import preview.android.activity.util.getFCMToken
 import preview.android.data.AccountStore
-import preview.android.data.AlarmStore
 import preview.android.databinding.FragmentChatBinding
 import preview.android.model.Alarm
 import preview.android.model.AlarmObject
@@ -46,7 +44,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
             val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
             vm.readMessageList(mentorNickname, AccountStore.menteeNickname.value!!)
         }
-        binding.btnSend.setOnClickListener {
+        binding.layoutSend.setOnClickListener {
             if (binding.etMessage.text.toString() != "") {
 
                 Log.e("mentorToken!!", vm.messageList.value.get(0).mentorToken)

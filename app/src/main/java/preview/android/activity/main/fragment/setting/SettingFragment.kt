@@ -2,25 +2,14 @@ package preview.android.activity.main.fragment.setting
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.login.LoginActivity
 import preview.android.activity.login.LoginViewModel
 import preview.android.activity.main.MainViewModel
-import preview.android.data.AccountStore
-import preview.android.activity.management.chat.ChatActivity
+import preview.android.activity.management.mentorprofile.MentorProfileActivity
 import preview.android.activity.management.profile.ProfileActivity
-import preview.android.activity.management.receiveform.ReceiveFormActivity
 import preview.android.activity.management.sendform.SendFormActivity
 import preview.android.databinding.FragmentSettingBinding
 
@@ -63,28 +52,18 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
 //                }
 //            }
 //        }
-        binding.layoutMentorprofile.setOnClickListener {
-            vm.editMentorInfo()
-
-           // AccountStore.updateMentorNickname(it.nickname) TODO: 멘토 닉네임 변경시 accountStore에서 멘토닉네임도 변경해줘야함
-        }
-
         binding.layoutProfile.setOnClickListener {
             val intent = Intent(context, ProfileActivity::class.java)
             startActivity(intent)
         }
 
-        binding.layoutReceiveForm.setOnClickListener {
-            val intent = Intent(context, ReceiveFormActivity::class.java)
-            startActivity(intent)
-        }
         binding.layoutSendForm.setOnClickListener {
             val intent = Intent(context, SendFormActivity::class.java)
             startActivity(intent)
         }
-        binding.layoutChat.setOnClickListener {
-            // TODO : isMentored = true 인 경우만 들어가게
-            val intent = Intent(context, ChatActivity::class.java)
+
+        binding.layoutMentorprofile.setOnClickListener {
+            val intent = Intent(context, MentorProfileActivity::class.java)
             startActivity(intent)
         }
     }

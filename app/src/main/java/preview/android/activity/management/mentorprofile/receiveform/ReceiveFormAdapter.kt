@@ -1,13 +1,11 @@
-package preview.android.activity.management.receiveform
+package preview.android.activity.management.mentorprofile.receiveform
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import preview.android.databinding.ItemMentorBinding
 import preview.android.databinding.ItemReceiveFormThumbnailBinding
-import preview.android.model.MentorPost
 import preview.android.model.ReceiveFormThumbnail
 
 class ReceiveFormAdapter(

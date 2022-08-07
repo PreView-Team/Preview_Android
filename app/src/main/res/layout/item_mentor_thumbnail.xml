@@ -26,8 +26,8 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/shapeableImageView"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="14dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="24dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -47,27 +47,28 @@
                     app:layout_constraintTop_toTopOf="@+id/shapeableImageView">
 
                     <TextView
+                        android:ellipsize="end"
                         android:id="@+id/textView38"
+                        style="@style/text_main_medium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:text="@{mentorThumbnail.nickname}"
                         android:textColor="@color/white"
-                        android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:ellipsize="end"
                         android:id="@+id/textView37"
-                        style="@style/text_caption_light"
+                        style="@style/text_caption_regular"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:singleLine="true"
                         android:text="@{mentorThumbnail.categoryName}"
                         android:textColor="@color/white"
-                        android:textSize="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView38" />
@@ -76,14 +77,16 @@
                 <TextView
 
                     android:id="@+id/textView7"
+                    style="@style/text_caption_regular"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
-                    android:singleLine="true"
+                    android:layout_marginRight="24dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:text="@{mentorThumbnail.title}"
                     android:textColor="@color/white"
-                    android:textSize="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
@@ -92,8 +95,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="16dp"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,12 +113,12 @@
 
                     <TextView
 
-                        android:maxWidth="50dp"
-
                         android:id="@+id/tv_like_count"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
+                        android:maxWidth="50dp"
 
                         android:text="@{Integer.toString(mentorThumbnail.likeCnt)}"
                         android:textColor="@color/white"
@@ -134,12 +137,12 @@
                         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
                     <TextView
-                        android:maxWidth="50dp"
                         android:id="@+id/tv_comment_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
-                        android:text="123"
+                        android:maxWidth="50dp"
+                        android:text="@{Integer.toString(mentorThumbnail.commentCnt)}"
                         android:textColor="@color/white"
                         android:textSize="13dp"
                         app:layout_constraintStart_toEndOf="@+id/imageView4"

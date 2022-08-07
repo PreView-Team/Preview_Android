@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             adapter = HomeMentorAdapter(
                 onThumbnailClicked = { mentorThumbnail ->
                     val intent = Intent(context, MentorInfoActivity::class.java)
-                    intent.putExtra("mentorInfo", mentorThumbnail)
+                    intent.putExtra("mentorThumbnail", mentorThumbnail)
                     startActivity(intent)
                 }
             ).apply {
@@ -85,7 +85,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
              (binding.rvRecommendMentor.adapter as HomeMentorAdapter).submitList(list.toMutableList())
 
         }
-
+        AccountStore.menteeNickname.observe(viewLifecycleOwner){
+            binding.tvMenteenickname.text = it
+        }
     }
 
 }

@@ -14,6 +14,7 @@ data class MentorPost(
     val contents: String = "",
     val like : Boolean = false,
     val likeCount : Int = 0,
+    val grade : Double = 0.0
   //  val review : Boolean = false,
   //  val reviewCount : Int = 0,
 ) : Serializable

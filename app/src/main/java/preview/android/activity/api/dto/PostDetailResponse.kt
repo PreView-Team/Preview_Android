@@ -11,6 +11,7 @@ data class PostDetailResponse(
     val createDateTime: String,
     val updateDateTime: String,
     val introduce: String,
-    val history: String,
+    val reviewCnt: Int,
     val reviews: List<Review>,
+    val grade : Float,
 )

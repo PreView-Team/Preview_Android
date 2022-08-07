@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -23,6 +24,13 @@ class WriteForm1stFragment : BaseFragment<FragmentWriteForm1stBinding, MentorInf
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val items = listOf("서울", "경기", "인천", "대전")
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, items)
+        binding.tfArea.setAdapter(adapter)
+
+        val jobItems = listOf("마케터", "프로그래밍")
+        val jobAdapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, jobItems)
+        binding.tfJobnames.setAdapter(jobAdapter)
 
         binding.etContact.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
@@ -32,12 +40,14 @@ class WriteForm1stFragment : BaseFragment<FragmentWriteForm1stBinding, MentorInf
             if (binding.etContact.text.toString()
                     .isNotEmpty()
             ) {
+                // TODO: metnorInfoStore에 현재값 저장
                 MentorInfoStore.updateForm(
                     Form(
                         postId = MentorInfoStore.mentorPost.value!!.postId,
                         name = AccountStore.menteeNickname.value!!, // 멘티값 고정
-                        phoneNumber = binding.etContact.text.toString()
-                        // jobNames =
+                        phoneNumber = binding.etContact.text.toString(),
+                        local = binding.tfArea.text.toString(),
+                        jobNames = binding.tfJobnames.text.toString()
                     )
                 )
                 view.findNavController()

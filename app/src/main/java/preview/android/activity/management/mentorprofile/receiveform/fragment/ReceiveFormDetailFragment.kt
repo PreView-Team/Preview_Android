@@ -1,4 +1,4 @@
-package preview.android.activity.management.receiveform.fragment
+package preview.android.activity.management.mentorprofile.receiveform.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
-import preview.android.activity.management.receiveform.ReceiveFormViewModel
+import preview.android.activity.management.mentorprofile.receiveform.ReceiveFormViewModel
 import preview.android.activity.util.getCurrentTime
 import preview.android.data.AccountStore
 import preview.android.data.AlarmStore

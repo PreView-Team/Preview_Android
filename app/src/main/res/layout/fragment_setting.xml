@@ -43,22 +43,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/layout_mentorprofile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="@+id/layout_profile"
             app:layout_constraintStart_toStartOf="@+id/layout_profile"
-            app:layout_constraintTop_toBottomOf="@+id/layout_profile">
+            app:layout_constraintTop_toBottomOf="@+id/layout_send_form">
 
             <TextView
                 android:id="@+id/textView10"
                 style="@style/text_main_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="멘토 프로필 관리"
+                android:text="멘토 프로필"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,22 +76,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/layout_send_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="@+id/layout_mentorprofile"
             app:layout_constraintStart_toStartOf="@+id/layout_mentorprofile"
-            app:layout_constraintTop_toBottomOf="@+id/layout_mentorprofile">
+            app:layout_constraintTop_toBottomOf="@+id/layout_profile">
 
             <TextView
                 android:id="@+id/textView11"
                 style="@style/text_main_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="보낸 신청서 관리"
+                android:text="보낸 신청서"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -107,81 +107,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_receive_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/layout_send_form"
-            app:layout_constraintStart_toStartOf="@+id/layout_send_form"
-            app:layout_constraintTop_toBottomOf="@+id/layout_send_form">
-
-            <TextView
-                android:id="@+id/textView12"
-                style="@style/text_main_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="받은 신청서 관리"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_black_next"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_chat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/layout_receive_form"
-            app:layout_constraintStart_toStartOf="@+id/layout_receive_form"
-            app:layout_constraintTop_toBottomOf="@+id/layout_receive_form">
-
-            <TextView
-                android:id="@+id/tv_chat"
-                style="@style/text_main_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="채팅"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_black_next"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_chat"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_chat" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
             android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/layout_chat"
-            app:layout_constraintStart_toStartOf="@+id/layout_chat"
-            app:layout_constraintTop_toBottomOf="@+id/layout_chat">
+            app:layout_constraintEnd_toEndOf="@+id/layout_send_form"
+            app:layout_constraintStart_toStartOf="@+id/layout_send_form"
+            app:layout_constraintTop_toBottomOf="@+id/layout_mentorprofile">
 
             <TextView
                 android:id="@+id/textView13"

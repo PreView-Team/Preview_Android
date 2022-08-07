@@ -6,12 +6,20 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.30648148148148147" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_blue_background.xml" value="0.224" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_blue_border.xml" value="0.224" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_chat_background_3.xml" value="0.243" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_grey_100_background_35.xml" value="0.2255" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_primary_background.xml" value="0.243" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_search_background_10.xml" value="0.243" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable-v24/curved_send_background_10.xml" value="0.2255" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/app_bar_background.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/best_post_background.xml" value="0.259" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/btn_kakao_login.xml" value="0.194" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/card_drop_shadow.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/cardview_shadow.xml" value="0.1295" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/check_overlap_icon.xml" value="0.2235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/circle_image_background.xml" value="0.259" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_blue_background_10.xml" value="0.243" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_blue_background_26.xml" value="0.2255" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background_10.xml" value="0.224" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_navy_background.xml" value="0.183" />
@@ -58,9 +66,10 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_mentor_info.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_mentor_profile.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_mentor_profile.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_receive_form.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_review.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_sample.xml" value="0.2390625" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_send_form.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/activity_write_form.xml" value="0.22453703703703703" />
@@ -68,39 +77,44 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/certify_mentor_dialog.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fab_dialog.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_board.xml" value="0.3030821917808219" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_chat.xml" value="0.2" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_chat_room.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_chat.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_chat_room.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_community.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_community_home.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_complete_sign_up.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_complete_submit.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_find_team_member.xml" value="0.25364583333333335" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_info_input.xml" value="0.264" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_home.xml" value="0.536" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_info_input.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_interview_data.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_interview_review.xml" value="0.25364583333333335" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentor_info.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentor_info.xml" value="0.39215686274509803" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentoring.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_new_mentor.xml" value="0.176" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.1" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_new_mentor.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recieve_from_detail.xml" value="0.11041666666666666" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_send_form_detail.xml" value="0.25364583333333335" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_setting.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form.xml" value="0.1" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.2" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_1st.xml" value="0.2" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.152" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_alarm.xml" value="0.171875" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_best_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat.xml" value="0.11145833333333334" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_admin.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_me.xml" value="0.11145833333333334" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.536" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.176" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.2" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_form_thumbnail.xml" value="0.4" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.1" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_jobnames.xml" value="0.1" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.176" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_receive_form_thumbnail.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_review.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/loading_dialog_custom.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/write_dialog.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.264" />
@@ -132,7 +146,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/activity_mentor_info.xml" value="0.23728088926891835" />
         <entry key="app/src/main/res/layout/activity_mentor_profile.xml" value="0.23728088926891835" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.15018615722656245" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22269592285156245" />
         <entry key="app/src/main/res/layout/activity_sample.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/certify_mentor_dialog.xml" value="0.23728088926891835" />
         <entry key="app/src/main/res/layout/fragment_board.xml" value="0.2545289855072464" />
@@ -144,12 +158,7 @@
         <entry key="app/src/main/res/layout/fragment_info_input.xml" value="0.21448822021484373" />
         <entry key="app/src/main/res/layout/fragment_interview_data.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_interview_review.xml" value="0.2545289855072464" />
-        <entry key="app/src/main/res/layout/fragment_mentor_info.xml" value="0.1778537836682343" />
         <entry key="app/src/main/res/layout/fragment_mentoring.xml" value="0.2545289855072464" />
-        <entry key="app/src/main/res/layout/fragment_new_mentor.xml" value="0.1778537836682343" />
-        <entry key="app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.1778537836682343" />
-        <entry key="app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.1778537836682343" />
-        <entry key="app/src/main/res/layout/fragment_send_form_detail.xml" value="0.1778537836682343" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.11596322607605516" />
         <entry key="app/src/main/res/layout/item_best_post.xml" value="0.2545289855072464" />

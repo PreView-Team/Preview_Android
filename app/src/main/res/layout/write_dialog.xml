@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="30dp"
-                    android:hint="제목"
+                    android:hint="한줄소개"
                     android:textColorHint="@color/grey_400"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

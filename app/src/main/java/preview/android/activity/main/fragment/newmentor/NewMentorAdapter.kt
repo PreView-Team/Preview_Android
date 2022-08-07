@@ -38,6 +38,7 @@ class NewMentorAdapter(
             binding.ibFavorite.setOnCheckedChangeListener { button, isChecked ->
                 onFavoriteButtonChecked(isChecked, mentorPost.postId)
             }
+            binding.ratingBar.rating = mentorPost.grade.toFloat()
         }
     }
     private companion object {

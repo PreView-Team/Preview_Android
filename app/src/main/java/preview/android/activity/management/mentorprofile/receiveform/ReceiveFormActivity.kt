@@ -1,18 +1,12 @@
-package preview.android.activity.management.receiveform
+package preview.android.activity.management.mentorprofile.receiveform
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
-import preview.android.activity.main.fragment.newmentor.NewMentorAdapter
-import preview.android.activity.management.receiveform.fragment.ReceiveFormDetailFragment
-import preview.android.activity.management.sendform.SendFormAdapter
-import preview.android.activity.management.sendform.fragment.SendFormDetailFragment
-import preview.android.activity.mentorinfo.MentorInfoActivity
+import preview.android.activity.management.mentorprofile.receiveform.fragment.ReceiveFormDetailFragment
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityReceiveFormBinding
 

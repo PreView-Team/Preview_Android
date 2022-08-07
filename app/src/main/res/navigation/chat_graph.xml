@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/chatRoomFragment"
-        android:name="preview.android.activity.management.chat.fragment.ChatRoomFragment"
+        android:name="preview.android.activity.management.mentorprofile.chat.fragment.ChatRoomFragment"
         android:label="ChatRoomFragment" >
         <action
             android:id="@+id/action_chatRoomFragment_to_chatFragment"
@@ -17,6 +17,6 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="preview.android.activity.management.chat.fragment.ChatFragment"
+        android:name="preview.android.activity.management.mentorprofile.chat.fragment.ChatFragment"
         android:label="ChatFragment" />
 </navigation>

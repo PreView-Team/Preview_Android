@@ -1,4 +1,4 @@
-package preview.android.activity.management.receiveform
+package preview.android.activity.management.mentorprofile.receiveform
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,22 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
-import preview.android.activity.api.dto.FormDetailResponse
 import preview.android.activity.api.dto.ReceiveFormDetailResponse
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
-import preview.android.data.AccountStore.token
 import preview.android.model.AlarmObject
-import preview.android.model.Message
 import preview.android.model.ReceiveFormThumbnail
-import preview.android.model.SendFormThumbnail
 import preview.android.repository.AlarmRepository
 import preview.android.repository.ChatRepository
 import preview.android.repository.FormRepository
-import preview.android.repository.MentorRepository
 import javax.inject.Inject
 
 @HiltViewModel

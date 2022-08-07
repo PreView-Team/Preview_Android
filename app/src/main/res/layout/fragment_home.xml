@@ -121,14 +121,24 @@
                 android:layout_marginTop="19dp">
 
                 <TextView
+                    android:id="@+id/tv_menteenickname"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/textView6"
                     style="@style/text_headline_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="프리 님에게 추천하는 "
+                    android:text=" 님에게 추천하는 "
                     android:textColor="@color/blue"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_menteenickname"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView

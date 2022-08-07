@@ -57,6 +57,7 @@ class WriteForm2ndFragment : BaseFragment<FragmentWriteForm2ndBinding, MentorInf
                 // 50자 이상 입력하라고 안내
             } else {
                 progressOn(progressDialog)
+                // TODO: 저장된 mentorInfoStore에 값 업데이트?
                 MentorInfoStore.updateForm(
                     MentorInfoStore.form.value!!.copy(
                         contents = binding.etContents.text.toString(),
