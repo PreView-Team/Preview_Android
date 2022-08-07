@@ -14,5 +14,7 @@ data class LoginResponse(
 )
 
 data class EditUserData(
-    @SerializedName(value = "jobDtoSet")  var jobDtoSet: List<String>
+    @SerializedName(value = "jobDtoSet")  var jobDtoSet: List<String>,
+    @SerializedName(value = "nickname")  var nickname: String
+
 )

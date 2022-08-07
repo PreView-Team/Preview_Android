@@ -11,7 +11,6 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/btn_kakao_login.xml" value="0.194" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/card_drop_shadow.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/cardview_shadow.xml" value="0.1295" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/check_overlap_icon.xml" value="0.2235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/circle_image_background.xml" value="0.259" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/curved_light_blue_background_10.xml" value="0.224" />
@@ -83,24 +82,21 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentor_info.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentoring.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_new_mentor.xml" value="0.176" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recieve_from_detail.xml" value="0.11041666666666666" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_send_form_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form.xml" value="0.1" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_1st.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.2" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_alarm.xml" value="0.171875" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_best_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat.xml" value="0.11145833333333334" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_me.xml" value="0.11145833333333334" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.536" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.176" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.4242105263157895" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_form_thumbnail.xml" value="0.4" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_jobnames.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_post.xml" value="0.264" />
@@ -136,7 +132,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/activity_mentor_info.xml" value="0.23728088926891835" />
         <entry key="app/src/main/res/layout/activity_mentor_profile.xml" value="0.23728088926891835" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22269592285156245" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.15018615722656245" />
         <entry key="app/src/main/res/layout/activity_sample.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/certify_mentor_dialog.xml" value="0.23728088926891835" />
         <entry key="app/src/main/res/layout/fragment_board.xml" value="0.2545289855072464" />
@@ -148,7 +144,12 @@
         <entry key="app/src/main/res/layout/fragment_info_input.xml" value="0.21448822021484373" />
         <entry key="app/src/main/res/layout/fragment_interview_data.xml" value="0.2545289855072464" />
         <entry key="app/src/main/res/layout/fragment_interview_review.xml" value="0.2545289855072464" />
+        <entry key="app/src/main/res/layout/fragment_mentor_info.xml" value="0.1778537836682343" />
         <entry key="app/src/main/res/layout/fragment_mentoring.xml" value="0.2545289855072464" />
+        <entry key="app/src/main/res/layout/fragment_new_mentor.xml" value="0.1778537836682343" />
+        <entry key="app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.1778537836682343" />
+        <entry key="app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.1778537836682343" />
+        <entry key="app/src/main/res/layout/fragment_send_form_detail.xml" value="0.1778537836682343" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/fragment_write_form_2nd.xml" value="0.11596322607605516" />
         <entry key="app/src/main/res/layout/item_best_post.xml" value="0.2545289855072464" />

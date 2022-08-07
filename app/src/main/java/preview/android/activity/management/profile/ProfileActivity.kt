@@ -2,6 +2,7 @@ package preview.android.activity.management.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, LoginViewModel>(
 ) {
 
     override val vm: LoginViewModel by viewModels()
+    private val jobList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,38 +40,33 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, LoginViewModel>(
             }
         }
 
-        //닉네임 수정 완료 버튼 클릭 시 서버 연동
-        binding.btnApplyNickname.setOnClickListener {
-            vm.editNickname(AccountStore.token.value!!,EditNickname(binding.etNickname.text.toString()))
-        }
-
-        vm.editNicknameResponseResult.observe(this){ result ->
+        vm.editUserResponseResult.observe(this){ result ->
             when (result) {
-                200 -> {
-                    Toast.makeText(this, "닉네임 수정 완료", Toast.LENGTH_SHORT).show()
+                "200" -> {
+                    Toast.makeText(this, "프로필 수정 완료", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    Toast.makeText(this, "닉네임 수정 불가", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "프로필 수정 불가", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        val jobList = mutableListOf<String>()
-        if (binding.checkDesign.isChecked) {
-            jobList.add(binding.checkDesign.text.toString())
-        }
-        if (binding.checkMarketing.isChecked) {
-            jobList.add(binding.checkMarketing.text.toString())
-        }
-        if (binding.checkPm.isChecked) {
-            jobList.add(binding.checkPm.text.toString())
-        }
-        if (binding.checkProgramming.isChecked) {
-            jobList.add(binding.checkProgramming.text.toString())
-        }
 
         binding.btnApplyJobs.setOnClickListener {
-            vm.editUser(AccountStore.token.value!!, EditUserData(jobList))
+            if (binding.checkDesign.isChecked) {
+                jobList.add(binding.checkDesign.text.toString())
+            }
+            if (binding.checkMarketing.isChecked) {
+                jobList.add(binding.checkMarketing.text.toString())
+            }
+            if (binding.checkPm.isChecked) {
+                jobList.add(binding.checkPm.text.toString())
+            }
+            if (binding.checkProgramming.isChecked) {
+                jobList.add(binding.checkProgramming.text.toString())
+            }
+
+            vm.editUser(AccountStore.token.value!!, EditUserData(jobList, binding.etNickname.text.toString()))
         }
 
     }
