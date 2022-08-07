@@ -148,22 +148,11 @@ class LoginRepository(private val api: AuthService) {
         close()
     }
 
-    suspend fun editNickname(token: String, nickname: EditNickname) = callbackFlow {
 
-        val request = api.editNickname("Bearer $token", nickname)
+    suspend fun editUser(token: String, editUser: EditUserData) = callbackFlow {
+        val request = api.editUser("Bearer $token", editUser)
         if (request.isSuccessful && request.body() != null) {
-            trySend(request.code())
-        } else {
-            trySend(request.code())
-        }
-
-        close()
-    }
-
-    suspend fun editUser(token: String, job: EditUserData) = callbackFlow {
-        val request = api.editUser("Bearer $token", job)
-        if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!.result)
+            trySend(request.code().toString())
         } else {
             trySend(request.errorBody()!!.string())
         }

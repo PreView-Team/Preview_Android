@@ -44,8 +44,8 @@ class LoginViewModel @Inject constructor(
     private val _nicknameResponseResult = MutableLiveData<String>()
     val nicknameResponseResult: LiveData<String> get() = _nicknameResponseResult
 
-    private val _editNicknameResponseResult = MutableLiveData<Int>()
-    val editNicknameResponseResult: LiveData<Int> get() = _editNicknameResponseResult
+    private val _editUserResponseResult = MutableLiveData<String>()
+    val editUserResponseResult: LiveData<String> get() = _editUserResponseResult
 
     private val _signOutResponseResult = MutableLiveData<Int>()
     val signOutResponseResult: LiveData<Int> get() = _signOutResponseResult
@@ -104,8 +104,8 @@ class LoginViewModel @Inject constructor(
         _nicknameResponseResult.value = result
     }
 
-    fun setEditNicknameResponseResult(result: Int) {
-        _editNicknameResponseResult.value = result
+    fun setEditUserResponseResult(result: String) {
+        _editUserResponseResult.value = result
     }
 
     fun setSignOutResponseResult(result: Int) {
@@ -182,18 +182,12 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun editNickname(token: String, nickname: EditNickname) = viewModelScope.launch {
 
-        loginRepository.editNickname(token, nickname).collect { value ->
-            Log.e("NICKNAME EDIT", value.toString())
-            setEditNicknameResponseResult(value)
-        }
-    }
+    fun editUser(token: String, editUser: EditUserData) = viewModelScope.launch {
 
-    fun editUser(token: String, job: EditUserData) = viewModelScope.launch {
-
-        loginRepository.editUser(token, job).collect { value ->
+        loginRepository.editUser(token, editUser).collect { value ->
             Log.e("USER EDIT", value)
+            setEditUserResponseResult(value)
         }
     }
 

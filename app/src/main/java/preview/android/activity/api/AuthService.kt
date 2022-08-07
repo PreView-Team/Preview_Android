@@ -16,17 +16,11 @@ interface AuthService {
     @GET("/api/user/nickname/{nickname}")
     suspend fun nickname(@Path("nickname") nickname: String): Response<NicknameResponse>
 
-    @PUT("/api/user/nickname")
-    suspend fun editNickname(
-        @Header("Authorization") token: String,
-        @Body nickname: EditNickname
-    ): Response<EditNicknameResponse>
-
 
     @PUT("/api/user")
     suspend fun editUser(
         @Header("Authorization") token: String,
-        @Body jobDtoSet: EditUserData
+        @Body editUser: EditUserData
     ): Response<EditNicknameResponse>
 
     @DELETE("/api/user")
