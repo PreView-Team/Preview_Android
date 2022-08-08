@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import preview.android.R
+import preview.android.data.AccountStore
 import preview.android.databinding.WriteDialogBinding
 import preview.android.model.MentorPost
 import preview.android.model.Writing
@@ -40,7 +41,7 @@ class WriteDialogFragment : DialogFragment() {
         binding.tbWrite.setOnMenuItemClickListener { menuItem ->
             vm.setWriting(
                 Writing(
-                    categoryName  = "디자인",
+                    categoryName  = AccountStore.mentorJob.value!!,
                     title = binding.etTitle.text.toString(),
                     contents = binding.etContents.text.toString()
                     // TODO : 직군 설정

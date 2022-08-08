@@ -6,7 +6,7 @@ import java.sql.Timestamp
 data class MentorPost(
     val postId: Int = 1,
     val nickname: String = "",
-    val category: String = "마케터",
+    val jobList: List<String> = listOf(),
     val title : String = "",
     val createdAt : String = "",
     val updatedAt : String = "",

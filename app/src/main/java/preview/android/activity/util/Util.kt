@@ -83,34 +83,6 @@ fun createBestPostList(): List<Post> {
     return list
 }
 
-fun createMentorList(): List<MentorPost> {
-    val list = arrayListOf<MentorPost>()
-
-    list.add(
-        MentorPost(
-            postId = 1,
-            nickname = "1번",
-            category = "마케터",
-            introduce = "소개 1번",
-            contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
-            like = true,
-            likeCount = 123,
-        )
-    )
-    list.add(
-        MentorPost(
-            postId = 2,
-            nickname = "2번",
-            category = "마케터",
-            introduce = "소개 2번",
-            contents = "내용 1번 내용 1번 내용 1번 내용 1번\n 내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번\n내용 1번 내용 1번 내용 1번 내용 1번",
-            like = true,
-            likeCount = 456,
-        )
-    )
-    return list
-}
-
 fun getFCMToken(): String {
     if (deviceToken == "") {
         var task =
@@ -218,3 +190,20 @@ fun getCurrentTime() : String{
     return format.format(curTime)
 }
 inline fun <reified T> DocumentSnapshot.toObjectNonNull(): T = toObject(T::class.java)!!
+
+fun checkCertifyProgressOn(progressDialog: AppCompatDialog) {
+    progressDialog.setCancelable(false)
+    progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    progressDialog.setContentView(R.layout.check_certify_dialog)
+    progressDialog.show()
+}
+
+fun checkCertifyProgressOff(progressDialog: AppCompatDialog) {
+    if (progressDialog != null && progressDialog.isShowing()) {
+        progressDialog.dismiss()
+    }
+}
+
+fun getJobList() : List<String>{
+    return listOf("개발","경영ㆍ비즈니스","마케팅","디자인")
+}

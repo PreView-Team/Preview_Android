@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.mentorinfo.MentorInfoViewModel
+import preview.android.activity.util.getJobList
 import preview.android.data.AccountStore
 import preview.android.data.MentorInfoStore
 import preview.android.databinding.FragmentWriteForm1stBinding
@@ -28,7 +29,7 @@ class WriteForm1stFragment : BaseFragment<FragmentWriteForm1stBinding, MentorInf
         val adapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, items)
         binding.tfArea.setAdapter(adapter)
 
-        val jobItems = listOf("마케터", "프로그래밍")
+        val jobItems = getJobList()
         val jobAdapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, jobItems)
         binding.tfJobnames.setAdapter(jobAdapter)
 

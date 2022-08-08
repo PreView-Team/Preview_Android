@@ -40,7 +40,7 @@ class SendFormAdapter(
             else{
                 binding.tvStatus.text = "거절"
             }
-            binding.layoutFormthumbnail.setOnClickListener {
+            binding.layoutFormThumbnail.setOnClickListener {
                 onClicked(sendFormThumbnail.formId)
             }
         }

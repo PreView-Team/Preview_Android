@@ -8,7 +8,8 @@ data class FormDetailResponse(
     val createTime : String = "",
     val name : String  = "",
     val phoneNumber : String = "",
-    val jobNames : List<JobName> = listOf(),
+    val jobNames : String= "",
     val status : String = "",
-    val contents : String = ""
+    val contents : String = "",
+    val local : String =""
 )

@@ -16,6 +16,7 @@ import preview.android.activity.util.ERROR_UNAUTHORIZED
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentInfoInputBinding
 import android.widget.ArrayAdapter
+import preview.android.activity.util.getJobList
 
 @AndroidEntryPoint
 class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>(
@@ -25,7 +26,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = listOf("1","2","3","4")
+        val items = getJobList()
         val adapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, items)
         binding.tfJobnames.setAdapter(adapter)
         binding.textInputLayoutNickname.setEndIconOnClickListener {
@@ -37,8 +38,8 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
 
             val account = vm.loadAccount().copy(
                 nickname = binding.etNickname.text.toString(),
-               // jobNames =
-            )
+                jobNames = listOf(binding.tfJobnames.text.toString())
+             )
             vm.signUp(account)
         }
 

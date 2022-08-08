@@ -30,17 +30,7 @@ class ReceiveFormAdapter(
         fun bind(receiveFormThumbnail: ReceiveFormThumbnail) {
             binding.receiveformthumbnail = receiveFormThumbnail
 
-            if (receiveFormThumbnail.status == "수락") {
-                binding.tvStatus.text = "수락"
-            }
-            else if(receiveFormThumbnail.status == "대기"){
-                binding.tvStatus.text = "대기"
-            }
-            else{
-                binding.tvStatus.text = "거절"
-            }
-
-            binding.layoutReceiveformthumbnail.setOnClickListener {
+            binding.layoutReceiveFormThumbnail.setOnClickListener {
                 onClicked(receiveFormThumbnail.formId)
             }
         }

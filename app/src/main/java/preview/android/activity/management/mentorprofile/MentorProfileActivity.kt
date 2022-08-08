@@ -8,7 +8,9 @@ import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.main.MainViewModel
 import preview.android.activity.management.mentorprofile.chat.ChatActivity
+import preview.android.activity.management.mentorprofile.editprofile.EditProfileActivity
 import preview.android.activity.management.mentorprofile.receiveform.ReceiveFormActivity
+import preview.android.activity.management.mentorprofile.writepost.WritePostActivity
 import preview.android.databinding.ActivityMentorProfileBinding
 
 class MentorProfileActivity : BaseActivity<ActivityMentorProfileBinding, MainViewModel>(
@@ -17,7 +19,8 @@ class MentorProfileActivity : BaseActivity<ActivityMentorProfileBinding, MainVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.layoutProfile.setOnClickListener {
-
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
         }
         binding.layoutReceiveForm.setOnClickListener {
             val intent = Intent(this, ReceiveFormActivity::class.java)
@@ -28,8 +31,9 @@ class MentorProfileActivity : BaseActivity<ActivityMentorProfileBinding, MainVie
             startActivity(intent)
         }
 
-        binding.layoutWriteForm.setOnClickListener {
-
+        binding.layoutWritePosts.setOnClickListener {
+            val intent = Intent(this, WritePostActivity::class.java)
+            startActivity(intent)
         }
 
 

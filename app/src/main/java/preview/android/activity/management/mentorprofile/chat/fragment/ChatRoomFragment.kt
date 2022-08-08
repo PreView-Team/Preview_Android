@@ -29,7 +29,7 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         vm.readChatRoomList(AccountStore.mentorNickname.value!!)
 
         val layoutManager = LinearLayoutManager(requireContext())
-        layoutManager.reverseLayout =true
+        layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
         binding.rvChatRoom.layoutManager = layoutManager
         binding.rvChatRoom.run {
@@ -62,21 +62,22 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
         }
 
         vm.messageMap.observe(viewLifecycleOwner) { mapList ->
-            val chatRoomList = mutableListOf<ChatRoom>()
-            mapList.forEach { map ->
-                map.forEach { nickname, list ->
-                    chatRoomList.add(
-                        ChatRoom(
-                            nickname = nickname,
-                            chatList = list,
-                            date = list.last().time
+            if (mapList.isNotEmpty()) {
+                val chatRoomList = mutableListOf<ChatRoom>()
+                mapList.forEach { map ->
+                    map.forEach { nickname, list ->
+                        chatRoomList.add(
+                            ChatRoom(
+                                nickname = nickname,
+                                chatList = list,
+                                date = ""+list.last().time
+                            )
                         )
-                    )
+                    }
                 }
+                (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(chatRoomList.toMutableList())
+
             }
-            (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(chatRoomList.toMutableList())
-
-
         }
 
 

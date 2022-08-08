@@ -152,20 +152,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun editPost(token: String, postId: Int, writing: Writing) = viewModelScope.launch {
-        mentorRepository.editPost(token, postId, writing).collect { response ->
-            Log.e("editPost", response.toString())
-
-        }
-    }
-
-    fun deletePost(token: String, postId: Int) = viewModelScope.launch {
-        mentorRepository.deletePost(token, postId).collect { response ->
-            Log.e("deletePost", response.toString())
-
-        }
-    }
-
     fun readAlarmList(myNickname: String) = viewModelScope.launch {
         runCatching {
             alarmRepository.readAlarmList(myNickname)
@@ -189,12 +175,6 @@ class MainViewModel @Inject constructor(
             }
         }.onFailure {
 
-        }
-    }
-
-    fun editMentorInfo() = viewModelScope.launch {
-        mentorRepository.editMentorInfo(AccountStore.token.value!!).collect {
-            Log.e("editMentorInfo", it.toString())
         }
     }
 }

@@ -65,8 +65,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         }
 
         binding.btnWrite.setOnClickListener {
+            if(AccountStore.isMentored.value!!){
+                showDialogFragment(this, WriteDialogFragment())
+            }
+            else{
+                checkCertifyProgressOn(progressDialog)
+            }
             Log.e("write", "!!")
-            showDialogFragment(this, WriteDialogFragment())
         }
         binding.btnCheckMentor.setOnClickListener {
             showDialogFragment(this, CertifyMentorDialogFragment())
@@ -110,5 +115,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     private fun isVerifyMentor(): Boolean {
         // 인증여부 확인
         return true
+    }
+
+    fun checkCertifyOkButtonOnClick(view: View) {
+        checkCertifyProgressOff(progressDialog)
     }
 }

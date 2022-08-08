@@ -22,21 +22,25 @@ class RecommendMentorFragment : BaseFragment<FragmentRecommendMentorBinding, Mai
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.updateFragmentState(MainViewModel.FragmentState.recommendMentor)
-        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "디자인")
+        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "개발")
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
+                        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "개발")
                     }
 
                     1 -> {
+                        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "경영ㆍ비즈니스")
                     }
 
                     2 -> {
+                        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "개발")
                     }
 
                     3 -> {
+                        vm.getCategoryRecommendMentorPostList(AccountStore.token.value!!, "개발")
                     }
                 }
             }

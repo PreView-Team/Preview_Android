@@ -115,4 +115,18 @@ class ChatRepository {
             }
             close()
         }
+
+    fun editChatRoom(originNickname : String, changeNickname : String) = callbackFlow {
+        val originRef = database.getReference(originNickname)
+        val changeRef = database.getReference(changeNickname)
+
+        originRef.get().addOnSuccessListener { datasnapshot ->
+            changeRef.setValue(datasnapshot)
+            trySend("success")
+        }.addOnFailureListener {
+            trySend("fail")
+        }
+        close()
+
+    }
 }

@@ -8,11 +8,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_receive_form"
+        android:id="@+id/layout_write_posts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.management.mentorprofile.receiveform.ReceiveFormActivity">
-
+        >
         <TextView
             android:id="@+id/textView50"
             style="@style/text_middle_semibold"
@@ -28,7 +27,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="16dp"
-            android:id="@+id/rv_receive_form"
+            android:id="@+id/rv_write_form"
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:layout_height="0dp"

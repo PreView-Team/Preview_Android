@@ -44,82 +44,92 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
             val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
             vm.readMessageList(mentorNickname, AccountStore.menteeNickname.value!!)
         }
-        binding.layoutSend.setOnClickListener {
-            if (binding.etMessage.text.toString() != "") {
+        val onSendClickListener = object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                if(view == binding.layoutSend || view == binding.btnSend){
+                    if (binding.etMessage.text.toString() != "") {
 
-                Log.e("mentorToken!!", vm.messageList.value.get(0).mentorToken)
-                Log.e("menteeToken!!", vm.messageList.value.get(0).menteeToken)
-                if (chatRoom.nickname.contains("멘티")) {
-                    Log.e("i am mentor", "!!")
-                    val menteeNickname = chatRoom.nickname.replace(" 멘티", "")
-                    val message = Message(
-                        nickname = AccountStore.mentorNickname.value!!,
-                        message = binding.etMessage.text.toString(),
-                        count = vm.messageList.value.size,
-                        time = getCurrentTime()
-                    )
-                    vm.sendChat(
-                        AccountStore.mentorNickname.value!!,
-                        menteeNickname,
-                        message,
-                        vm.messageList.value.size
-                    )
+                        Log.e("mentorToken!!", vm.messageList.value.get(0).mentorToken)
+                        Log.e("menteeToken!!", vm.messageList.value.get(0).menteeToken)
+                        if (chatRoom.nickname.contains("멘티")) {
+                            Log.e("i am mentor", "!!")
+                            val menteeNickname = chatRoom.nickname.replace(" 멘티", "")
+                            val message = Message(
+                                nickname = AccountStore.mentorNickname.value!!,
+                                message = binding.etMessage.text.toString(),
+                                count = vm.messageList.value.size,
+                                time = getCurrentTime()
+                            )
+                            vm.sendChat(
+                                AccountStore.mentorNickname.value!!,
+                                menteeNickname,
+                                message,
+                                vm.messageList.value.size
+                            )
 
-                    // 알람
-                    vm.sendNotice(
-                        vm.messageList.value.get(0).menteeToken, //상대방 토큰으로
-                        AccountStore.mentorNickname.value!!, //내 이름으로 보냄
-                        binding.etMessage.text.toString()
-                    )
+                            // 알람
+                            vm.sendNotice(
+                                vm.messageList.value.get(0).menteeToken, //상대방 토큰으로
+                                AccountStore.mentorNickname.value!!, //내 이름으로 보냄
+                                binding.etMessage.text.toString()
+                            )
 
-                    val alarmList = mutableListOf<Alarm>()
-                    alarmList.add(
-                        Alarm(
-                            title = "${AccountStore.mentorNickname.value!!}님이 메시지를 보냈습니다.",
-                            content = "지금 확인하기",
-                            time = getCurrentTime()
-                        )
-                    )
-                    vm.addAlarm(menteeNickname, AlarmObject().copy(value = alarmList))
+                            val alarmList = mutableListOf<Alarm>()
+                            alarmList.add(
+                                Alarm(
+                                    title = "${AccountStore.mentorNickname.value!!}님이 메시지를 보냈습니다.",
+                                    content = "지금 확인하기",
+                                    time = getCurrentTime()
+                                )
+                            )
+                            vm.addAlarm(menteeNickname, AlarmObject().copy(value = alarmList))
 
-                } else {
-                    Log.e("i am mentor", "!!")
-                    val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
-                    val message = Message(
-                        nickname = AccountStore.menteeNickname.value!!,
-                        message = binding.etMessage.text.toString(),
-                        count = vm.messageList.value.size,
-                        time = getCurrentTime()
-                    )
-                    vm.sendChat(
-                        mentorNickname,
-                        AccountStore.menteeNickname.value!!,
-                        message,
-                        vm.messageList.value.size
-                    )
+                        } else {
+                            Log.e("i am mentor", "!!")
+                            val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
+                            val message = Message(
+                                nickname = AccountStore.menteeNickname.value!!,
+                                message = binding.etMessage.text.toString(),
+                                count = vm.messageList.value.size,
+                                time = getCurrentTime()
+                            )
+                            vm.sendChat(
+                                mentorNickname,
+                                AccountStore.menteeNickname.value!!,
+                                message,
+                                vm.messageList.value.size
+                            )
 
-                    // 알람은 상대방꺼로
-                    vm.sendNotice(
-                        vm.messageList.value.get(0).mentorToken, // 상대방 토큰
-                        AccountStore.menteeNickname.value!!, // 내 이름
-                        binding.etMessage.text.toString()
-                    )
+                            // 알람은 상대방꺼로
+                            vm.sendNotice(
+                                vm.messageList.value.get(0).mentorToken, // 상대방 토큰
+                                AccountStore.menteeNickname.value!!, // 내 이름
+                                binding.etMessage.text.toString()
+                            )
 
-                    val alarmList = mutableListOf<Alarm>()
-                    alarmList.add(
-                        Alarm(
-                            title = "${AccountStore.menteeNickname.value!!}님이 메시지를 보냈습니다.",
-                            content = "지금 확인하기",
-                            time = getCurrentTime()
-                        )
-                    )
-                    vm.addAlarm(mentorNickname, AlarmObject().copy(value = alarmList))
+                            val alarmList = mutableListOf<Alarm>()
+                            alarmList.add(
+                                Alarm(
+                                    title = "${AccountStore.menteeNickname.value!!}님이 메시지를 보냈습니다.",
+                                    content = "지금 확인하기",
+                                    time = getCurrentTime()
+                                )
+                            )
+                            vm.addAlarm(mentorNickname, AlarmObject().copy(value = alarmList))
 
 
+                        }
+                    }
+                    binding.etMessage.setText("")
                 }
+
             }
 
         }
+        binding.layoutSend.setOnClickListener(onSendClickListener)
+        binding.btnSend.setOnClickListener(onSendClickListener)
+
+
         lifecycleScope.launch {
             vm.messageList.collect { list ->
                 (binding.rvChat.adapter as ChatAdapter).submitList(list.toMutableList())

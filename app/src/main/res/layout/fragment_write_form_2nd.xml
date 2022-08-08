@@ -83,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     android:gravity="start"
-                    android:hint="이름 입력"
+                    android:hint="내용 입력"
                     android:maxLength="500"
                     android:padding="8dp"
                     android:textColor="@color/black" />

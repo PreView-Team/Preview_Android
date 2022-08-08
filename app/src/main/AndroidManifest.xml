@@ -13,16 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name=".activity.management.mentorprofile.editprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.management.mentorprofile.writepost.WritePostActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.alarm.AlarmActivity"
             android:exported="false" />
         <activity
             android:name=".activity.review.ReviewActivity"
             android:exported="false" />
         <activity
-            android:name="preview.android.activity.management.mentorprofile.chat.ChatActivity"
+            android:name=".activity.management.mentorprofile.chat.ChatActivity"
             android:exported="false" />
         <activity
-            android:name="preview.android.activity.management.mentorprofile.receiveform.ReceiveFormActivity"
+            android:name=".activity.management.mentorprofile.receiveform.ReceiveFormActivity"
             android:exported="false" />
         <activity
             android:name=".activity.management.sendform.SendFormActivity"

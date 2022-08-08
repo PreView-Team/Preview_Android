@@ -85,6 +85,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         vm.getUserInfoResponseResult.observe(this) { getUserInfoResponse ->
 
             AccountStore.updateMenteeNickname(getUserInfoResponse.nickname)
+            AccountStore.updateMenteeJob(getUserInfoResponse.jobNames.get(0))
             if(getUserInfoResponse.isMentored) {
                 AccountStore.updateIsMentored(getUserInfoResponse.isMentored)
                 vm.getMentorInfo(AccountStore.token.value!!)
@@ -108,6 +109,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
         }
         vm.getMentorInfoResponseResult.observe(this){
             AccountStore.updateMentorNickname(it.nickname)
+            AccountStore.updateMentorJob(it.jobNames.get(0))
         }
     }
 }

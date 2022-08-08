@@ -3,7 +3,6 @@ package preview.android.repository
 import android.util.Log
 import kotlinx.coroutines.flow.callbackFlow
 import preview.android.activity.api.MentorService
-import preview.android.activity.util.createMentorList
 import preview.android.model.*
 
 class MentorRepository(private val api: MentorService) {
@@ -105,8 +104,8 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun editPost(token: String, postId: Int, writing: Writing) = callbackFlow {
-        val request = api.editPost("Bearer $token", EditPost(postId, "test", "testcontents"))
+    suspend fun editPost(token: String, editPost : EditPost) = callbackFlow {
+        val request = api.editPost("Bearer $token", editPost)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
@@ -138,12 +137,34 @@ class MentorRepository(private val api: MentorService) {
         close()
     }
 
-    suspend fun editMentorInfo(token: String) = callbackFlow {
-        val request = api.editMentorInfo("Bearer $token", EditMentorInfo(nickname = "30mentorNickname"))
+    suspend fun editMentorInfo(token: String, editMentorInfo: EditMentorInfo) = callbackFlow {
+        val request = api.editMentorInfo("Bearer $token", editMentorInfo)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
             Log.e("getMentorInfo ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun getWritePosts(token: String) = callbackFlow {
+        val request = api.getWritePosts("Bearer $token")
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("getMentorInfo ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun getWritePostDetail(token: String, postId: Int) = callbackFlow {
+        val request = api.getWritePostDetail("Bearer $token", postId)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("getWritePostDetail ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()

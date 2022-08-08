@@ -109,7 +109,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="10dp"
-            android:id="@+id/layout_write_form"
+            android:id="@+id/layout_write_posts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

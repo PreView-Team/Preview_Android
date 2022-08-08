@@ -12,7 +12,9 @@ import preview.android.activity.api.dto.*
 import preview.android.data.AccountStore
 import preview.android.model.Account
 import preview.android.model.AlarmObject
+import preview.android.model.EditMentorInfo
 import preview.android.repository.AlarmRepository
+import preview.android.repository.ChatRepository
 import preview.android.repository.LoginRepository
 import preview.android.repository.MentorRepository
 import javax.inject.Inject
@@ -21,7 +23,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
     private val alarmRepository: AlarmRepository,
-    private val mentorRepository: MentorRepository
+    private val mentorRepository: MentorRepository,
+    private val chatRepository: ChatRepository
 ) : BaseViewModel() {
     private val _refreshToken = MutableLiveData<String>("")
     val refreshToken: LiveData<String> get() = _refreshToken
@@ -43,6 +46,9 @@ class LoginViewModel @Inject constructor(
 
     private val _nicknameResponseResult = MutableLiveData<String>()
     val nicknameResponseResult: LiveData<String> get() = _nicknameResponseResult
+
+    private val _mentorNicknameEditResult = MutableLiveData<String>()
+    val mentorNicknameEditResult: LiveData<String> get() = _mentorNicknameEditResult
 
     private val _editUserResponseResult = MutableLiveData<String>()
     val editUserResponseResult: LiveData<String> get() = _editUserResponseResult
@@ -122,6 +128,10 @@ class LoginViewModel @Inject constructor(
 
     fun setGetMentorInfoResponseResult(result : GetMentorInfoResponse){
         _getMentorInfoResponseResult.value = result
+    }
+
+    fun setMentorNicknameEditResult(result : String){
+        _mentorNicknameEditResult.value = result
     }
 
     fun loginKaKao(context: Context) = viewModelScope.launch {
@@ -226,6 +236,17 @@ class LoginViewModel @Inject constructor(
             val getMentorInfoResponse = it as GetMentorInfoResponse
             Log.e("getMentorInfo", it.toString())
             setGetMentorInfoResponseResult(getMentorInfoResponse)
+        }
+    }
+    fun editMentorInfo(token:String, editMentorInfo: EditMentorInfo) = viewModelScope.launch {
+        mentorRepository.editMentorInfo(token, editMentorInfo).collect { value ->
+            setMentorNicknameEditResult(value.toString())
+        }
+    }
+
+    fun editChatRoom(originName : String, changeName : String) = viewModelScope.launch {
+        chatRepository.editChatRoom(originName, changeName).collect { value ->
+            Log.e("EDITCHAGE ROOM", value.toString())
         }
     }
 }

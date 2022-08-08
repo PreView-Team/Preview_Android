@@ -40,7 +40,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="11dp"
                 android:maxLines="2"
-                android:text="1234567 1234567 \n 1234567 1234567\n123123"
+                android:text="프리뷰에 참여하게 된\n새로운 멘토분들을 다양한 직군별로 만나보세요!"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -64,22 +64,22 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:text="개발" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2" />
+                android:text="경영ㆍ비즈니스" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3" />
+                android:text="마케팅" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4" />
+                android:text="디자인" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
