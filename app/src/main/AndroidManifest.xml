@@ -13,6 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
+            android:name=".activity.management.menteechat.MenteeChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.management.signout.SignoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.management.mentorprofile.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
@@ -64,13 +79,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.login.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
 
         <service
             android:name=".activity.util.PreviewFirebaseMessagingService"

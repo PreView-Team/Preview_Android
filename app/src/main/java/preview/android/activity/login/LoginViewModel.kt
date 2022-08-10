@@ -187,8 +187,8 @@ class LoginViewModel @Inject constructor(
     fun checkNickname(nickname: String) = viewModelScope.launch {
 
         loginRepository.checkNickname(nickname).collect { value ->
-            Log.e("NICKNAME CHECK", value.toString())
-            setNicknameResponseResult(value.toString())
+            Log.e("NICKNAME CHECK", value)
+            setNicknameResponseResult(value)
         }
     }
 

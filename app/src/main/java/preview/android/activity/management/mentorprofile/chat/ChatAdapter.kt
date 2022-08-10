@@ -1,18 +1,17 @@
 package preview.android.activity.management.mentorprofile.chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import preview.android.data.AccountStore
-import preview.android.databinding.ItemChatAdminBinding
-import preview.android.databinding.ItemChatMenteeBinding
-import preview.android.databinding.ItemChatMentorBinding
-import preview.android.model.MentorPost
+import preview.android.databinding.*
 import preview.android.model.Message
 
 class ChatAdapter(
+    private val onAcceptClicked: (Message) -> Unit,
 ) : ListAdapter<Message, RecyclerView.ViewHolder>(diffUtil) {
 
     private var isMentored = false
@@ -21,15 +20,20 @@ class ChatAdapter(
         if (currentList[position].nickname == "admin") {
             return ADMIN_CHAT
         }
+
         if (isMentored) {
-            if (currentList[position].nickname == AccountStore.mentorNickname.value) { // TODO: mentornickname과 같을때 mychat 처리 // TODO: 멘토/멘티 뭐로 설정해야하는지 확인
+            if (currentList[position].nickname == AccountStore.mentorNickname.value) {
                 return MY_CHAT
+            } else if (currentList[position].nickname == "calendar") {
+                return CALENDAR_MY_CHAT
             } else {
                 return OTHER_CHAT
             }
         } else {
-            if (currentList[position].nickname == AccountStore.menteeNickname.value) { // TODO: mentornickname과 같을때 mychat 처리 // TODO: 멘토/멘티 뭐로 설정해야하는지 확인
+            if (currentList[position].nickname == AccountStore.menteeNickname.value) {
                 return MY_CHAT
+            } else if (currentList[position].nickname == "calendar") {
+                return CALENDAR_OTHER_CHAT
             } else {
                 return OTHER_CHAT
             }
@@ -50,9 +54,25 @@ class ChatAdapter(
             MenteeViewHolder(
                 ItemChatMenteeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
-        } else {
+        } else if (viewType == ADMIN_CHAT) {
             AdminViewHolder(
                 ItemChatAdminBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
+        } else if (viewType == CALENDAR_MY_CHAT) {
+            CalendarMentorViewHolder(
+                ItemChatCalendarMentorBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        } else {
+            CalendarMenteeViewHolder(
+                ItemChatCalendarMenteeBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                ), onAcceptClicked
             )
         }
     }
@@ -62,8 +82,12 @@ class ChatAdapter(
             (holder as MentorViewHolder).bind(currentList[position])
         } else if (getItemViewType(position) == OTHER_CHAT) {
             (holder as MenteeViewHolder).bind(currentList[position])
-        } else {
+        } else if (getItemViewType(position) == ADMIN_CHAT) {
             (holder as AdminViewHolder).bind(currentList[position])
+        } else if (getItemViewType(position) == CALENDAR_MY_CHAT) {
+            (holder as CalendarMentorViewHolder).bind(currentList[position])
+        } else if (getItemViewType(position) == CALENDAR_OTHER_CHAT) {
+            (holder as CalendarMenteeViewHolder).bind(currentList[position])
         }
     }
 
@@ -94,6 +118,40 @@ class ChatAdapter(
         }
     }
 
+    class CalendarMenteeViewHolder(
+        private val binding: ItemChatCalendarMenteeBinding,
+        private val onAcceptClicked: (Message) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: Message) {
+            val value = message.message
+            val dateSplit = value.split("-")[0]
+            val timeSplit = value.split("-")[1]
+            val date = dateSplit.split("날짜")[1]
+            val time = timeSplit.split("시간")[1]
+            binding.tvDate.text = date
+            binding.tvTime.text = time
+            binding.btnAccept.setOnClickListener {
+                onAcceptClicked(message)
+                Log.e("ACCEP!", "!")
+            }
+        }
+    }
+
+    class CalendarMentorViewHolder(
+        private val binding: ItemChatCalendarMentorBinding,
+
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: Message) {
+            val value = message.message
+            val dateSplit = value.split("-")[0]
+            val timeSplit = value.split("-")[1]
+            val date = dateSplit.split("날짜")[1]
+            val time = timeSplit.split("시간")[1]
+            binding.tvDate.text = date
+            binding.tvTime.text = time
+        }
+    }
+
     private companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Message>() {
             override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
@@ -108,5 +166,7 @@ class ChatAdapter(
         private const val MY_CHAT = 1
         private const val OTHER_CHAT = 2
         private const val ADMIN_CHAT = 3
+        private const val CALENDAR_MY_CHAT = 4
+        private const val CALENDAR_OTHER_CHAT = 5
     }
 }

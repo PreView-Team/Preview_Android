@@ -1,27 +1,31 @@
-package preview.android.activity.login
+package preview.android.activity.splash
 
-import android.content.ContentValues.TAG
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
+import preview.android.activity.login.CompleteSignUpFragment
+import preview.android.activity.login.InfoInputFragment
+import preview.android.activity.login.LoginFragment
+import preview.android.activity.login.LoginViewModel
 import preview.android.activity.main.MainActivity
 import preview.android.activity.util.ERROR_CODE_400
 import preview.android.activity.util.ERROR_UNAUTHORIZED
-import preview.android.activity.util.deviceToken
+import preview.android.activity.util.changeWordColor
 import preview.android.activity.util.getFCMToken
 import preview.android.data.AccountStore
-import preview.android.databinding.ActivityLoginBinding
+import preview.android.databinding.ActivitySplashBinding
 import preview.android.model.Account
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
-    R.layout.activity_login
+class SplashActivity : BaseActivity<ActivitySplashBinding, LoginViewModel>(
+    R.layout.activity_splash
 ) {
 
     override val vm: LoginViewModel by viewModels()
@@ -29,15 +33,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var keyHash = Utility.getKeyHash(this)
-        Log.e(TAG, "해시 키 값 : ${keyHash}")
+        val uiOptions = window.decorView.systemUiVisibility
+        var newUiOptions = uiOptions
+        val isImmersiveModeEnabled =
+            uiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY == uiOptions
+        newUiOptions = newUiOptions xor View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        newUiOptions = newUiOptions xor View.SYSTEM_UI_FLAG_FULLSCREEN
+        newUiOptions = newUiOptions xor View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility = newUiOptions
 
+        binding.tvDescription.text = changeWordColor(binding.tvDescription, "쉬운 면접", "point")
 
         AccountStore.updateFcmToken(getFCMToken())
 
-
-
-        // 로그인 여부 체크는 splash에서 진행
         val pref = getSharedPreferences("loginAccount", MODE_PRIVATE)
 
         val savedKakaoAccessToken = pref.getString("kakaoAccessToken", "").toString()
@@ -53,29 +61,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
 
         if (savedKakaoAccessToken.equals("")) {
             Log.e("SharedPreferences", "저장 안됨")
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.layout_splash, LoginFragment()).commit()
         } else {
             Log.e("SPF", "저장 되어 있음 $savedKakaoAccessToken $savedNickname $savedJobs ")
             vm.setKakaoAccount(Account(savedKakaoAccessToken, savedNickname, savedJobs))
         }
-
-        binding.btnKakao.setOnClickListener {
-            vm.loginKaKao(this)
-        }
-
         vm.kakaoAccount.observe(this) { kakaoAccount ->
             vm.loginToServer(kakaoAccount)
         }
-
         vm.responseResult.observe(this) { responseResult ->
             Log.e("RESPONSE RESULT ", "token: " + responseResult)
 
             AccountStore.updateToken(responseResult)
             if (responseResult == ERROR_CODE_400) {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.layout_login, InfoInputFragment()).commit()
+                    .replace(R.id.layout_splash, InfoInputFragment()).commit()
             } else if (responseResult == ERROR_UNAUTHORIZED) {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.layout_login, InfoInputFragment()).commit()
+                    .replace(R.id.layout_splash, InfoInputFragment()).commit()
             } else {
                 vm.getUserDetail(responseResult)
             }
@@ -86,7 +90,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
 
             AccountStore.updateMenteeNickname(getUserInfoResponse.nickname)
             AccountStore.updateMenteeJob(getUserInfoResponse.jobNames.get(0))
-            if(getUserInfoResponse.isMentored) {
+            if (getUserInfoResponse.isMentored) {
                 AccountStore.updateIsMentored(getUserInfoResponse.isMentored)
                 vm.getMentorInfo(AccountStore.token.value!!)
             }
@@ -97,19 +101,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(
             edit.putString("nickname", vm.kakaoAccount.value!!.nickname)
             edit.putStringSet("job", set)
             edit.commit()
-            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.layout_login)
-            if (fragment is InfoInputFragment) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
-            } else {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.layout_login, InfoInputFragment()).commit()
-                startActivity(Intent(this, MainActivity::class.java))
-            }
+            startActivity(Intent(this, MainActivity::class.java))
+
         }
-        vm.getMentorInfoResponseResult.observe(this){
+        vm.getMentorInfoResponseResult.observe(this)
+        {
             AccountStore.updateMentorNickname(it.nickname)
             AccountStore.updateMentorJob(it.jobNames.get(0))
         }
     }
+
 }

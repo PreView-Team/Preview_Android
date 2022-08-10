@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.util.MutableListLiveData
@@ -89,7 +90,7 @@ class ChatViewModel @Inject constructor(
 
     fun readChatList(mentorNickname: String, menteeNickname: String) = viewModelScope.launch {
         chatRepository.readChat(mentorNickname, menteeNickname).collect { list ->
-            //Log.e("readChatList?", list.toString())
+            Log.e("readChatList?", list.toString())
             val map = mutableMapOf<String, List<Message>>()
             if (mentorNickname == AccountStore.mentorNickname.value) {
                 map.put(menteeNickname + " 멘티", list)
@@ -115,12 +116,12 @@ class ChatViewModel @Inject constructor(
                 map.forEach { nickname, list ->
                     mapChatRoom = ChatRoom(nickname = nickname, chatList = list)
                 }
-                mentorChatRoomMap.forEach{ nickname , list ->
+                mentorChatRoomMap.forEach { nickname, list ->
                     mentorChatRoom = ChatRoom(nickname = nickname, chatList = list)
                 }
 
                 // 사이즈 비교
-                if(mapChatRoom.chatList.size >= mentorChatRoom.chatList.size){
+                if (mapChatRoom.chatList.size >= mentorChatRoom.chatList.size) {
                     _messageMap.add(map)
                     _messageMap.remove(mentorChatRoomMap)
                     isFiltered = true
@@ -129,7 +130,7 @@ class ChatViewModel @Inject constructor(
                 Log.e("size 2", mentorChatRoom.chatList.size.toString())
             }
         }
-        if(!isFiltered){
+        if (!isFiltered) {
             addMessageMap(map)
         }
     }
@@ -147,15 +148,16 @@ class ChatViewModel @Inject constructor(
             }
         }
 
-    fun sendNotice(token: String, myNickname: String, contents : String) = viewModelScope.launch(Dispatchers.IO) {
-        runCatching {
-            alarmRepository.sendNotice(token, myNickname, contents)
-        }.onSuccess {
-            Log.e("sendNotice success", it.toString())
-        }.onFailure {
-            Log.e("sendNotice fail", it.toString())
+    fun sendNotice(token: String, myNickname: String, contents: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                alarmRepository.sendNotice(token, myNickname, contents)
+            }.onSuccess {
+                Log.e("sendNotice success", it.toString())
+            }.onFailure {
+                Log.e("sendNotice fail", it.toString())
+            }
         }
-    }
 
     fun addAlarm(otherNickname: String, alarmObject: AlarmObject) = viewModelScope.launch {
         runCatching {
@@ -177,10 +179,33 @@ class ChatViewModel @Inject constructor(
     }
 
     fun getSendForms(token: String) = viewModelScope.launch {
-        //Log.e("getSendForms","!!")
+        Log.e("getSendForms","!!")
         formRepository.getSendForms(token).collect { response ->
             updateSendFormThumbnailList(filtJsonArray(response as JsonArray))
         }
     }
 
+    fun createMentoringDate(
+        mentorNickname: String,
+        menteeNickname: String,
+        message: Message,
+        count: Int
+    ) = viewModelScope.launch {
+        chatRepository.createMentoringDate(mentorNickname, menteeNickname, message, count).collect {
+            //Log.e("response", it)
+        }
+    }
+
+    fun acceptMentoring(mentorNickname: String, menteeNickname: String, count: Int, date: String) =
+        viewModelScope.launch {
+            chatRepository.acceptMentoring(mentorNickname, menteeNickname, count, date).collect {
+                Log.e("acceptMentoring response", it)
+            }
+        }
+
+    fun sendEndMentoring(mentorNickname: String, menteeNickname: String, message: Message, count: Int) = viewModelScope.launch {
+        chatRepository.sendChat(mentorNickname, menteeNickname, message, count).collect{
+
+        }
+    }
 }

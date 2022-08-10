@@ -1,5 +1,6 @@
 package preview.android.activity.management.sendform.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,12 @@ import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.management.sendform.SendFormViewModel
+import preview.android.activity.review.ReviewActivity
+import preview.android.activity.util.getJobList
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentSendFormDetailBinding
 import preview.android.model.EditForm
+import preview.android.model.MentorPost
 
 
 class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendFormViewModel>(
@@ -27,7 +31,7 @@ class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendF
         binding.tfArea.setAdapter(adapter)
 
 
-        val jobItems = listOf("마케터", "프로그래밍")
+        val jobItems = getJobList()
         val jobAdapter = ArrayAdapter(requireContext(), R.layout.item_jobnames, jobItems)
         binding.tfJob.setAdapter(jobAdapter)
 
@@ -49,6 +53,19 @@ class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendF
                 phoneNumber = "010-9557-1081",
                 contents = "작성내용"
             ))
+        }
+
+        binding.btnReview.setOnClickListener {
+            val formDetail = binding.formdetailresponse!!
+            val mentorPost= MentorPost(
+                postId = formDetail.postId,
+                nickname = formDetail.mentorNickname,
+                jobList = listOf(formDetail.jobNames),
+                title = formDetail.name,
+            )
+            val intent = Intent(requireContext(), ReviewActivity::class.java)
+            intent.putExtra("mentorInfo", mentorPost)
+            startActivity(intent)
         }
 
         vm.formDetail.observe(viewLifecycleOwner) { formDetailResponse ->

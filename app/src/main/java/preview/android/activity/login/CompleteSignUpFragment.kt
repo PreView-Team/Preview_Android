@@ -21,7 +21,7 @@ class CompleteSignUpFragment : BaseFragment<FragmentCompleteSignUpBinding, Login
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm.createAlarmList(AccountStore.menteeNickname.value!!) // TODO: 멘티/멘토 둘중에 알림 뭐로보내는지 확인
+        vm.createAlarmList(AccountStore.menteeNickname.value!!)
 
         binding.nickname = AccountStore.menteeNickname.value
         binding.btnGoHome.setOnClickListener {

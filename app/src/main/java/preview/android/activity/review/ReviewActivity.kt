@@ -22,8 +22,10 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>(
         val mentorPost = intent.getSerializableExtra("mentorInfo") as MentorPost
         super.onCreate(savedInstanceState)
 
+        binding.mentorpost = mentorPost
+
         binding.btnSubmit.setOnClickListener {
-            vm.createReview(AccountStore.token.value!!, mentorPost.postId, Review())
+            vm.createReview(AccountStore.token.value!!, mentorPost.postId, Review(nickname = AccountStore.menteeNickname.value!!,grade = binding.ratingBar.numStars, contents = binding.etContents.text.toString()))
         }
 
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, b ->

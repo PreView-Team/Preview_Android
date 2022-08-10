@@ -1,6 +1,7 @@
 package preview.android.activity.util
 
 import android.animation.ObjectAnimator
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
@@ -17,6 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.messaging.FirebaseMessaging
@@ -151,9 +155,9 @@ fun isFabOpened(view: FloatingActionButton): Boolean {
     )
 }
 
-fun changeFabClose(view: FloatingActionButton, dialog: ConstraintLayout) {
+fun changeFabClose(view: FloatingActionButton, dialog: ConstraintLayout, resource : Int) {
     ObjectAnimator.ofFloat(dialog, "translationY", 0f).apply { start() }
-    view.setImageResource(R.drawable.ic_baseline_add)
+    view.setImageResource(resource)
     view.backgroundTintList = AppCompatResources.getColorStateList(view.context, R.color.orange)
     dialog.visibility = View.INVISIBLE
 }
@@ -183,7 +187,7 @@ inline fun <reified T> filtJsonArray(list: JsonArray): List<T> {
 
 fun getCurrentTime() : String{
     val curTime = Date()
-    val format = SimpleDateFormat("MM/dd a h:mm분 ss초", Locale.KOREAN)
+    val format = SimpleDateFormat("MM/dd a h:mm분", Locale.KOREAN)
     val timeZone = TimeZone.getTimeZone("Asia/Seoul")
     format.timeZone = timeZone
 
@@ -201,6 +205,49 @@ fun checkCertifyProgressOn(progressDialog: AppCompatDialog) {
 fun checkCertifyProgressOff(progressDialog: AppCompatDialog) {
     if (progressDialog != null && progressDialog.isShowing()) {
         progressDialog.dismiss()
+    }
+}
+
+fun checkCalendarProgressOn(context : Context, btnOkClicked : () -> Unit) {
+   val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(R.layout.check_calendar_dialog)
+    dialog.show()
+    dialog.findViewById<MaterialButton>(R.id.btn_ok).setOnClickListener {
+        btnOkClicked()
+        dialog.dismiss()
+    }
+    dialog.findViewById<MaterialButton>(R.id.btn_cancel_calendar).setOnClickListener {
+        dialog.dismiss()
+    }
+}
+
+
+fun checkLogoutProgressOn(context : Context, btnOkClicked : () -> Unit) {
+    val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(R.layout.check_logout_dialog)
+    dialog.show()
+    dialog.findViewById<MaterialButton>(R.id.btn_ok).setOnClickListener {
+        btnOkClicked()
+        dialog.dismiss()
+    }
+    dialog.findViewById<MaterialButton>(R.id.btn_cancel_calendar).setOnClickListener {
+        dialog.dismiss()
+    }
+}
+
+fun checkSignoutProgressOn(context : Context, btnOkClicked : () -> Unit) {
+    val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(R.layout.check_signout_dialog)
+    dialog.show()
+    dialog.findViewById<MaterialButton>(R.id.btn_ok).setOnClickListener {
+        btnOkClicked()
+        dialog.dismiss()
+    }
+    dialog.findViewById<MaterialButton>(R.id.btn_cancel_calendar).setOnClickListener {
+        dialog.dismiss()
     }
 }
 

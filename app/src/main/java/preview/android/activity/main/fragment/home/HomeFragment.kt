@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseFragment
 import preview.android.R
@@ -55,16 +56,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, MainViewModel>(
             setItemViewCacheSize(10)
             addItemDecoration(HomeMentorDecoration(context))
             adapter = HomeMentorAdapter(
-                onThumbnailClicked = { mentorPost ->
+                onThumbnailClicked = { mentorThumbnail ->
                     val intent = Intent(context, MentorInfoActivity::class.java)
-                    intent.putExtra("mentorInfo", mentorPost)
+                    intent.putExtra("mentorThumbnail", mentorThumbnail)
                     startActivity(intent)
                 }
             ).apply {
                 submitList(listOf())
             }
         }
+        binding.rvNewMentor.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(!binding.rvNewMentor.canScrollVertically(1)){
+                    val size = (binding.rvNewMentor.adapter as HomeMentorAdapter).currentList.size
+                    Log.e("currentsize", size.toString())
+                    vm.getNewMentorThumbnailList(AccountStore.token.value!!, size/5,5, "id")
+                }
+            }
+        })
 
+        binding.rvRecommendMentor.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if(!binding.rvRecommendMentor.canScrollVertically(1)){
+                    val size = (binding.rvRecommendMentor.adapter as HomeMentorAdapter).currentList.size
+                    Log.e("currentsize", size.toString())
+                    vm.getRecommendMentorThumbnailList(AccountStore.token.value!!, size/5,5, "id")
+                }
+            }
+        })
 
         binding.btnNewmentorAll.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_newMentorFragment)

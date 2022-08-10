@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import preview.android.databinding.ItemWrietPostBinding
+import preview.android.databinding.ItemWritePostBinding
 import preview.android.model.ReceivePost
 
 class WritePostAdapter(private val onClicked : (Int) -> Unit
@@ -13,7 +13,7 @@ class WritePostAdapter(private val onClicked : (Int) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemWrietPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemWritePostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, onClicked)
     }
 
@@ -23,7 +23,7 @@ class WritePostAdapter(private val onClicked : (Int) -> Unit
 
 
     class ViewHolder(
-        private val binding: ItemWrietPostBinding,
+        private val binding: ItemWritePostBinding,
         private val onClicked : (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(receivePost: ReceivePost) {

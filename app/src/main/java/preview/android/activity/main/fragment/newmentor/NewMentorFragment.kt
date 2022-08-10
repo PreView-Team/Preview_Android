@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.fragment_new_mentor.*
 import preview.android.BaseFragment
 import preview.android.R
 import preview.android.activity.main.MainViewModel
@@ -29,7 +30,6 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    // 
                     0 -> {
                         vm.getCategoryNewMentorPostList(AccountStore.token.value!!, "개발")
                     }
@@ -45,13 +45,8 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                     }
                 }
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
 
         binding.rvNewMentor.run {
@@ -59,9 +54,6 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
             setItemViewCacheSize(10)
             adapter = NewMentorAdapter(
                 onApplyButtonClicked = { mentor ->
-//                    val intent = Intent(activity, ReviewActivity::class.java)
-//                    intent.putExtra("mentorInfo", mentor)
-//                    startActivity(intent)
                     val intent = Intent(activity, MentorInfoActivity::class.java)
                     intent.putExtra("mentorInfo", mentor)
                     startActivity(intent)
@@ -69,10 +61,8 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                 onFavoriteButtonChecked = { isChecked, postId ->
                     if (isChecked) {
                         vm.likePost(AccountStore.token.value!!, postId)
-                        Log.e("CHECKED", "!!")
                     } else {
                         vm.unLikePost(AccountStore.token.value!!, postId)
-                        Log.e("NOT CHECKED", "!!")
                     }
 
                 }
@@ -80,6 +70,24 @@ class NewMentorFragment : BaseFragment<FragmentNewMentorBinding, MainViewModel>(
                 submitList(vm.newMentorPostList.value)
             }
         }
+
+        val searchOnClickListener = object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                if (view == binding.layoutSearch || view == binding.ibSearch) {
+                    vm.searhMentors(
+                        AccountStore.token.value!!,
+                        binding.etSearch.text.toString(),
+                        binding.tabLayout.getTabAt(binding.tabLayout.selectedTabPosition)!!.text.toString(),
+                        0,
+                        10
+                    )
+                }
+            }
+
+        }
+
+        binding.layoutSearch.setOnClickListener(searchOnClickListener)
+        binding.ibSearch.setOnClickListener(searchOnClickListener)
 
         vm.newMentorPostList.observe(viewLifecycleOwner) { list ->
             Log.e("newMentorPostList", list.toString())

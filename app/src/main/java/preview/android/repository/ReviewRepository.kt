@@ -7,7 +7,7 @@ import preview.android.model.Review
 class ReviewRepository(private val api: ReviewService) {
 
     fun createReview(token: String, postId: Int, review: Review) = callbackFlow {
-        val request = api.createReview("Bearer $token", postId, Review(contents = "contents", grade = 5))
+        val request = api.createReview("Bearer $token", postId, review)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {

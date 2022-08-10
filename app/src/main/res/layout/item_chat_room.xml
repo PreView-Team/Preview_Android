@@ -30,13 +30,15 @@
             app:srcCompat="@color/primary" />
 
         <TextView
+            android:layout_marginRight="16dp"
             android:id="@+id/tv_nickname"
             style="@style/text_main_medium"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="@{chatroom.nickname}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/tv_time"
             app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
             app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
 
@@ -51,12 +53,16 @@
             app:layout_constraintTop_toTopOf="@+id/tv_nickname" />
 
         <TextView
-            android:layout_marginTop="1dp"
-            style="@style/text_main_regular"
+            android:layout_marginRight="16dp"
             android:id="@+id/tv_lastchat"
-            android:layout_width="wrap_content"
+            style="@style/text_main_regular"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_nickname"
             app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
     </androidx.constraintlayout.widget.ConstraintLayout>

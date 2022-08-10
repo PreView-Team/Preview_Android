@@ -13,11 +13,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import preview.android.R
-import preview.android.activity.login.LoginActivity
-import preview.android.activity.main.MainActivity
-import preview.android.data.AlarmStore
-import preview.android.model.Alarm
-import java.text.SimpleDateFormat
+import preview.android.activity.splash.SplashActivity
 import java.util.*
 
 class PreviewFirebaseMessagingService : FirebaseMessagingService() {
@@ -54,7 +50,7 @@ class PreviewFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun showNotification(remoteMessage: RemoteMessage) {
         Log.e("showNotification", "!!")
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, SplashActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this, 0 /* Request code */, intent,

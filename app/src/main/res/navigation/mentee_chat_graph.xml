@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mentee_chat_graph"
+    app:startDestination="@id/menteeChatRoomFragment">
+
+    <fragment
+        android:id="@+id/menteeChatRoomFragment"
+        android:name="preview.android.activity.management.menteechat.fragment.MenteeChatRoomFragment"
+        android:label="MenteeChatRoomFragment" >
+        <action
+            android:id="@+id/action_menteeChatRoomFragment_to_menteeChatFragment"
+            app:destination="@id/menteeChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menteeChatFragment"
+        android:name="preview.android.activity.management.menteechat.fragment.MenteeChatFragment"
+        android:label="MenteeChatFragment" />
+</navigation>

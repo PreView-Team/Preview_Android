@@ -10,28 +10,59 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/imageview_circle"
+            app:srcCompat="@color/primary" />
+
+        <TextView
+            android:id="@+id/textView62"
+            style="@style/text_main_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@{review.nickname}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
+            app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
 
         <RatingBar
+            android:rating="@{review.grade}"
+            android:layout_marginTop="3dp"
             android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/orange"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/textView62"
+            app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
         <TextView
-            android:textColor="@color/black"
-            style="@style/text_main_regular"
+            android:layout_marginBottom="20dp"
             android:id="@+id/tv_content"
-            android:layout_width="match_parent"
+            style="@style/text_main_regular"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:ellipsize="end"
+            android:lines="2"
             android:text="@{review.contents}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ratingBar"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

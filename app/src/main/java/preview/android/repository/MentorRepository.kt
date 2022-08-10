@@ -169,4 +169,15 @@ class MentorRepository(private val api: MentorService) {
         }
         close()
     }
+
+    suspend fun searchMentors(token: String, keyword : String, category : String, page : Int, size : Int) = callbackFlow {
+        val request = api.getSearchMentors("Bearer $token", keyword, category, page, size, "id")
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            Log.e("searchMentors ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
 }

@@ -129,4 +129,61 @@ class ChatRepository {
         close()
 
     }
+
+    fun createMentoringDate(mentorNickname: String, menteeNickname: String, message: Message, count: Int) =
+        callbackFlow {
+            val myRef = database.getReference(mentorNickname)
+            myRef.child(menteeNickname + "/" + count).setValue(message).addOnSuccessListener {
+                trySend("success")
+            }.addOnFailureListener {
+                trySend("fail")
+            }
+            close()
+        }
+
+    fun acceptMentoring(mentorNickname: String, menteeNickname: String, count: Int, date : String) = callbackFlow{
+
+
+        val dateSplit = date.split("-")[0]
+        val timeSplit = date.split("-")[1]
+        val day = dateSplit.split("날짜")[1]
+        val time = timeSplit.split("시간")[1]
+
+        val myRef = database.getReference(mentorNickname)
+        val createMentoringMessage = Message(
+            nickname = "admin",
+            message = "${day}일 ${time}에\n 멘토링 일정을 만들었어요. 시간을 지켜주세요!",
+            count = count,
+            menteeToken = "",
+            mentorToken ="",
+            time = getCurrentTime()
+        )
+        myRef.child(menteeNickname + "/" + count).setValue(createMentoringMessage).addOnSuccessListener {
+            trySend("success")
+        }.addOnFailureListener {
+            trySend("fail")
+        }
+        close()
+
+        /*
+        val myRef = database.getReference(AccountStore.mentorNickname.value!!)
+        val createList = arrayListOf<Message>()
+        createList.add(
+            Message(
+                nickname = "admin",
+                message = "새로운 채팅이 시작되었습니다",
+                count = 0,
+                menteeToken = menteeFCMToken,
+                mentorToken = AccountStore.myFCMToken.value!!,
+                time = getCurrentTime()
+            )
+        ) // menteeToken = 멘티 fcmToken
+        myRef.child(menteeNickname).setValue(createList).addOnSuccessListener {
+            trySend("success")
+        }.addOnFailureListener {
+            trySend("fail")
+        }
+        close()
+         */
+    }
 }

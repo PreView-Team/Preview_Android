@@ -36,11 +36,18 @@
         <action
             android:id="@+id/action_newMentorFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_newMentorFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/recommendMentorFragment"
         android:name="preview.android.activity.main.fragment.recommendmentor.RecommendMentorFragment"
-        android:label="RecommendMentorFragment" />
+        android:label="RecommendMentorFragment" >
+        <action
+            android:id="@+id/action_recommendMentorFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/communityFragment"

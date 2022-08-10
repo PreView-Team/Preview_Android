@@ -1,34 +1,21 @@
 package preview.android.activity.main
 
-import android.animation.ObjectAnimator
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
 import preview.android.activity.alarm.AlarmActivity
-import preview.android.activity.review.ReviewActivity
 import preview.android.activity.util.*
 import preview.android.data.AccountStore
 import preview.android.databinding.ActivityMainBinding
-import preview.android.model.Writing
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
@@ -49,26 +36,34 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         binding.bnvMain.setupWithNavController(navController)
 
         binding.tbMain.setNavigationOnClickListener { view ->
-            val intent = Intent(this, AlarmActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AlarmActivity::class.java))
         }
         binding.tbMain.setOnMenuItemClickListener { item ->
-            // 프로필 쪽 이동
+            when (vm.fragmentState.value) {
+                MainViewModel.FragmentState.newMentor -> {
+                    navController.navigate(R.id.action_newMentorFragment_to_settingFragment)
+                }
+                MainViewModel.FragmentState.recommendMentor -> {
+                    navController.navigate(R.id.action_recommendMentorFragment_to_settingFragment)
+                }
+                MainViewModel.FragmentState.home -> {
+                    navController.navigate(R.id.action_homeFragment_to_settingFragment)
+                }
+            }
             true
         }
         binding.fab.setOnClickListener {
             if (isFabOpened(binding.fab)) {
-                changeFabClose(binding.fab, binding.layoutFabClick)
+                changeFabClose(binding.fab, binding.layoutFabClick, R.drawable.ic_baseline_add)
             } else {
                 changeFabOpen(binding.fab, binding.layoutFabClick)
             }
         }
 
         binding.btnWrite.setOnClickListener {
-            if(AccountStore.isMentored.value!!){
+            if (AccountStore.isMentored.value!!) {
                 showDialogFragment(this, WriteDialogFragment())
-            }
-            else{
+            } else {
                 checkCertifyProgressOn(progressDialog)
             }
             Log.e("write", "!!")
@@ -80,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
 
         vm.fragmentState.observe(this) { state ->
             Log.e("STATE", state.toString())
-            changeFabClose(binding.fab, binding.layoutFabClick)
+            changeFabClose(binding.fab, binding.layoutFabClick, R.drawable.ic_baseline_add)
             when (state) {
                 MainViewModel.FragmentState.newMentor -> {
                     binding.fab.visibility = View.INVISIBLE

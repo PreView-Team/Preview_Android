@@ -16,6 +16,8 @@ import preview.android.activity.util.ERROR_UNAUTHORIZED
 import preview.android.data.AccountStore
 import preview.android.databinding.FragmentInfoInputBinding
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import preview.android.activity.util.getJobList
 
 @AndroidEntryPoint
@@ -34,13 +36,15 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
         }
 
         binding.btnNext.setOnClickListener {
-
-
-            val account = vm.loadAccount().copy(
-                nickname = binding.etNickname.text.toString(),
-                jobNames = listOf(binding.tfJobnames.text.toString())
-             )
-            vm.signUp(account)
+            if (vm.nicknameResponseResult.value != "true") {
+                Toast.makeText(activity, "닉네임 중복확인 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+            } else {
+                val account = vm.loadAccount().copy(
+                    nickname = binding.etNickname.text.toString(),
+                    jobNames = listOf(binding.tfJobnames.text.toString())
+                )
+                vm.signUp(account)
+            }
         }
 
         vm.nicknameResponseResult.observe(viewLifecycleOwner) { result ->
@@ -62,13 +66,43 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
         vm.signUpResponseResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 "success" -> {
-                    AccountStore.updateMenteeNickname(vm.loadAccount().nickname)
+                    // AccountStore.updateMenteeNickname(vm.loadAccount().nickname)
                     vm.loginToServer(vm.loadAccount())
                 }
                 else -> {
-                    Toast.makeText(activity, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "회원가입에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        vm.responseResult.observe(viewLifecycleOwner) { responseResult ->
+            AccountStore.updateToken(responseResult)
+            if (responseResult == ERROR_CODE_400) {
+                Toast.makeText(activity, "토큰을 찾을 수 없습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+            } else if (responseResult == ERROR_UNAUTHORIZED) {
+
+            } else {
+                vm.getUserDetail(responseResult)
+            }
+        }
+
+        vm.getUserInfoResponseResult.observe(viewLifecycleOwner) { getUserInfoResponse ->
+            AccountStore.updateMenteeNickname(getUserInfoResponse.nickname)
+            AccountStore.updateMenteeJob(getUserInfoResponse.jobNames.get(0))
+
+            val pref = requireActivity().getSharedPreferences(
+                "loginAccount",
+                AppCompatActivity.MODE_PRIVATE
+            )
+            val edit = pref.edit()
+            val set: Set<String> = vm.kakaoAccount.value!!.jobNames.toSet()
+
+            edit.putString("kakaoAccessToken", vm.kakaoAccount.value!!.kakaoAccessToken)
+            edit.putString("nickname", vm.kakaoAccount.value!!.nickname)
+            edit.putStringSet("job", set)
+            edit.commit()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
         }
     }
 }

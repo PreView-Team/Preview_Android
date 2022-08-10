@@ -15,10 +15,10 @@ interface MentorService {
     suspend fun getHomeMentorThumbnail(
         @Header("Authorization") token: String,
         @Query("status") status: String,
-        @Query("page") page : Int,
-        @Query("size") size : Int,
-        @Query("sort") sort : String
-    ) : Response<JsonArray>
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<JsonArray>
 
     @POST("/api/post")
     suspend fun createPost(
@@ -66,20 +66,20 @@ interface MentorService {
     suspend fun editPost(
         @Header("Authorization") token: String,
         @Body editPost: EditPost
-    ) : Response<MentorPostResponse>
+    ): Response<MentorPostResponse>
 
     @DELETE("/api/post/{postId}")
     suspend fun deletePost(
         @Header("Authorization") token: String,
         @Path("postId") postId: Int
-    ) : Response<MentorPostResponse>
+    ): Response<MentorPostResponse>
 
 
     @PUT("/api/mentor")
     suspend fun editMentorInfo(
         @Header("Authorization") token: String,
         @Body editMentorInfo: EditMentorInfo
-    ) : Response<MentorRegistResponse>
+    ): Response<MentorRegistResponse>
 
     @GET("/api/mentor/post")
     suspend fun getWritePosts(
@@ -92,4 +92,13 @@ interface MentorService {
         @Path("postId") postId: Int
     ): Response<JsonObject>
 
+    @GET("/api/post/search")
+    suspend fun getSearchMentors(
+        @Header("Authorization") token: String,
+        @Query("keyword") keyword: String,
+        @Query("category") category: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String,
+    ) : Response<JsonArray>
 }

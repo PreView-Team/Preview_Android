@@ -83,7 +83,8 @@
         <com.google.android.material.textfield.TextInputLayout
 
             android:id="@+id/menu_jobnames"
-            style="@style/Outlined.ExposedDropdownMenu"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
 
             android:hint="관심있는 직무 선택"
             android:layout_width="0dp"
@@ -94,6 +95,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView36">
 
             <AutoCompleteTextView
+                style="@style/text_caption_medium"
                 android:id="@+id/tf_jobnames"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

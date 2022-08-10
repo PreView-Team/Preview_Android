@@ -177,4 +177,12 @@ class MainViewModel @Inject constructor(
 
         }
     }
+
+    fun searhMentors(token: String, keyword: String, category: String, page: Int, size: Int) =
+        viewModelScope.launch {
+            mentorRepository.searchMentors(token, keyword, category, page, size)
+                .collect { response ->
+                    updateNewMentorPostList(filtJsonArray(response as JsonArray))
+                }
+        }
 }
