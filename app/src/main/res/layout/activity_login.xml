@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="53dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="프리뷰"
+                    android:textColor="@color/blue"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    style="@style/text_headline_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="에"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView17"
+                style="@style/text_headline_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오신걸 환영합니다 :)"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/iv"
+            android:layout_width="280dp"
+            android:layout_height="195.38dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="119dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            android:background="@drawable/ic_image_login"/>
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/text_caption_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SNS로 간편가입하기"
+            android:textColor="@color/grey_400"
+            android:textSize="12sp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_kakao"
+            app:layout_constraintStart_toStartOf="@+id/btn_kakao" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_kakao"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:stateListAnimator="@null"
+            android:text="카카오로 시작하기"
+            android:textColor="#000000"
+            app:backgroundTint="#FFE500"
+            app:cornerRadius="26dp"
+            app:icon="@drawable/ic_baseline_kakaotalk"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"
+            app:iconGravity="start"
+            app:iconTint="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import preview.android.BaseActivity
 import preview.android.R
-import preview.android.activity.login.CompleteSignUpFragment
-import preview.android.activity.login.InfoInputFragment
-import preview.android.activity.login.LoginFragment
-import preview.android.activity.login.LoginViewModel
+import preview.android.activity.login.*
 import preview.android.activity.main.MainActivity
 import preview.android.activity.util.ERROR_CODE_400
 import preview.android.activity.util.ERROR_UNAUTHORIZED
@@ -78,8 +75,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, LoginViewModel>(
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.layout_splash, InfoInputFragment()).commit()
             } else if (responseResult == ERROR_UNAUTHORIZED) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.layout_splash, InfoInputFragment()).commit()
+                startActivity(Intent(this, LoginActivity::class.java))
             } else {
                 vm.getUserDetail(responseResult)
             }
