@@ -152,7 +152,7 @@ class ChatRepository {
         val myRef = database.getReference(mentorNickname)
         val createMentoringMessage = Message(
             nickname = "admin",
-            message = "${day}일 ${time}에\n 멘토링 일정을 만들었어요. 시간을 지켜주세요!",
+            message = "${day} ${time}에\n 멘토링 일정을 만들었어요. 시간을 지켜주세요!",
             count = count,
             menteeToken = "",
             mentorToken ="",

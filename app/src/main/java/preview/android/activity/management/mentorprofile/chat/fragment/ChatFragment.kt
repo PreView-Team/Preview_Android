@@ -50,6 +50,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                             date = message.message
                         )
                     })
+                },
+                onEndClicked = { message ->
+                    Log.e("END CLICKED",message.toString())
                 }
             ).apply {
                 submitList(listOf<Message>())
@@ -59,7 +62,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
             (binding.rvChat.adapter as ChatAdapter).setMentoredTrue()
         val onSendClickListener = object : View.OnClickListener {
             override fun onClick(view: View?) {
-                if (view == binding.layoutSend || view == binding.btnSend) {
+                if(vm.messageList.value.last().nickname == "admin" && vm.messageList.value.last().message == "멘토링이 종료되었습니다."){
+
+                }
+                else if (view == binding.layoutSend || view == binding.btnSend) {
                     if (binding.etMessage.text.toString() != "") {
                             val message = Message(
                                 nickname = AccountStore.mentorNickname.value!!,
@@ -114,7 +120,18 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
         }
 
         binding.btnCompleteMentoring.setOnClickListener {
-            // 종료요청 보내기
+            val message = Message(
+                nickname = "end",
+                message = "종료요청을 보냈습니다.",
+                count = vm.messageList.value.size,
+                time = getCurrentTime()
+            )
+            vm.sendEndMentoring(
+                AccountStore.mentorNickname.value!!,
+                menteeNickname,
+                message,
+                vm.messageList.value.size
+            )
         }
 
         lifecycleScope.launch {
@@ -122,6 +139,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                 (binding.rvChat.adapter as ChatAdapter).submitList(list.toMutableList())
                 (binding.rvChat.smoothScrollToPosition((binding.rvChat.adapter as ChatAdapter).itemCount + 1))
                 // 포커스가 맨 마지막이 아니면 맨 아래로 바로 이동하지않고 아래로 내릴 수 있는 버튼으로 내리게 (카톡)
+
+                if(list.last().nickname == "admin" && list.last().message == "멘토링이 종료되었습니다."){
+                    binding.fabCalendar.visibility = View.INVISIBLE
+                }
             }
         }
     }

@@ -13,11 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Preview">
         <activity
-            android:name=".activity.management.menteechat.MenteeChatActivity"
+            android:name=".activity.login.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.management.menteechat.MenteeChatActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".activity.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,37 +31,48 @@
         </activity>
         <activity
             android:name=".activity.management.signout.SignoutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.mentorprofile.editprofile.EditProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.mentorprofile.writepost.WritePostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.alarm.AlarmActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.review.ReviewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.mentorprofile.chat.ChatActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.mentorprofile.receiveform.ReceiveFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.sendform.SendFormActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.profile.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.management.mentorprofile.MentorProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.mentorinfo.MentorInfoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -77,9 +93,6 @@
         <activity
             android:name=".activity.main.MainActivity"
             android:exported="true" />
-        <activity
-            android:name=".activity.login.LoginActivity"
-            android:exported="true"></activity>
 
         <service
             android:name=".activity.util.PreviewFirebaseMessagingService"

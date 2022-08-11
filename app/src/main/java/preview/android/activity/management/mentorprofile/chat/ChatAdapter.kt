@@ -12,6 +12,7 @@ import preview.android.model.Message
 
 class ChatAdapter(
     private val onAcceptClicked: (Message) -> Unit,
+    private val onEndClicked : (Message) -> Unit
 ) : ListAdapter<Message, RecyclerView.ViewHolder>(diffUtil) {
 
     private var isMentored = false
@@ -22,7 +23,10 @@ class ChatAdapter(
         }
 
         if (isMentored) {
-            if (currentList[position].nickname == AccountStore.mentorNickname.value) {
+            if (currentList[position].nickname == "end") {
+                return END_MY_CHAT
+            }
+            else if (currentList[position].nickname == AccountStore.mentorNickname.value) {
                 return MY_CHAT
             } else if (currentList[position].nickname == "calendar") {
                 return CALENDAR_MY_CHAT
@@ -30,7 +34,10 @@ class ChatAdapter(
                 return OTHER_CHAT
             }
         } else {
-            if (currentList[position].nickname == AccountStore.menteeNickname.value) {
+            if (currentList[position].nickname == "end") {
+                return END_OTHER_CHAT
+            }
+            else if (currentList[position].nickname == AccountStore.menteeNickname.value) {
                 return MY_CHAT
             } else if (currentList[position].nickname == "calendar") {
                 return CALENDAR_OTHER_CHAT
@@ -66,6 +73,23 @@ class ChatAdapter(
                     false
                 )
             )
+        } else if (viewType == END_MY_CHAT) {
+            EndMentorViewHodler(
+                ItemEndMentorBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        } else if (viewType == END_OTHER_CHAT) {
+            EndMenteeViewHodler(
+                ItemEndMenteeBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                ),
+                onEndClicked
+            )
         } else {
             CalendarMenteeViewHolder(
                 ItemChatCalendarMenteeBinding.inflate(
@@ -88,6 +112,10 @@ class ChatAdapter(
             (holder as CalendarMentorViewHolder).bind(currentList[position])
         } else if (getItemViewType(position) == CALENDAR_OTHER_CHAT) {
             (holder as CalendarMenteeViewHolder).bind(currentList[position])
+        } else if(getItemViewType(position) == END_MY_CHAT){
+            (holder as EndMentorViewHodler).bind(currentList[position])
+        }else if(getItemViewType(position) == END_OTHER_CHAT){
+            (holder as EndMenteeViewHodler).bind(currentList[position])
         }
     }
 
@@ -132,7 +160,6 @@ class ChatAdapter(
             binding.tvTime.text = time
             binding.btnAccept.setOnClickListener {
                 onAcceptClicked(message)
-                Log.e("ACCEP!", "!")
             }
         }
     }
@@ -152,6 +179,25 @@ class ChatAdapter(
         }
     }
 
+    class EndMentorViewHodler(
+        private val binding: ItemEndMentorBinding,
+
+        ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: Message) {
+            binding.message = message
+        }
+    }
+    class EndMenteeViewHodler(
+        private val binding: ItemEndMenteeBinding,
+        private val onEndClicked : (Message) -> Unit
+        ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: Message) {
+            binding.message = message
+            binding.btnEnd.setOnClickListener {
+                onEndClicked(message)
+            }
+        }
+    }
     private companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Message>() {
             override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
@@ -168,5 +214,7 @@ class ChatAdapter(
         private const val ADMIN_CHAT = 3
         private const val CALENDAR_MY_CHAT = 4
         private const val CALENDAR_OTHER_CHAT = 5
+        private const val END_MY_CHAT = 6
+        private const val END_OTHER_CHAT = 7
     }
 }

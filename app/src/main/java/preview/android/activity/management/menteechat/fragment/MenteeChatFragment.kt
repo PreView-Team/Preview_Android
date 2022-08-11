@@ -54,6 +54,21 @@ class MenteeChatFragment : BaseFragment<FragmentMenteeChatBinding, MenteeChatVie
                             date = message.message
                         )
                     })
+                },
+                onEndClicked = { message ->
+                    Log.e("END CLICKED",message.toString())
+                    val message = Message(
+                        nickname = "admin",
+                        message = "멘토링이 종료되었습니다.",
+                        count = vm.messageList.value.size,
+                        time = getCurrentTime()
+                    )
+                    vm.sendChat(
+                        mentorNickname,
+                        AccountStore.menteeNickname.value!!,
+                        message,
+                        vm.messageList.value.size
+                    )
                 }
             ).apply {
                 submitList(listOf<Message>())
@@ -64,7 +79,10 @@ class MenteeChatFragment : BaseFragment<FragmentMenteeChatBinding, MenteeChatVie
 
         val onSendClickListener = object : View.OnClickListener {
             override fun onClick(view: View?) {
-                if (view == binding.layoutSend || view == binding.btnSend) {
+                if(vm.messageList.value.last().nickname == "admin" && vm.messageList.value.last().message == "멘토링이 종료되었습니다."){
+
+                }
+                else if (view == binding.layoutSend || view == binding.btnSend) {
                     if (binding.etMessage.text.toString() != "") {
                         val message = Message(
                             nickname = AccountStore.menteeNickname.value!!,

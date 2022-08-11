@@ -123,9 +123,12 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_calendar_mentee.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_calendar_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_me.xml" value="0.11145833333333334" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.536" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.264" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentee.xml" value="0.264" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentee.xml.xml" value="0.25364583333333335" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_form_thumbnail.xml" value="0.152" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_jobnames.xml" value="0.1" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.176" />
