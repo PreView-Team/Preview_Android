@@ -8,6 +8,7 @@ import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
+import preview.android.activity.api.dto.FormResponse
 import preview.android.activity.api.dto.ReceiveFormDetailResponse
 import preview.android.activity.util.MutableListLiveData
 import preview.android.activity.util.filtJsonArray
@@ -30,6 +31,12 @@ class ReceiveFormViewModel @Inject constructor(
 
     private val _receiveFormDetail = MutableLiveData<ReceiveFormDetailResponse>()
     val receiveFormDetail: LiveData<ReceiveFormDetailResponse> get() = _receiveFormDetail
+
+    private val _aceeptFormResponse = MutableLiveData<String>()
+    val aceeptFormResponse: LiveData<String> get() = _aceeptFormResponse
+
+    private val _createRoomResponse = MutableLiveData<String>()
+    val createRoomResponse: LiveData<String> get() = _createRoomResponse
 
     fun updateReceiveThumbnailList(list: List<ReceiveFormThumbnail>) {
         _receiveFormThumbnailList.clear()
@@ -58,19 +65,22 @@ class ReceiveFormViewModel @Inject constructor(
 
     fun aceeptForm(token: String, formId: Int) = viewModelScope.launch {
         formRepository.acceptForm(token, formId).collect { response ->
-            //Log.e("acceptForm", response.toString())
+            _aceeptFormResponse.value = (response as FormResponse).status
         }
     }
 
     fun refuseForm(token: String, formId: Int) = viewModelScope.launch {
         formRepository.refuseForm(token, formId).collect { response ->
            //Log.e("acceptForm", response.toString())
+            Log.e("aceeptForm", response.toString())
+            //_aceeptFormResponse.value = response
         }
     }
 
     fun createRoom(menteeNickname : String, menteeFCMToken : String) = viewModelScope.launch{
         chatRepository.createChatRoom(menteeNickname, menteeFCMToken).collect {
-            //Log.e("createRoom reponse", it)
+            Log.e("createRoom reponse", it)
+            _createRoomResponse.value = it
         }
     }
 

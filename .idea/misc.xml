@@ -45,6 +45,7 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_newmentor.xml" value="0.1235" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_setting.xml" value="0.2485" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_baseline_submit.xml" value="0.2025" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_black_close.xml" value="0.2245" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_black_favorite.xml" value="0.183" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_home_filled.xml" value="0.2485" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
@@ -98,18 +99,18 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_complete_submit.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_find_team_member.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_home.xml" value="0.536" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_info_input.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_info_input.xml" value="0.24088541666666666" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_interview_data.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_interview_review.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_login.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentee_chat.xml" value="0.152" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentor_info.xml" value="0.39215686274509803" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_mentoring.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_new_mentor.xml" value="0.6" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_new_mentor.xml" value="0.42311033883579496" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_receive_form_detail.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recieve_from_detail.xml" value="0.11041666666666666" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_recommend_mentor.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_send_form_detail.xml" value="0.4" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_send_form_detail.xml" value="0.2" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/fragment_write_form.xml" value="0.1" />
@@ -125,13 +126,13 @@
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_me.xml" value="0.11145833333333334" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentee.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_mentor.xml" value="0.264" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.264" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_chat_room.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentee.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentee.xml.xml" value="0.25364583333333335" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_end_mentor.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_form_thumbnail.xml" value="0.152" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_jobnames.xml" value="0.1" />
-        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.176" />
+        <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor.xml" value="0.4" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_mentor_thumbnail.xml" value="0.176" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/@SourceTree/@Preview/app/src/main/res/layout/item_receive_form_thumbnail.xml" value="0.2" />

@@ -2,6 +2,7 @@ package preview.android.activity.management.menteechat
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,10 +37,12 @@ class MenteeChatViewModel @Inject constructor(
     val messageList = _messageList.asStateFlow()
 
 
-
     private val _sendFormThumbnailList = MutableListLiveData<SendFormThumbnail>()
     val sendFormThumbnailList: LiveData<List<SendFormThumbnail>> get() = _sendFormThumbnailList
 
+
+    private val _deleteResponse = MutableLiveData<ChatRoom>()
+    val deleteResponse: LiveData<ChatRoom> get() = _deleteResponse
 
     fun addMessageMap(map: Map<String, List<Message>>) = viewModelScope.launch {
         _messageMap.add(map)
@@ -47,17 +50,16 @@ class MenteeChatViewModel @Inject constructor(
 
     fun readChatList(mentorNickname: String, menteeNickname: String) = viewModelScope.launch {
         chatRepository.readChat(mentorNickname, menteeNickname).collect { list ->
-            Log.e("readChatList?", list.toString())
-            val map = mutableMapOf<String, List<Message>>()
-            if (mentorNickname == AccountStore.mentorNickname.value) {
-                map.put(menteeNickname + " 멘티", list)
-            } else {
-                map.put(mentorNickname + " 멘토", list)
+            Log.e("readChatList", list.toString())
+            if (list.isNotEmpty()) {
+                val map = mutableMapOf<String, List<Message>>()
+                if (mentorNickname == AccountStore.mentorNickname.value) {
+                    map.put(menteeNickname + " 멘티", list)
+                } else {
+                    map.put(mentorNickname + " 멘토", list)
+                }
+                filtMessageMap(map)
             }
-
-            //Log.e("Add map?", map.toString())
-            filtMessageMap(map)
-
         }
     }
 
@@ -132,7 +134,7 @@ class MenteeChatViewModel @Inject constructor(
     }
 
     fun getSendForms(token: String) = viewModelScope.launch {
-        Log.e("getSendForms","!!")
+        Log.e("getSendForms", "!!")
         formRepository.getSendForms(token).collect { response ->
             updateSendFormThumbnailList(filtJsonArray(response as JsonArray))
         }
@@ -145,4 +147,18 @@ class MenteeChatViewModel @Inject constructor(
             }
         }
 
+    fun deleteChatRoom(
+        mentorNickname: String,
+        menteeNickname: String,
+        chatRoom : ChatRoom
+    ) = viewModelScope.launch {
+        chatRepository.deleteChatRoom(mentorNickname, menteeNickname).collect { response ->
+            Log.e("deleteChatRoom MenteeCvm", response)
+            if(response == "delete success"){
+
+                Log.e("deleteChatRoom reponse", "pass")
+                _deleteResponse.value = chatRoom
+            }
+        }
+    }
 }

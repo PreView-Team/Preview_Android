@@ -26,9 +26,10 @@ class SendFormActivity : BaseActivity<ActivitySendFormBinding, SendFormViewModel
             // setHasFixedSize(true)
             // setItemViewCacheSize(10)
             adapter = SendFormAdapter(
-                onClicked = { formId ->
+                onClicked = { sendFormThumbnail ->
                     val bundle = Bundle()
-                    bundle.putInt("formId", formId)
+                    bundle.putInt("formId", sendFormThumbnail.formId)
+                    bundle.putString("status", sendFormThumbnail.status)
                     val fragment = SendFormDetailFragment()
                     fragment.arguments = bundle
 

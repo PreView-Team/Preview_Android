@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import preview.android.BaseViewModel
 import preview.android.activity.api.dto.*
@@ -62,6 +63,8 @@ class LoginViewModel @Inject constructor(
     private val _getMentorInfoResponseResult = MutableLiveData<GetMentorInfoResponse>()
     val getMentorInfoResponseResult : LiveData<GetMentorInfoResponse> get() = _getMentorInfoResponseResult
 
+    private val _checkOverlapMentorNicknameResponse = MutableLiveData<String>()
+    val checkOverlapMentorNicknameResponse : LiveData<String> get() = _checkOverlapMentorNicknameResponse
     fun loadRefreshToken(): String {
         return _refreshToken.value!!
     }
@@ -209,15 +212,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun createAlarmList(myNickname: String) = viewModelScope.launch {
-        runCatching {
-            alarmRepository.createAlarmList(myNickname, AlarmObject())
-        }.onSuccess {
-            Log.e("createAlarmList", "success")
-        }.onFailure {
-            Log.e("createAlarmList", "fail" + it.message.toString())
-        }
-    }
 
     fun getUserDetail(token: String) = viewModelScope.launch {
         loginRepository.getUserInfo(token).collect{
@@ -247,6 +241,21 @@ class LoginViewModel @Inject constructor(
     fun editChatRoom(originName : String, changeName : String) = viewModelScope.launch {
         chatRepository.editChatRoom(originName, changeName).collect { value ->
             Log.e("EDITCHAGE ROOM", value.toString())
+        }
+    }
+
+    fun checkOverlapMentorNickname(token: String, mentorNickname: String) = viewModelScope.launch{
+        mentorRepository.checkOverlapMentorNickname(token,mentorNickname).collect { response ->
+            _checkOverlapMentorNicknameResponse.value = response.toString()
+        }
+    }
+    fun createAlarmList(myNickname: String) = viewModelScope.launch {
+        runCatching {
+            alarmRepository.createAlarmList(myNickname, AlarmObject())
+        }.onSuccess {
+            Log.e("createAlarmList", "success")
+        }.onFailure {
+            Log.e("createAlarmList", "fail" + it.message.toString())
         }
     }
 }

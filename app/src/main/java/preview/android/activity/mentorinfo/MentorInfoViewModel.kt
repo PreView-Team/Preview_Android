@@ -23,21 +23,31 @@ class MentorInfoViewModel @Inject constructor(
     val response: LiveData<String> get() = _response
 
     private val _postDetail = MutableLiveData<PostDetailResponse>()
-    val postDetail : LiveData<PostDetailResponse> get() = _postDetail
+    val postDetail: LiveData<PostDetailResponse> get() = _postDetail
 
     fun sendForm(token: String, form: Form) = viewModelScope.launch {
-        formRepository.sendForm(token, form).collect{ response ->
+        formRepository.sendForm(token, form).collect { response ->
             Log.e("sendForm response", response.toString())
             _response.value = response.toString()
         }
     }
 
-    fun getPostDetail(token: String, postId: Int) = viewModelScope.launch {
-        mentorRepository.getPostDetail(token, postId).collect { response ->
-            Log.e("getPostDetail", response.toString())
-            _postDetail.value = response as PostDetailResponse
+    fun getPostDetail(token: String, postId: Int, page: Int, size: Int, sort: String) =
+        viewModelScope.launch {
+            mentorRepository.getPostDetail(token, postId, page, size, sort).collect { response ->
+                if (response != null) {
+                    _postDetail.value = response as PostDetailResponse
+                }
+            }
         }
-    }
 
+    fun getPostDetail(token: String, postId: Int) =
+        viewModelScope.launch {
+            mentorRepository.getPostDetail(token, postId).collect { response ->
+                if (response != null) {
+                    _postDetail.value = response as PostDetailResponse
+                }
+            }
+        }
 
 }

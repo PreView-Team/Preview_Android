@@ -41,8 +41,9 @@ class LoginRepository(private val api: AuthService) {
                     is OAuthToken -> {
                         account = account.copy(
                             kakaoAccessToken = value.accessToken,
-//                    refreshToken = oAuthToken.refreshToken
+                            //refreshToken = value.refreshToken
                         )
+                        Log.e("@#@# refresh",value.refreshToken)
                     }
                     is Throwable -> {
                         return value

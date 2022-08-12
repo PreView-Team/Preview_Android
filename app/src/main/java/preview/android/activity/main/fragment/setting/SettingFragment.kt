@@ -3,6 +3,7 @@ package preview.android.activity.main.fragment.setting
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import preview.android.BaseFragment
@@ -17,6 +18,7 @@ import preview.android.activity.management.sendform.SendFormActivity
 import preview.android.activity.management.signout.SignoutActivity
 import preview.android.activity.splash.SplashActivity
 import preview.android.activity.util.checkLogoutProgressOn
+import preview.android.data.AccountStore
 import preview.android.databinding.FragmentSettingBinding
 
 class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
@@ -64,8 +66,13 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, MainViewModel>(
         }
 
         binding.layoutMentorprofile.setOnClickListener {
-            val intent = Intent(context, MentorProfileActivity::class.java)
-            startActivity(intent)
+            if(AccountStore.isMentored.value!!) {
+                val intent = Intent(context, MentorProfileActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(requireContext(), "멘토 인증이 되어있지 않습니다!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

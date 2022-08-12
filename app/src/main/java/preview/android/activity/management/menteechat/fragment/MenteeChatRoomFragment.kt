@@ -1,6 +1,7 @@
 package preview.android.activity.management.menteechat.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -42,6 +43,10 @@ class MenteeChatRoomFragment : BaseFragment<FragmentMenteeChatroomBinding, Mente
                         R.id.action_menteeChatRoomFragment_to_menteeChatFragment,
                         bundle
                     )
+                },
+                onDeleteClicked = { chatRoom ->
+                    val mentorNickname = chatRoom.nickname.replace(" 멘토", "")
+                    vm.deleteChatRoom(mentorNickname, AccountStore.menteeNickname.value!!, chatRoom)
                 }
             ).apply {
                 submitList(listOf<ChatRoom>())
@@ -79,7 +84,12 @@ class MenteeChatRoomFragment : BaseFragment<FragmentMenteeChatroomBinding, Mente
             }
         }
 
-
+        vm.deleteResponse.observe(viewLifecycleOwner){ chatRoom ->
+            Log.e("deleteResponse", chatRoom.toString())
+            val currentList = (binding.rvChatRoom.adapter as ChatRoomAdpater).currentList.toMutableList()
+            currentList.remove(chatRoom)
+            (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(currentList.toMutableList())
+        }
     }
 
 }

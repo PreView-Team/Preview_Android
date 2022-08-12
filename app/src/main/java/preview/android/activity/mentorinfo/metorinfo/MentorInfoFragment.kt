@@ -30,12 +30,22 @@ class MentorInfoFragment : BaseFragment<FragmentMentorInfoBinding, MentorInfoVie
         if (requireActivity().intent.getSerializableExtra("mentorInfo") != null) {
             val mentorPost =
                 requireActivity().intent.getSerializableExtra("mentorInfo") as MentorPost
+            Log.e("mentorInfo intent", mentorPost.toString())
             MentorInfoStore.updateMentorPost(mentorPost)
+           // vm.getPostDetail(AccountStore.token.value!!, MentorInfoStore.mentorPost.value!!.postId, 0, 10, "createdDate")
             vm.getPostDetail(AccountStore.token.value!!, MentorInfoStore.mentorPost.value!!.postId)
         } else if (requireActivity().intent.getSerializableExtra("mentorThumbnail") != null) {
             val mentorThumbnail =
                 requireActivity().intent.getSerializableExtra("mentorThumbnail") as MentorThumbnail
+
+            Log.e("mentorThumbnail intent", mentorThumbnail.toString())
+            //vm.getPostDetail(AccountStore.token.value!!, mentorThumbnail.postId, 0, 10, "createdDate")
             vm.getPostDetail(AccountStore.token.value!!, mentorThumbnail.postId)
+            MentorInfoStore.updateMentorPost(
+                MentorPost(
+                    postId = mentorThumbnail.postId
+                )
+            )
         }
 
 

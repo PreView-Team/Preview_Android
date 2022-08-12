@@ -25,7 +25,7 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
 
         vm.clearMessageMap()
         vm.clearSendFormThumbnailList()
-        vm.getSendForms(AccountStore.token.value!!)
+        //vm.getSendForms(AccountStore.token.value!!)
         vm.readChatRoomList(AccountStore.mentorNickname.value!!)
 
         val layoutManager = LinearLayoutManager(requireContext())
@@ -43,6 +43,10 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
                         R.id.action_chatRoomFragment_to_chatFragment,
                         bundle
                     )
+                },
+                onDeleteClicked = { chatRoom ->
+                    val menteeNickname = chatRoom.nickname.replace(" 멘티", "")
+                    vm.deleteChatRoom(AccountStore.mentorNickname.value!!, menteeNickname, chatRoom)
                 }
             ).apply {
                 submitList(listOf<ChatRoom>())
@@ -68,7 +72,11 @@ class ChatRoomFragment : BaseFragment<FragmentChatRoomBinding, ChatViewModel>(
             }
         }
 
-
+         vm.deleteResponse.observe(viewLifecycleOwner){ chatRoom ->
+            val currentList = (binding.rvChatRoom.adapter as ChatRoomAdpater).currentList.toMutableList()
+            currentList.remove(chatRoom)
+            (binding.rvChatRoom.adapter as ChatRoomAdpater).submitList(currentList.toMutableList())
+        }
     }
 
 }

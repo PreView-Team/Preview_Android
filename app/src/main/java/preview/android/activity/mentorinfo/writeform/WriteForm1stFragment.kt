@@ -38,8 +38,9 @@ class WriteForm1stFragment : BaseFragment<FragmentWriteForm1stBinding, MentorInf
         binding.tvName.text = AccountStore.menteeNickname.value!!
 
         binding.btnApply.setOnClickListener {
-            if (binding.etContact.text.toString()
-                    .isNotEmpty()
+            if (binding.etContact.text.toString().isNotEmpty()
+                && binding.tfArea.text.toString().isNotEmpty()
+                && binding.tfJobnames.text.toString().isNotEmpty()
             ) {
                 // TODO: metnorInfoStore에 현재값 저장
                 MentorInfoStore.updateForm(

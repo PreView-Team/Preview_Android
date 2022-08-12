@@ -36,7 +36,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
         }
 
         binding.btnNext.setOnClickListener {
-            if (vm.nicknameResponseResult.value != "true") {
+            if (vm.nicknameResponseResult.value == "true") {
                 Toast.makeText(activity, "닉네임 중복확인 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 val account = vm.loadAccount().copy(
@@ -102,7 +102,7 @@ class InfoInputFragment : BaseFragment<FragmentInfoInputBinding, LoginViewModel>
             edit.putStringSet("job", set)
             edit.commit()
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.layout_login, CompleteSignUpFragment()).commit()
+                .replace(R.id.layout_info_input, CompleteSignUpFragment()).commit()
         }
     }
 }

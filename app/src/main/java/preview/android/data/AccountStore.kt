@@ -7,7 +7,7 @@ import preview.android.model.MentorPost
 
 object AccountStore {
 
-    val kakaoId = 2373880354
+    val kakaoId = 2327958242
     // 2327958242 -> 주이식
     // 2373880354 -> 테스트계정
 

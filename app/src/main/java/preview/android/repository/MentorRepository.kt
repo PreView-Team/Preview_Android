@@ -7,30 +7,38 @@ import preview.android.model.*
 
 class MentorRepository(private val api: MentorService) {
 
-    suspend fun getNewMentorThumbnailList(token : String, page: Int, size : Int, sort : String) = callbackFlow {
-        val request = api.getHomeMentorThumbnail("Bearer $token", "new", page, size, sort)
-        if(request.isSuccessful && request.body() != null){
-            trySend(request.body()!!)
+    suspend fun getNewMentorThumbnailList(token: String, page: Int, size: Int, sort: String) =
+        callbackFlow {
+            val request = api.getHomeMentorThumbnail("Bearer $token", "new", page, size, sort)
+            if (request.isSuccessful && request.body() != null) {
+                trySend(request.body()!!)
+            } else {
+                trySend("ERROR :" + request.errorBody()!!.string())
+            }
+            close()
         }
-        else{
-            trySend("ERROR :" + request.errorBody()!!.string())
-        }
-        close()
-    }
 
-    suspend fun getRecommendMentorThumbnailList(token : String, page: Int, size : Int, sort : String) = callbackFlow {
-        val request = api.getHomeMentorThumbnail("Bearer $token", "recommendation", page, size, sort)
-        if(request.isSuccessful && request.body() != null){
-            trySend(request.body()!!)
+    suspend fun getRecommendMentorThumbnailList(token: String, page: Int, size: Int, sort: String) =
+        callbackFlow {
+            val request =
+                api.getHomeMentorThumbnail("Bearer $token", "recommendation", page, size, sort)
+            if (request.isSuccessful && request.body() != null) {
+                trySend(request.body()!!)
+            } else {
+                trySend("ERROR :" + request.errorBody()!!.string())
+            }
+            close()
         }
-        else{
-            trySend("ERROR :" + request.errorBody()!!.string())
-        }
-        close()
-    }
 
-    suspend fun getCategoryNewMentorPostList(token: String, categoryName: String) = callbackFlow {
-        val request = api.getCatergoryPostList("Bearer $token", "new", categoryName)
+    suspend fun getCategoryNewMentorPostList(
+        token: String,
+        categoryName: String,
+        page: Int,
+        size: Int,
+        sort: String
+    ) = callbackFlow {
+        val request =
+            api.getCatergoryPostList("Bearer $token", "new", categoryName, page, size, sort)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
@@ -40,15 +48,22 @@ class MentorRepository(private val api: MentorService) {
     }
 
 
-    suspend fun getCategoryRecommendMentorPostList(token: String, categoryName: String) = callbackFlow {
-        val request = api.getCatergoryPostList("Bearer $token", "recommendation",categoryName)
-        if (request.isSuccessful && request.body() != null) {
-            trySend(request.body()!!)
-        } else {
-            trySend("ERROR :" + request.errorBody()!!.string())
+    suspend fun getCategoryRecommendMentorPostList(
+        token: String,
+        categoryName: String,
+        page: Int,
+        size: Int,
+        sort: String
+    ) =
+        callbackFlow {
+            val request = api.getCatergoryPostList("Bearer $token", "recommendation", categoryName, page, size, sort)
+            if (request.isSuccessful && request.body() != null) {
+                trySend(request.body()!!)
+            } else {
+                trySend("ERROR :" + request.errorBody()!!.string())
+            }
+            close()
         }
-        close()
-    }
 
     suspend fun sendWriting(token: String, writing: Writing) = callbackFlow {
         val request = api.createPost("Bearer $token", writing)
@@ -65,7 +80,6 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("REGIST ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -76,7 +90,6 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("likePost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -87,40 +100,44 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("unLikePost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
 
+    suspend fun getPostDetail(token: String, postId: Int, page: Int, size: Int, sort : String) = callbackFlow {
+        val request = api.getPostDetail("Bearer $token", postId, page, size, sort)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
     suspend fun getPostDetail(token: String, postId: Int) = callbackFlow {
         val request = api.getPostDetail("Bearer $token", postId)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("getPostDetail ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
-
-    suspend fun editPost(token: String, editPost : EditPost) = callbackFlow {
+    suspend fun editPost(token: String, editPost: EditPost) = callbackFlow {
         val request = api.editPost("Bearer $token", editPost)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("editPost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
 
-    suspend fun deletePost(token:String, postId : Int) = callbackFlow {
+    suspend fun deletePost(token: String, postId: Int) = callbackFlow {
         val request = api.deletePost("Bearer $token", postId)
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("deletePost ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -131,7 +148,6 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("getMentorInfo ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -142,7 +158,6 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("getMentorInfo ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -153,7 +168,6 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("getMentorInfo ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
@@ -164,18 +178,32 @@ class MentorRepository(private val api: MentorService) {
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("getWritePostDetail ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
 
-    suspend fun searchMentors(token: String, keyword : String, category : String, page : Int, size : Int) = callbackFlow {
+    suspend fun searchMentors(
+        token: String,
+        keyword: String,
+        category: String,
+        page: Int,
+        size: Int
+    ) = callbackFlow {
         val request = api.getSearchMentors("Bearer $token", keyword, category, page, size, "id")
         if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
         } else {
-            Log.e("searchMentors ERROR", request.code().toString())
+            trySend(request.errorBody()!!.string())
+        }
+        close()
+    }
+
+    suspend fun checkOverlapMentorNickname(token: String, mentorNickname: String) = callbackFlow {
+        val request = api.checkOverlapMentorNickname("Bearer $token", mentorNickname)
+        if (request.isSuccessful && request.body() != null) {
+            trySend(request.body()!!)
+        } else {
             trySend(request.errorBody()!!.string())
         }
         close()

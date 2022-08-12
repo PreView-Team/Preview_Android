@@ -6,7 +6,7 @@ import preview.android.activity.api.FormService
 import preview.android.model.EditForm
 import preview.android.model.Form
 
-class FormRepository(private val api : FormService) {
+class FormRepository(private val api: FormService) {
 
     suspend fun sendForm(token: String, form: Form) = callbackFlow {
         val request = api.createFrom("Bearer $token", form)
@@ -21,10 +21,9 @@ class FormRepository(private val api : FormService) {
 
     suspend fun getSendForms(token: String) = callbackFlow {
         val request = api.getAllMyForm("Bearer $token")
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("getSendForms ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
@@ -33,10 +32,9 @@ class FormRepository(private val api : FormService) {
 
     suspend fun getReceiveForms(token: String) = callbackFlow {
         val request = api.getAllReceiveForm("Bearer $token")
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("getReceiveForms ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
@@ -45,10 +43,9 @@ class FormRepository(private val api : FormService) {
 
     suspend fun getFormDetail(token: String, formId: Int) = callbackFlow {
         val request = api.getFormDetail("Bearer $token", formId)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("getFormDetail ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
@@ -57,10 +54,9 @@ class FormRepository(private val api : FormService) {
 
     suspend fun getReceiveFormDetail(token: String, formId: Int) = callbackFlow {
         val request = api.getReceiveFormDetail("Bearer $token", formId)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("getFormDetail ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
@@ -69,22 +65,20 @@ class FormRepository(private val api : FormService) {
 
     suspend fun deleteForm(token: String, formId: Int) = callbackFlow {
         val request = api.deleteForm("Bearer $token", formId)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("deleteForm ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
 
-    suspend fun editForm(token: String, formId : Int,editForm : EditForm) = callbackFlow {
+    suspend fun editForm(token: String, formId: Int, editForm: EditForm) = callbackFlow {
         val request = api.editForm("Bearer $token", formId, editForm)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("deleteForm ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
@@ -93,21 +87,20 @@ class FormRepository(private val api : FormService) {
 
     suspend fun acceptForm(token: String, formId: Int) = callbackFlow {
         val request = api.acceptForm("Bearer $token", formId)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("acceptForm ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }
         close()
     }
+
     suspend fun refuseForm(token: String, formId: Int) = callbackFlow {
         val request = api.refuseForm("Bearer $token", formId)
-        if(request.isSuccessful && request.body() != null){
+        if (request.isSuccessful && request.body() != null) {
             trySend(request.body()!!)
-        }
-        else{
+        } else {
             Log.e("acceptForm ERROR", request.code().toString())
             trySend(request.errorBody()!!.string())
         }

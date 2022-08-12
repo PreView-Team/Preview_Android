@@ -3,6 +3,7 @@ package preview.android.activity.main
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -48,6 +49,15 @@ class WriteDialogFragment : DialogFragment() {
                 )
             )
             true
+        }
+
+        vm.sendWritingResponse.observe(this){ response ->
+            if(response == "성공"){
+                dismiss()
+            }
+            else{
+                Toast.makeText(requireContext(), "글쓰기에 실패했습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

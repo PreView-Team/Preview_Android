@@ -10,14 +10,15 @@ import preview.android.databinding.ItemChatRoomBinding
 import preview.android.model.ChatRoom
 
 class ChatRoomAdpater(
-    private val onClicked: (ChatRoom) -> Unit
+    private val onClicked: (ChatRoom) -> Unit,
+    private val onDeleteClicked: (ChatRoom) -> Unit
 ) : ListAdapter<ChatRoom, ChatRoomAdpater.ViewHolder>(diffUtil) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemChatRoomBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding, onClicked)
+        return ViewHolder(binding, onClicked, onDeleteClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,14 +27,17 @@ class ChatRoomAdpater(
 
     class ViewHolder(
         private val binding: ItemChatRoomBinding,
-        private val onClicked: (ChatRoom) -> Unit
+        private val onClicked: (ChatRoom) -> Unit,
+        private val onDeleteClicked : (ChatRoom) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(chatRoom: ChatRoom) {
             binding.chatroom = chatRoom
             binding.layoutChatRoom.setOnClickListener {
                 onClicked(chatRoom)
             }
-
+            binding.ibDelete.setOnClickListener {
+                onDeleteClicked(chatRoom)
+            }
             // TODO: 색상변경
 //            if (binding.tvNickname.text == null){
 //

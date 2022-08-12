@@ -69,6 +69,7 @@ class MenteeChatFragment : BaseFragment<FragmentMenteeChatBinding, MenteeChatVie
                         message,
                         vm.messageList.value.size
                     )
+                    // TODO: 신청서 완료처리
                 }
             ).apply {
                 submitList(listOf<Message>())

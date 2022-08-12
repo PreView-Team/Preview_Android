@@ -10,12 +10,13 @@ interface AuthService {
     @POST("/api/user/kakao/signup")
     suspend fun signUp(@Body account: Account): Response<SignUpResponse>
 
-    @POST("/api/login")
-    suspend fun login(@Body kakaoAccessToken: LoginData): Response<LoginResponse>
-
     @GET("/api/user/nickname/{nickname}")
     suspend fun nickname(@Path("nickname") nickname: String): Response<NicknameResponse>
 
+    @DELETE("/api/user")
+    suspend fun signOut(
+        @Header("Authorization") token: String
+    ): Response<SignUpResponse>
 
     @PUT("/api/user")
     suspend fun editUser(
@@ -23,14 +24,16 @@ interface AuthService {
         @Body editUser: EditUserData
     ): Response<EditNicknameResponse>
 
-    @DELETE("/api/user")
-    suspend fun signOut(
-        @Header("Authorization") token: String
-    ): Response<SignUpResponse>
-
     @GET("/api/user")
     suspend fun getUserInfo(
         @Header("Authorization") token: String
     ) : Response<GetUserInfoResponse>
+
+    @POST("/api/login")
+    suspend fun login(@Body kakaoAccessToken: LoginData): Response<LoginResponse>
+
+
+
+
 
 }

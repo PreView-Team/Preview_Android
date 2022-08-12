@@ -58,8 +58,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, LoginViewModel>(
 
         if (savedKakaoAccessToken.equals("")) {
             Log.e("SharedPreferences", "저장 안됨")
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.layout_splash, LoginFragment()).commit()
+            startActivity(Intent(this, LoginActivity::class.java))
         } else {
             Log.e("SPF", "저장 되어 있음 $savedKakaoAccessToken $savedNickname $savedJobs ")
             vm.setKakaoAccount(Account(savedKakaoAccessToken, savedNickname, savedJobs))
@@ -102,6 +101,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, LoginViewModel>(
         }
         vm.getMentorInfoResponseResult.observe(this)
         {
+            Log.e("getMentorInfoResponseResult", it.toString())
             AccountStore.updateMentorNickname(it.nickname)
             AccountStore.updateMentorJob(it.jobNames.get(0))
         }

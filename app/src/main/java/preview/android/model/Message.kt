@@ -6,7 +6,7 @@ import java.io.Serializable
 data class Message(
     val nickname: String = "",
     val message: String = "",
-    val count : Int,
+    val count : Int = 0,
     val mentorToken : String ="",
     val menteeToken : String ="",
     val time : String = "",

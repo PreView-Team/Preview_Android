@@ -2,6 +2,7 @@ package preview.android.activity.management.mentorprofile.chat
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonArray
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,34 +48,17 @@ class ChatViewModel @Inject constructor(
     private val _sendFormThumbnailList = MutableListLiveData<SendFormThumbnail>()
     val sendFormThumbnailList: LiveData<List<SendFormThumbnail>> get() = _sendFormThumbnailList
 
+    private val _deleteResponse = MutableLiveData<ChatRoom>()
+    val deleteResponse: LiveData<ChatRoom> get() = _deleteResponse
+
+
 
     fun addMessageMap(map: Map<String, List<Message>>) = viewModelScope.launch {
         _messageMap.add(map)
     }
 
-    fun setMessageMap(mapList: List<Map<String, List<Message>>>) = viewModelScope.launch {
-        _messageMap.value = mapList
-    }
-
     fun clearMessageMap() {
         _messageMap.clear()
-    }
-
-    fun updateMessageList(list: List<Message>) = viewModelScope.launch {
-        _messageList.emit(list)
-    }
-
-    fun updateChatRoomList(list: List<String>) {
-        _chatRoomList.clear()
-        _chatRoomList.addAll(list)
-    }
-
-    fun addMentorChatList(list: List<String>) {
-        _mentorChatList.addAll(list)
-    }
-
-    fun addChatRoomList(chatRoomName: String) {
-        _chatRoomList.add(chatRoomName)
     }
 
     // 멘토의 하위 멘티 닉네임들을 읽어옴
@@ -90,17 +74,15 @@ class ChatViewModel @Inject constructor(
 
     fun readChatList(mentorNickname: String, menteeNickname: String) = viewModelScope.launch {
         chatRepository.readChat(mentorNickname, menteeNickname).collect { list ->
-            Log.e("readChatList?", list.toString())
-            val map = mutableMapOf<String, List<Message>>()
-            if (mentorNickname == AccountStore.mentorNickname.value) {
-                map.put(menteeNickname + " 멘티", list)
-            } else {
-                map.put(mentorNickname + " 멘토", list)
+            if (list.isNotEmpty()) {
+                val map = mutableMapOf<String, List<Message>>()
+                if (mentorNickname == AccountStore.mentorNickname.value) {
+                    map.put(menteeNickname + " 멘티", list)
+                } else {
+                    map.put(mentorNickname + " 멘토", list)
+                }
+                filtMessageMap(map)
             }
-
-            //Log.e("Add map?", map.toString())
-            filtMessageMap(map)
-
         }
     }
 
@@ -178,12 +160,6 @@ class ChatViewModel @Inject constructor(
         _sendFormThumbnailList.clear()
     }
 
-    fun getSendForms(token: String) = viewModelScope.launch {
-        Log.e("getSendForms","!!")
-        formRepository.getSendForms(token).collect { response ->
-            updateSendFormThumbnailList(filtJsonArray(response as JsonArray))
-        }
-    }
 
     fun createMentoringDate(
         mentorNickname: String,
@@ -203,9 +179,29 @@ class ChatViewModel @Inject constructor(
             }
         }
 
-    fun sendEndMentoring(mentorNickname: String, menteeNickname: String, message: Message, count: Int) = viewModelScope.launch {
-        chatRepository.sendChat(mentorNickname, menteeNickname, message, count).collect{
+    fun sendEndMentoring(
+        mentorNickname: String,
+        menteeNickname: String,
+        message: Message,
+        count: Int
+    ) = viewModelScope.launch {
+        chatRepository.sendChat(mentorNickname, menteeNickname, message, count).collect {
 
+        }
+    }
+
+    fun deleteChatRoom(
+        mentorNickname: String,
+        menteeNickname: String,
+        chatRoom : ChatRoom
+    ) = viewModelScope.launch {
+        chatRepository.deleteChatRoom(mentorNickname, menteeNickname).collect { response ->
+            Log.e("deleteChatRoom Chatvm", response)
+            if(response == "delete success"){
+
+                Log.e("deleteChatRoom reponse", "pass")
+                _deleteResponse.value = chatRoom
+            }
         }
     }
 }

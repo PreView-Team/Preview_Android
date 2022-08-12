@@ -10,7 +10,7 @@ import preview.android.databinding.ItemFormThumbnailBinding
 import preview.android.model.SendFormThumbnail
 
 class SendFormAdapter(
-    private val onClicked : (Int) -> Unit
+    private val onClicked : (SendFormThumbnail) -> Unit
 ) : ListAdapter<SendFormThumbnail, SendFormAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +26,7 @@ class SendFormAdapter(
 
     class ViewHolder(
         private val binding: ItemFormThumbnailBinding,
-        private val onClicked : (Int) -> Unit
+        private val onClicked : (SendFormThumbnail) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(sendFormThumbnail: SendFormThumbnail) {
             Log.e("formThumbnail", "!!"+ sendFormThumbnail.toString())
@@ -41,7 +41,7 @@ class SendFormAdapter(
                 binding.tvStatus.text = "거절"
             }
             binding.layoutFormThumbnail.setOnClickListener {
-                onClicked(sendFormThumbnail.formId)
+                onClicked(sendFormThumbnail)
             }
         }
     }

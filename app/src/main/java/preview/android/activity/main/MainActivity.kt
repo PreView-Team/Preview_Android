@@ -30,7 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         super.onCreate(savedInstanceState)
 
         AccountStore.updateFcmToken(getFCMToken())
-
+        vm.createAlarmList(AccountStore.menteeNickname.value!!)
         navController =
             (supportFragmentManager.findFragmentById(R.id.fcv_fragment) as NavHostFragment).navController
         binding.bnvMain.setupWithNavController(navController)
@@ -61,12 +61,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         }
 
         binding.btnWrite.setOnClickListener {
-            if (AccountStore.isMentored.value!!) {
-                showDialogFragment(this, WriteDialogFragment())
-            } else {
+            try {
+                if (AccountStore.isMentored.value!!) {
+                    showDialogFragment(this, WriteDialogFragment())
+                } else {
+                    checkCertifyProgressOn(progressDialog)
+                }
+                Log.e("write", "!!")
+            }
+            catch (exception : Exception){
                 checkCertifyProgressOn(progressDialog)
             }
-            Log.e("write", "!!")
         }
         binding.btnCheckMentor.setOnClickListener {
             showDialogFragment(this, CertifyMentorDialogFragment())

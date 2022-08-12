@@ -52,21 +52,21 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                     })
                 },
                 onEndClicked = { message ->
-                    Log.e("END CLICKED",message.toString())
+                    Log.e("END CLICKED", message.toString())
                 }
             ).apply {
                 submitList(listOf<Message>())
             }
         }
-            vm.readMessageList(AccountStore.mentorNickname.value!!, menteeNickname)
-            (binding.rvChat.adapter as ChatAdapter).setMentoredTrue()
+        vm.readMessageList(AccountStore.mentorNickname.value!!, menteeNickname)
+        (binding.rvChat.adapter as ChatAdapter).setMentoredTrue()
         val onSendClickListener = object : View.OnClickListener {
             override fun onClick(view: View?) {
-                if(vm.messageList.value.last().nickname == "admin" && vm.messageList.value.last().message == "멘토링이 종료되었습니다."){
+                try {
+                    if (vm.messageList.value.last().nickname == "admin" && vm.messageList.value.last().message == "멘토링이 종료되었습니다.") {
 
-                }
-                else if (view == binding.layoutSend || view == binding.btnSend) {
-                    if (binding.etMessage.text.toString() != "") {
+                    } else if (view == binding.layoutSend || view == binding.btnSend) {
+                        if (binding.etMessage.text.toString() != "") {
                             val message = Message(
                                 nickname = AccountStore.mentorNickname.value!!,
                                 message = binding.etMessage.text.toString(),
@@ -96,9 +96,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
                                 )
                             )
                             vm.addAlarm(menteeNickname, AlarmObject().copy(value = alarmList))
+                        }
+                        binding.etMessage.setText("")
                     }
-                    binding.etMessage.setText("")
+                } catch (e: Exception) {
+
                 }
+
             }
         }
         binding.layoutSend.setOnClickListener(onSendClickListener)
@@ -106,7 +110,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
 
         binding.fabCalendar.setOnClickListener {
             if (isFabOpened(binding.fabCalendar)) {
-                changeFabClose(binding.fabCalendar, binding.layoutFabClick, R.drawable.ic_baseline_calendar_check)
+                changeFabClose(
+                    binding.fabCalendar,
+                    binding.layoutFabClick,
+                    R.drawable.ic_baseline_calendar_check
+                )
             } else {
                 changeFabOpen(binding.fabCalendar, binding.layoutFabClick)
             }
@@ -136,12 +144,19 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatViewModel>(
 
         lifecycleScope.launch {
             vm.messageList.collect { list ->
-                (binding.rvChat.adapter as ChatAdapter).submitList(list.toMutableList())
-                (binding.rvChat.smoothScrollToPosition((binding.rvChat.adapter as ChatAdapter).itemCount + 1))
-                // 포커스가 맨 마지막이 아니면 맨 아래로 바로 이동하지않고 아래로 내릴 수 있는 버튼으로 내리게 (카톡)
+                Log.e("vm.messageList.collec", list.toString())
+                if (list.isNotEmpty()) {
+                    (binding.rvChat.adapter as ChatAdapter).submitList(list.toMutableList())
+                    (binding.rvChat.smoothScrollToPosition((binding.rvChat.adapter as ChatAdapter).itemCount + 1))
+                    // 포커스가 맨 마지막이 아니면 맨 아래로 바로 이동하지않고 아래로 내릴 수 있는 버튼으로 내리게 (카톡)
+                    try {
+                        if (list.last().nickname == "admin" && list.last().message == "멘토링이 종료되었습니다.") {
+                            binding.fabCalendar.visibility = View.INVISIBLE
+                        }
+                    } catch (e: Exception) {
 
-                if(list.last().nickname == "admin" && list.last().message == "멘토링이 종료되었습니다."){
-                    binding.fabCalendar.visibility = View.INVISIBLE
+                    }
+
                 }
             }
         }

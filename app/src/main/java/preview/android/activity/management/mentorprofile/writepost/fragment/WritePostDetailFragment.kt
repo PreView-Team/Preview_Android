@@ -35,5 +35,11 @@ class WritePostDetailFragment : BaseFragment<FragmentWritePostDetailBinding, Wri
         binding.btnCancel.setOnClickListener {
             vm.deleteWritePostDetail(AccountStore.token.value!!, bundle!!.getInt("postId"))
         }
+
+        vm.writePostDetail.observe(viewLifecycleOwner){ receivePost ->
+            binding.etTitle.setText(receivePost.title)
+            binding.etContents.setText(receivePost.contents)
+        }
+
     }
 }

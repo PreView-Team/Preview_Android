@@ -43,21 +43,28 @@ class SendFormDetailFragment : BaseFragment<FragmentSendFormDetailBinding, SendF
             bundle!!.getInt("formId")
         )
 
+        if (bundle!!.getString("status") == "완료") {
+            binding.btnReview.visibility = View.VISIBLE
+        }
+
         binding.btnCancel.setOnClickListener {
             vm.deleteForm(AccountStore.token.value!!, bundle!!.getInt("formId"))
         }
 
         binding.btnEdit.setOnClickListener {
-            vm.editForm(AccountStore.token.value!!, bundle!!.getInt("formId"), EditForm(
-                name = binding.etName.text.toString(),
-                phoneNumber = "010-9557-1081",
-                contents = "작성내용"
-            ))
+            vm.editForm(
+                AccountStore.token.value!!, bundle!!.getInt("formId"), EditForm(
+                    name = binding.etName.text.toString(),
+                    phoneNumber = binding.etContact.text.toString(),
+                    local = binding.tfArea.text.toString(),
+                    contents = binding.etContents.text.toString()
+                )
+            )
         }
 
         binding.btnReview.setOnClickListener {
             val formDetail = binding.formdetailresponse!!
-            val mentorPost= MentorPost(
+            val mentorPost = MentorPost(
                 postId = formDetail.postId,
                 nickname = formDetail.mentorNickname,
                 jobList = listOf(formDetail.jobNames),

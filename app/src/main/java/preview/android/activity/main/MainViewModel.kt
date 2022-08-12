@@ -55,24 +55,43 @@ class MainViewModel @Inject constructor(
     private val _recommendMentorPostList = MutableListLiveData<MentorPost>()
     val recommendMentorPostList: LiveData<List<MentorPost>> get() = _recommendMentorPostList
 
+    private val _checkNewMentorListEnd = MutableLiveData<String>()
+    val checkNewMentorListEnd: LiveData<String> get() = _checkNewMentorListEnd
+
+    private val _checkRecommendMentorListEnd = MutableLiveData<String>()
+    val checkRecommendMentorListEnd: LiveData<String> get() = _checkRecommendMentorListEnd
+
+    private val _checkNewMentorThumbnailListEnd = MutableLiveData<String>()
+    val checkNewMentorThumbnailListEnd: LiveData<String> get() = _checkNewMentorThumbnailListEnd
+
+    private val _checkRecommendMentorThumbnailListEnd = MutableLiveData<String>()
+    val checkRecommendMentorThumbnailListEnd: LiveData<String> get() = _checkRecommendMentorThumbnailListEnd
+
+    private val _sendWritingResponse = MutableLiveData<String>()
+     val sendWritingResponse : LiveData<String> get() = _sendWritingResponse
 
     fun updateNewMentorThumbnailList(list: List<MentorThumbnail>) {
-        _newMentorThumbnailList.clear()
+
         _newMentorThumbnailList.addAll(list)
     }
+    fun clearNewMentorThumbnailList() {
+        _newMentorThumbnailList.clear()
 
+    }
     fun updateRecommendMentorThumbnailList(list: List<MentorThumbnail>) {
         _recommendMentorThumbnailList.clear()
         _recommendMentorThumbnailList.addAll(list)
     }
-
+    fun clearRecommendMentorThumbnailList() {
+        _recommendMentorThumbnailList.clear()
+    }
     fun updateNewMentorPostList(list: List<MentorPost>) {
-        _newMentorPostList.clear()
+        // _newMentorPostList.clear()
         _newMentorPostList.addAll(list)
     }
 
     fun updateRecommendMentorPostList(list: List<MentorPost>) {
-        _recommendMentorPostList.clear()
+        //_recommendMentorPostList.clear()
         _recommendMentorPostList.addAll(list)
     }
 
@@ -80,6 +99,13 @@ class MainViewModel @Inject constructor(
         _fragmentState.value = fragmentState
     }
 
+    fun clearNewMentorPostList() {
+        _newMentorPostList.clear()
+    }
+    fun clearRecommendMentorPostList() {
+        _recommendMentorPostList.clear()
+
+    }
     fun loadToken(): String {
         return _token.value!!
     }
@@ -92,8 +118,13 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             mentorRepository.getNewMentorThumbnailList(token, page, size, sort)
                 .collect { response ->
-                    Log.e("getNewMentorThumbnailList", response.toString())
-                    updateNewMentorThumbnailList(filtJsonArray(response as JsonArray))
+                    val list : List<MentorThumbnail> = filtJsonArray(response as JsonArray)
+                    if (list.isEmpty()) {
+                        _checkNewMentorThumbnailListEnd.value = "isEmpty"
+                    } else {
+                        _checkNewMentorThumbnailListEnd.value = "isNotEmpty"
+                        updateNewMentorThumbnailList(list)
+                    }
                 }
         }
 
@@ -101,25 +132,68 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             mentorRepository.getRecommendMentorThumbnailList(token, page, size, sort)
                 .collect { response ->
-                    Log.e("getRecommendMentorThumbnailList", response.toString())
-                    updateRecommendMentorThumbnailList(filtJsonArray(response as JsonArray))
+                    val list : List<MentorThumbnail> = filtJsonArray(response as JsonArray)
+                    if (list.isEmpty()) {
+                        _checkRecommendMentorThumbnailListEnd.value = "isEmpty"
+                    } else {
+                        _checkRecommendMentorThumbnailListEnd.value = "isNotEmpty"
+                        updateRecommendMentorThumbnailList(list)
+                    }
                 }
         }
 
-    fun getCategoryNewMentorPostList(token: String, categoryName: String) =
+//    fun getCategoryNewMentorPostList(token: String, categoryName: String) =
+//        viewModelScope.launch {
+//            mentorRepository.getCategoryNewMentorPostList(token, categoryName).collect { response ->
+//                Log.e("new LIST", response.toString())
+//                updateNewMentorPostList(filtJsonArray(response as JsonArray))
+//            }
+//        }
+
+    fun getCategoryNewMentorPostList(
+        token: String,
+        categoryName: String,
+        page: Int,
+        size: Int,
+        sort: String
+    ) =
         viewModelScope.launch {
-            mentorRepository.getCategoryNewMentorPostList(token, categoryName).collect { response ->
-                Log.e("new LIST", response.toString())
-                updateNewMentorPostList(filtJsonArray(response as JsonArray))
-            }
+            mentorRepository.getCategoryNewMentorPostList(token, categoryName, page, size, sort)
+                .collect { response ->
+                    val mentorList: List<MentorPost> = filtJsonArray(response as JsonArray)
+                    if (mentorList.isEmpty()) {
+                        _checkNewMentorListEnd.value = "isEmpty"
+                    } else {
+                        _checkNewMentorListEnd.value = "isNotEmpty"
+                        updateNewMentorPostList(mentorList)
+                    }
+                }
         }
 
-    fun getCategoryRecommendMentorPostList(token: String, categoryName: String) =
+    fun getCategoryRecommendMentorPostList(
+        token: String,
+        categoryName: String,
+        page: Int,
+        size: Int,
+        sort: String
+    ) =
         viewModelScope.launch {
-            mentorRepository.getCategoryRecommendMentorPostList(token, categoryName)
+            mentorRepository.getCategoryRecommendMentorPostList(
+                token,
+                categoryName,
+                page,
+                size,
+                sort
+            )
                 .collect { response ->
                     Log.e("recommend LIST", response.toString())
-                    updateRecommendMentorPostList(filtJsonArray(response as JsonArray))
+                    val mentorList: List<MentorPost> = filtJsonArray(response as JsonArray)
+                    if (mentorList.isEmpty()) {
+                        _checkRecommendMentorListEnd.value = "isEmpty"
+                    } else {
+                        _checkRecommendMentorListEnd.value = "isNotEmpty"
+                        updateRecommendMentorPostList(mentorList)
+                    }
                 }
         }
 
@@ -185,4 +259,14 @@ class MainViewModel @Inject constructor(
                     updateNewMentorPostList(filtJsonArray(response as JsonArray))
                 }
         }
+
+    fun createAlarmList(myNickname: String) = viewModelScope.launch {
+        runCatching {
+            alarmRepository.createAlarmList(myNickname, AlarmObject())
+        }.onSuccess {
+            Log.e("createAlarmList", "success")
+        }.onFailure {
+            Log.e("createAlarmList", "fail" + it.message.toString())
+        }
+    }
 }

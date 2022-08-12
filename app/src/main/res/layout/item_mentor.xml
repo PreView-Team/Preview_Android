@@ -113,18 +113,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
                 <TextView
-                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
                     android:id="@+id/tv_content"
                     style="@style/text_caption_regular"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:text="@{mentorpost.title}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/btn_apply"
-                    app:layout_constraintEnd_toEndOf="@+id/ib_favorite"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
                     app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 

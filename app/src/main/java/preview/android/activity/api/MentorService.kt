@@ -11,50 +11,26 @@ import retrofit2.http.*
 
 interface MentorService {
 
-    @GET("/api/home/post/")
-    suspend fun getHomeMentorThumbnail(
-        @Header("Authorization") token: String,
-        @Query("status") status: String,
-        @Query("page") page: Int,
-        @Query("size") size: Int,
-        @Query("sort") sort: String
-    ): Response<JsonArray>
-
-    @POST("/api/post")
-    suspend fun createPost(
-        @Header("Authorization") token: String,
-        @Body writing: Writing
-    ): Response<MentorPostResponse>
-
-    @GET("/api/post/category/")
-    suspend fun getCatergoryPostList(
-        @Header("Authorization") token: String,
-        @Query("status") status: String,
-        @Query("name") categoryName: String
-    ): Response<JsonArray>
-
     @POST("/api/mentor/{kakaoId}")
     suspend fun registMentor(
         @Header("Authorization") token: String,
         @Path("kakaoId") kakoId: Long
     ): Response<MentorRegistResponse>
 
-    @GET("/api/mentor")
-    suspend fun getMentorInfo(
-        @Header("Authorization") token: String
-    ): Response<GetMentorInfoResponse>
-
-    @POST("/api/post/like")
-    suspend fun like(
+    @POST("/api/post")
+    suspend fun createPost(
         @Header("Authorization") token: String,
-        @Body postId: PostId
-    ): Response<LikeResponse>
+        @Body writing: Writing
+    ): Response<SignUpResponse>
 
-    @POST("/api/post/unlike")
-    suspend fun unlike(
+    @GET("/api/post/{postId}/review")
+    suspend fun getPostDetail(
         @Header("Authorization") token: String,
-        @Body postId: PostId
-    ): Response<LikeResponse>
+        @Path("postId") postId: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<PostDetailResponse>
 
     @GET("/api/post/{postId}")
     suspend fun getPostDetail(
@@ -75,6 +51,52 @@ interface MentorService {
     ): Response<MentorPostResponse>
 
 
+    @GET("/api/post/category/")
+    suspend fun getCatergoryPostList(
+        @Header("Authorization") token: String,
+        @Query("status") status: String,
+        @Query("name") categoryName: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<JsonArray>
+
+
+    @GET("/api/home/post/")
+    suspend fun getHomeMentorThumbnail(
+        @Header("Authorization") token: String,
+        @Query("status") status: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<JsonArray>
+
+
+    @GET("/api/mentor")
+    suspend fun getMentorInfo(
+        @Header("Authorization") token: String
+    ): Response<GetMentorInfoResponse>
+
+    @GET("/api/mentor/nickname/{nickname}")
+    suspend fun checkOverlapMentorNickname(
+        @Header("Authorization") token: String,
+        @Path("nickname") nickname: String
+    ): Response<NicknameResponse>
+
+
+    @POST("/api/post/like")
+    suspend fun like(
+        @Header("Authorization") token: String,
+        @Body postId: PostId
+    ): Response<LikeResponse>
+
+    @POST("/api/post/unlike")
+    suspend fun unlike(
+        @Header("Authorization") token: String,
+        @Body postId: PostId
+    ): Response<LikeResponse>
+
+
     @PUT("/api/mentor")
     suspend fun editMentorInfo(
         @Header("Authorization") token: String,
@@ -90,7 +112,7 @@ interface MentorService {
     suspend fun getWritePostDetail(
         @Header("Authorization") token: String,
         @Path("postId") postId: Int
-    ): Response<JsonObject>
+    ): Response<ReceiveWritePost>
 
     @GET("/api/post/search")
     suspend fun getSearchMentors(
@@ -100,5 +122,5 @@ interface MentorService {
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String,
-    ) : Response<JsonArray>
+    ): Response<JsonArray>
 }
